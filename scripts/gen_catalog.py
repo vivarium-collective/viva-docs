@@ -14,6 +14,10 @@ from pathlib import Path
 DEFAULT_SRC = Path.home() / "code/viva-superpowers/viva_superpowers/catalog/modules.json"
 OUT = Path(__file__).resolve().parent.parent / "docs" / "catalog.md"
 
+# Modules to omit from the published docs catalog (matched case-insensitively against
+# `name` and `display_name`). Upstream modules.json is left untouched.
+EXCLUDE = {"viva-yalla"}
+
 
 def esc(s: str) -> str:
     return html.escape((s or "").strip(), quote=True)
@@ -22,6 +26,12 @@ def esc(s: str) -> str:
 def main() -> None:
     src = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_SRC
     mods = json.loads(src.read_text())
+    mods = [
+        m
+        for m in mods
+        if (m.get("name") or "").lower() not in EXCLUDE
+        and (m.get("display_name") or "").lower() not in EXCLUDE
+    ]
     mods.sort(key=lambda m: m.get("display_name", "").lower())
 
     all_tags = sorted({t for m in mods for t in (m.get("tags") or [])})

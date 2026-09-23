@@ -9,12 +9,11 @@ hide:
 Every module here is a ready-to-install unit of capability — a simulator wrapped as process-bigraph Processes, a composite, or a whole workspace — from the [Vivarium Collective](https://github.com/vivarium-collective). Install one into a workspace with [`/viva-catalog`](reference/skills.md) (`install <name>`), or browse the source on GitHub.
 
 !!! tip "Filter the catalog"
-    Type to search, or click capability tags to narrow the list. There are **28 modules** across **24 capability tags**.
+    Type to search, or click capability tags to narrow the list. There are **27 modules** across **22 capability tags**.
 
 <div class="cat-controls">
 <input type="search" id="cat-search" class="cat-search" placeholder="Search modules…" aria-label="Search modules">
 <div class="cat-chips" id="cat-chips">
-<button class="cat-chip" data-tag="agent-based">agent-based</button>
 <button class="cat-chip" data-tag="bioreactor">bioreactor</button>
 <button class="cat-chip" data-tag="coarse-grained">coarse-grained</button>
 <button class="cat-chip" data-tag="composite">composite</button>
@@ -27,7 +26,6 @@ Every module here is a ready-to-install unit of capability — a simulator wrapp
 <button class="cat-chip" data-tag="membrane">membrane</button>
 <button class="cat-chip" data-tag="metabolism">metabolism</button>
 <button class="cat-chip" data-tag="microbial">microbial</button>
-<button class="cat-chip" data-tag="morphogenesis">morphogenesis</button>
 <button class="cat-chip" data-tag="multicellular">multicellular</button>
 <button class="cat-chip" data-tag="ode">ode</button>
 <button class="cat-chip" data-tag="particle">particle</button>
@@ -70,7 +68,6 @@ Every module here is a ready-to-install unit of capability — a simulator wrapp
 <div class="cat-card" data-tags="spatial particle stochastic" data-text="viva-smoldyn process-bigraph wrapper for the smoldyn particle-based spatial stochastic simulator spatial particle stochastic"><div class="cat-card-head"><h3>viva-smoldyn</h3><a class="cat-repo" href="https://github.com/vivarium-collective/pbg-smoldyn" target="_blank" rel="noopener" title="Open repository">GitHub &#8599;</a></div><p class="cat-desc">Process-bigraph wrapper for the Smoldyn particle-based spatial stochastic simulator</p><div class="cat-tags"><span class="cat-tag">spatial</span><span class="cat-tag">particle</span><span class="cat-tag">stochastic</span></div><code class="cat-install">/viva-catalog install pbg-smoldyn</code></div>
 <div class="cat-card" data-tags="sbml" data-text="viva-tellurium process-bigraph wrapper for tellurium / libroadrunner sbml &amp; antimony simulation sbml"><div class="cat-card-head"><h3>viva-tellurium</h3><a class="cat-repo" href="https://github.com/vivarium-collective/pbg-tellurium" target="_blank" rel="noopener" title="Open repository">GitHub &#8599;</a></div><p class="cat-desc">Process-bigraph wrapper for Tellurium / libroadrunner SBML &amp; Antimony simulation</p><div class="cat-tags"><span class="cat-tag">sbml</span></div><code class="cat-install">/viva-catalog install pbg-tellurium</code></div>
 <div class="cat-card" data-tags="reaction-diffusion pde" data-text="viva-vcell-fvsolver process-bigraph wrapper around pyvcell / pyvcell-fvsolver — vcell&#x27;s finite-volume 3d reaction-diffusion pde solver as a pbg process reaction-diffusion pde"><div class="cat-card-head"><h3>viva-vcell-fvsolver</h3><a class="cat-repo" href="https://github.com/vivarium-collective/pbg-vcell-fvsolver" target="_blank" rel="noopener" title="Open repository">GitHub &#8599;</a></div><p class="cat-desc">process-bigraph wrapper around pyvcell / pyvcell-fvsolver — VCell&#x27;s finite-volume 3D reaction-diffusion PDE solver as a PBG Process</p><div class="cat-tags"><span class="cat-tag">reaction-diffusion</span><span class="cat-tag">pde</span></div><code class="cat-install">/viva-catalog install pbg-vcell-fvsolver</code></div>
-<div class="cat-card" data-tags="agent-based morphogenesis" data-text="viva-yalla process-bigraph wrapper for a numpy port of ya||a&#x27;s pair-wise agent-based morphogenesis simulator agent-based morphogenesis"><div class="cat-card-head"><h3>viva-yalla</h3><a class="cat-repo" href="https://github.com/vivarium-collective/pbg-yalla" target="_blank" rel="noopener" title="Open repository">GitHub &#8599;</a></div><p class="cat-desc">Process-bigraph wrapper for a NumPy port of ya||a&#x27;s pair-wise agent-based morphogenesis simulator</p><div class="cat-tags"><span class="cat-tag">agent-based</span><span class="cat-tag">morphogenesis</span></div><code class="cat-install">/viva-catalog install pbg-yalla</code></div>
 </div>
 <p class="cat-empty" id="cat-empty" hidden>No modules match your filter.</p>
 
