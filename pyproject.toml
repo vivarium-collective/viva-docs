@@ -1,0 +1,12 @@
+[project]
+name = "viva-docs"
+version = "0.1.0"
+description = "The comprehensive users guide to the viva ecosystem (bigraph-schema, process-bigraph, vivarium-workbench, viva-superpowers)."
+requires-python = ">=3.10"
+dependencies = [
+    "mkdocs-material>=9.5",
+    "pymdown-extensions>=10.7",
+]
+
+[tool.uv]
+# Build/serve locally with:  uvx --with mkdocs-material mkdocs serve

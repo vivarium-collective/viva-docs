@@ -1,0 +1,130 @@
+site_name: Vivarium Users Guide
+site_description: >-
+  The comprehensive guide to the viva ecosystem — bigraph-schema, process-bigraph,
+  vivarium-workbench, and viva-superpowers. Simulation you can compose. Reasoning you can audit.
+site_author: Vivarium Collective
+site_url: https://vivarium-collective.github.io/viva-docs/
+repo_url: https://github.com/vivarium-collective/viva-docs
+repo_name: vivarium-collective/viva-docs
+edit_uri: edit/main/docs/
+copyright: Copyright &copy; Vivarium Collective
+
+theme:
+  name: material
+  language: en
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/vivarium-collective
+  generator: false
+
+nav:
+  - Home: index.md
+  - Foundations:
+      - foundations/what-is-viva-eco.md
+      - foundations/core-concepts.md
+      - foundations/the-stack.md
+  - Build & run models:
+      - compute/schema-types-state.md
+      - compute/processes-and-steps.md
+      - compute/composites-and-wiring.md
+      - compute/emitters.md
+      - compute/templates-and-draft-processes.md
+  - Investigate:
+      - investigate/workspaces-and-workbench.md
+      - investigate/studies.md
+      - investigate/analyses-visualizations-report-cards.md
+      - investigate/investigations.md
+      - investigate/rigor-and-evidence.md
+      - investigate/working-with-agents.md
+  - Reference:
+      - reference/skills.md
+      - reference/http-api.md
+      - reference/schemas.md
+      - reference/install-and-deploy.md
+      - reference/worked-example.md
+      - reference/glossary.md
