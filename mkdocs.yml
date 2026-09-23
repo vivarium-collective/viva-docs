@@ -60,6 +60,7 @@ extra_css:
 
 extra_javascript:
   - javascripts/catalog.js
+  - javascripts/loom-embed.js
 
 markdown_extensions:
   - abbr
@@ -114,6 +115,7 @@ nav:
   - Start here: start-here.md
   - Quick start: quickstart.md
   - Catalog: catalog.md
+  - Explore: explore.md
   - Tags: tags.md
   - Foundations:
       - foundations/index.md

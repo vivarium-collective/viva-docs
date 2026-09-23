@@ -1,0 +1,10 @@
+{
+  "composites": [
+    {
+      "id": "whole-cell-ecoli",
+      "label": "Whole-cell E. coli \u2014 55 processes",
+      "file": "whole-cell-ecoli.json",
+      "description": "The partitioned whole-cell E. coli baseline: transcription, translation, metabolism (FBA), replication and more, wired as one composite."
+    }
+  ]
+}
