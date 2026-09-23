@@ -112,11 +112,9 @@ extra:
 
 nav:
   - Home: index.md
-  - Start here: start-here.md
-  - Quick start: quickstart.md
-  - Catalog: catalog.md
-  - Explore: explore.md
-  - Tags: tags.md
+  - Get started:
+      - start-here.md
+      - quickstart.md
   - Foundations:
       - foundations/index.md
       - foundations/what-is-viva-eco.md
@@ -129,6 +127,7 @@ nav:
       - compute/composites-and-wiring.md
       - compute/emitters.md
       - compute/templates-and-draft-processes.md
+      - Explore a bigraph: explore.md
   - Investigate:
       - investigate/index.md
       - investigate/workspaces-and-workbench.md
@@ -145,3 +144,5 @@ nav:
       - reference/install-and-deploy.md
       - reference/worked-example.md
       - reference/glossary.md
+      - Module catalog: catalog.md
+      - Tags: tags.md

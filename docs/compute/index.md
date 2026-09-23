@@ -35,6 +35,11 @@ The one part of a composite allowed to leave the run — recording wired state e
 Interface-first modeling — design a document with the mechanism left out, then fill it in later.
 </div>
 
+<div class="viva-card part-build" markdown>
+### [Explore a bigraph](../explore.md) :material-cursor-default-click:
+See a real composite in the live loom explorer — pan, zoom, and drill into its wiring.
+</div>
+
 </div>
 
 !!! tip "Suggested path"

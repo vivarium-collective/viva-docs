@@ -40,6 +40,11 @@ One question followed from an empty directory to a graded study and the next stu
 Every load-bearing term in one place, with its formal anchor and its legacy synonyms.
 </div>
 
+<div class="viva-card part-reference" markdown>
+### [Module catalog](../catalog.md)
+Every installable Vivarium module — searchable and filterable by capability tag.
+</div>
+
 </div>
 
 !!! tip "Suggested path"
