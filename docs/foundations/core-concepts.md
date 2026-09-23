@@ -1,3 +1,11 @@
+---
+tags:
+  - concepts
+  - process
+  - step
+  - composite
+---
+
 # Core concepts
 
 This chapter builds the whole framework from first principles. The vocabulary is
@@ -8,6 +16,11 @@ The formal anchors come from the **Process Bigraph** paper's core vocabulary (Ta
 the plain-language framing comes from the *Composition Interface Protocol* primer. Where a
 term has a legacy synonym, it is noted — the ecosystem is mid-migration and older
 documents use different words for the same idea.
+
+!!! info "On this page"
+    **Assumes** you've read [What is Vivarium?](what-is-viva-eco.md). · **You'll learn**
+    stores, edges and wires; processes vs steps; the delta-merge semantic that makes models
+    compose; and how composites, templates and studies are all one kind of typed document.
 
 ## Structure: stores, edges, and wires
 

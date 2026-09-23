@@ -58,6 +58,9 @@ theme:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/catalog.js
+
 markdown_extensions:
   - abbr
   - admonition
@@ -98,6 +101,7 @@ markdown_extensions:
 
 plugins:
   - search
+  - tags
 
 extra:
   social:
@@ -108,6 +112,9 @@ extra:
 nav:
   - Home: index.md
   - Start here: start-here.md
+  - Quick start: quickstart.md
+  - Catalog: catalog.md
+  - Tags: tags.md
   - Foundations:
       - foundations/index.md
       - foundations/what-is-viva-eco.md

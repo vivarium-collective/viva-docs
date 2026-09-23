@@ -1,5 +1,7 @@
 # Vivarium Users Guide (`viva-docs`)
 
+📖 **Read it live: <https://vivarium-collective.github.io/viva-docs/>**
+
 The comprehensive, versioned users guide to the **viva ecosystem**:
 
 - **bigraph-schema** — the type system

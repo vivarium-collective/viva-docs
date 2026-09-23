@@ -1,3 +1,9 @@
+---
+tags:
+  - reference
+  - glossary
+  - concepts
+---
 # Glossary
 
 Every load-bearing term in one place, with its formal anchor and its legacy synonyms. The
@@ -8,6 +14,13 @@ Investigation Spine framework. Where a term has an older name, it is marked **(l
 idea.
 
 Entries are grouped by the layer they belong to. Each links to the chapter that develops it.
+
+!!! info "On this page"
+    **What's here** every load-bearing term in one place — its formal anchor, its
+    legacy synonym where one exists, and a link to the chapter that develops it,
+    grouped by the layer it belongs to. · **See also**
+    [Core concepts](../foundations/core-concepts.md) for the argument behind the
+    vocabulary, and [Schemas, types & state](../compute/schema-types-state.md).
 
 ---
 

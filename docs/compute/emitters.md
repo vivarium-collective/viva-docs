@@ -1,3 +1,9 @@
+---
+tags:
+  - emitter
+  - composite
+  - provenance
+---
 # Emitters — getting data out
 
 A composite run produces a stream of state that never touches the disk on its own. The
@@ -5,6 +11,9 @@ engine advances stores, merges deltas, and moves on — nothing is kept unless s
 asks to keep it. That something is an **emitter**: the Step that watches wired state and
 writes it to a durable sink. When [Core concepts](../foundations/core-concepts.md) says a
 run "emits a run store of trajectories," the emitter is the object doing the emitting.
+
+!!! info "On this page"
+    **Assumes** [Composites & wiring](composites-and-wiring.md). · **You'll learn** the emitter contract, how an emitter attaches as a plain Step, how it writes wired state to a durable sink, and why it never writes back into the run.
 
 !!! quote ""
     An emitter records wired state each tick into a durable sink — and it is the only part

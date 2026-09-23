@@ -1,3 +1,9 @@
+---
+tags:
+  - getting-started
+  - study
+  - composite
+---
 # A worked end-to-end example
 
 This chapter follows one question all the way through the framework: from an empty
@@ -5,6 +11,13 @@ directory to a graded study with a computed verdict, and on to the next study it
 It is a map, not a copy-paste script — each step links to the chapter that covers it in
 depth, and the exact command surface evolves, so confirm specifics against your installed
 `/viva-*` skills and a live workspace.
+
+!!! info "On this page"
+    **Assumes** you've skimmed [Studies](../investigate/studies.md) and have `uv`
+    plus the `viva-superpowers` plugin installed. · **You'll learn** how one
+    question travels the whole loop — from an empty directory to a scaffolded
+    workspace, a composite, graded runs, a computed verdict, and the next study
+    it seeds.
 
 !!! tip "The shape of the loop"
     Every step below is one hop of the discovery loop from

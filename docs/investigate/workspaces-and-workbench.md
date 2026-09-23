@@ -1,3 +1,10 @@
+---
+tags:
+  - workspace
+  - workbench
+  - getting-started
+---
+
 # Workspaces & the Workbench
 
 Everything in the [Investigate](studies.md) half of the guide happens in one place: a
@@ -6,6 +13,9 @@ AI-free server that turns that directory into a git-backed research notebook.
 
 <p class="viva-pull">A workspace is where research happens; the Workbench is the loop
 turning inside it. The data lives in the workspace, never in the server.</p>
+
+!!! info "On this page"
+    **Assumes** [Core concepts](../foundations/core-concepts.md). · **You'll learn** the workspace/Workbench split, which way the dependency arrow points, and how every mutating action becomes a git commit.
 
 ## The one crucial split
 

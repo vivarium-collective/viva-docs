@@ -15,6 +15,10 @@ matter for it.
     `viva_<pkg>/` package) and **a running Workbench** (the dashboard server). If either is
     missing, start at [Workspaces & the Workbench](investigate/workspaces-and-workbench.md).
 
+!!! abstract "Just want it running?"
+    The [**Quick start**](quickstart.md) is a copy-pasteable, top-to-bottom path from nothing
+    to a running Workbench — and it's written so you can point an **AI agent** straight at it.
+
 ## Everyone: the 20-minute mental model
 
 Before any path, read these three — they're short and everything else builds on them.

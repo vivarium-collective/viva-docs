@@ -1,3 +1,10 @@
+---
+tags:
+  - composite
+  - wiring
+  - process
+  - step
+---
 # Composites & wiring
 
 A [process or step](processes-and-steps.md) is just a rule. To *run* one you need stores
@@ -7,7 +14,11 @@ of that is a **Composite** — the state-tree of typed nodes wired to shared sto
 document, how ports wire to store paths, how composites nest, and what happens on every
 tick when you call `run`.
 
-!!! abstract "What you'll learn"
+!!! info "On this page"
+    **Assumes** [Processes & Steps](processes-and-steps.md).
+
+    **You'll learn:**
+
     - The composite **document shape** — a `state` tree of `process` / `step` nodes
     - Wiring ports to shared-store **paths**, including relative paths like `['..']`
     - **Nesting** composites through the `bridge`

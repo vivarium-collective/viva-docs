@@ -1,3 +1,9 @@
+---
+tags:
+  - study
+  - report-card
+---
+
 # Studies
 
 !!! quote "The one sentence"
@@ -15,6 +21,9 @@ argument — and audit the argument without re-reading the code.</p>
 A study is **never compiled into a composite of its own.** It stays *metadata that points
 at* a composite by a dotted id and reads back what came out. That is the whole design: the
 composite runs, the study records.
+
+!!! info "On this page"
+    **Assumes** [Workspaces & the Workbench](workspaces-and-workbench.md), [Composites & wiring](../compute/composites-and-wiring.md). · **You'll learn** the study/composite split, the three on-disk layers, and the five-phase authoring lifecycle.
 
 ## Three on-disk layers
 

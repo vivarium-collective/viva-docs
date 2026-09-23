@@ -14,8 +14,8 @@ hide:
 
 <div class="viva-cta" markdown>
 [Start here](start-here.md){ .md-button .md-button--primary }
+[Quick start](quickstart.md){ .md-button }
 [What is Vivarium?](foundations/what-is-viva-eco.md){ .md-button }
-[Build a model](compute/processes-and-steps.md){ .md-button }
 </div>
 
 Vivarium is a framework for building **multiscale biological models** by composing

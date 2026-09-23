@@ -1,9 +1,20 @@
+---
+tags:
+  - concepts
+  - getting-started
+---
+
 # The stack
 
 Vivarium is four packages in a strict dependency order. Each layer imports the ones below
 it and never the reverse. That acyclicity *is* the separation of concerns — and it is why
 you can swap the AI layer without touching the engine, or run the engine with no dashboard
 at all.
+
+!!! info "On this page"
+    **Assumes** you've read [Core concepts](core-concepts.md). · **You'll learn** the four
+    packages and their dependency order, how to read the stack bottom-up and top-down, which
+    layer to reach for, and how the pbg → viva rename maps onto names you'll see.
 
 <div class="viva-stack" markdown>
 

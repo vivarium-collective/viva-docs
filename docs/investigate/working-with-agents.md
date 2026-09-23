@@ -1,3 +1,10 @@
+---
+tags:
+  - agents
+  - workbench
+  - api
+---
+
 # Working with AI agents
 
 The agentic spine is *what reasons* — but it reasons through a tool that contains no AI at all.
@@ -14,6 +21,9 @@ construction and a human curator owning the calls that matter.
 hypothesis → prediction → workflow → simulation → evidence → validation → model update —
 over a process-bigraph execution substrate, with a human approving the stages that matter.</figcaption>
 </figure>
+
+!!! info "On this page"
+    **Assumes** [Workspaces & the Workbench](workspaces-and-workbench.md), [Rigor & the evidence engine](rigor-and-evidence.md). · **You'll learn** the AI-free-tool / swappable-plugin split, how the `/viva-*` skills drive the Workbench over plain HTTP, and how work divides between agent and human curator.
 
 ## The split: AI-free tool, swappable AI plugin
 

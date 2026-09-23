@@ -1,3 +1,10 @@
+---
+tags:
+  - rigor
+  - provenance
+  - report-card
+---
+
 # Rigor & the evidence engine
 
 A study's conclusion is **computed from its evidence, not asserted**. This chapter is about
@@ -7,6 +14,9 @@ the study's own files so a human can audit every hop.
 
 !!! quote ""
     Simulation you can compose. **Reasoning you can audit.**
+
+!!! info "On this page"
+    **Assumes** [Studies](studies.md), [Investigations](investigations.md). · **You'll learn** the evidence spine, the parallel-slot convention, and why the verdict is computed rather than asserted.
 
 ## The big idea: code where prose used to be
 

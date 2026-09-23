@@ -1,3 +1,10 @@
+---
+tags:
+  - reference
+  - schema
+  - workspace
+  - study
+---
 # On-disk schema reference
 
 Everything in the Vivarium ecosystem is a file on disk. A workspace is a git repository;
@@ -17,6 +24,14 @@ Three documents carry almost all the structure:
 For the concepts these files encode — Composite, Study, Investigation, Run, Finding,
 Verdict — read [Core concepts](../foundations/core-concepts.md) first. This chapter is the
 reference; that chapter is the argument.
+
+!!! info "On this page"
+    **What's here** the field guide to the on-disk shapes — `workspace.yaml`,
+    `study.yaml`, and `investigation.yaml`: what each file must contain, what it
+    may, and how the schemas have drifted across versions. · **See also**
+    [Core concepts](../foundations/core-concepts.md) for what these files encode,
+    and [Schemas, types & state](../compute/schema-types-state.md) for the type
+    system underneath.
 
 !!! note "A word on `viva` vs `pbg`"
     The ecosystem was renamed from **pbg** to **viva**, and the migration is mid-flight.

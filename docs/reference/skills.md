@@ -1,3 +1,9 @@
+---
+tags:
+  - reference
+  - skills
+  - agents
+---
 # Skill reference
 
 The `/viva-*` skills are the ecosystem's AI layer — a Claude Code plugin
@@ -10,6 +16,13 @@ This chapter is the catalog — every skill, what it does, and which API or help
 it wraps. For the request surface those skills call, cross over to the
 [HTTP API reference](http-api.md); for how an agent drives them end to end, see
 [Working with AI agents](../investigate/working-with-agents.md).
+
+!!! info "On this page"
+    **What's here** the full `/viva-*` skill catalog — every command, what it
+    does, and which HTTP endpoint or `viva_superpowers` helper it wraps. · **See
+    also** the [HTTP API reference](http-api.md) for the request surface, and
+    [Working with AI agents](../investigate/working-with-agents.md) for the loop
+    an agent drives end to end.
 
 !!! note "Two preconditions every dashboard-touching skill assumes"
     1. **A workspace** — a directory with a `workspace.yaml` and a `viva_<pkg>/`

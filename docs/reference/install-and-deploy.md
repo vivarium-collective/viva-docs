@@ -1,3 +1,9 @@
+---
+tags:
+  - reference
+  - workspace
+  - getting-started
+---
 # Install & deploy
 
 Getting a workspace and the Workbench running — on your laptop, in a container, and as a
@@ -14,6 +20,13 @@ before anything else:
 That is why there is no global "install the Workbench" step. You scaffold a workspace, and
 the Workbench comes along inside its venv. For the layers involved, see
 [The stack](../foundations/the-stack.md).
+
+!!! info "On this page"
+    **What's here** what to install and how to run it — prerequisites, the local
+    laptop path, the container image, and a read-only site others can browse. ·
+    **See also** [The stack](../foundations/the-stack.md) for the layers
+    involved, and the [worked example](worked-example.md) to see the setup used
+    end to end.
 
 ---
 

@@ -1,3 +1,10 @@
+---
+tags:
+  - visualization
+  - report-card
+  - study
+---
+
 # Analyses, visualizations & report cards
 
 A simulation produces a wall of numbers. This chapter is about the machinery that
@@ -9,6 +16,9 @@ that fires when its inputs are ready.
 
 <p class="viva-pull">Emitters, analyses, visualizations, and report cards are all
 Steps. The clock never drives them; the arrival of a completed run does.</p>
+
+!!! info "On this page"
+    **Assumes** [Studies](studies.md), [Composites & wiring](../compute/composites-and-wiring.md). · **You'll learn** the two-phase study, why emitters, analyses, visualizations, and report cards are all Steps, and how the flush network fires.
 
 ## The two-phase study
 

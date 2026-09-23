@@ -1,3 +1,9 @@
+---
+tags:
+  - investigation
+  - study
+---
+
 # Investigations
 
 A single [study](studies.md) answers one question. An **investigation** is the
@@ -11,6 +17,9 @@ run it; an Investigation is the argument several studies build together.</p>
 Read the collection top-down and it's an argument; read it bottom-up and it's a
 pile of simulations. The investigation is the layer that makes the difference —
 the place where a dozen questions become evidence the field can re-run.
+
+!!! info "On this page"
+    **Assumes** [Studies](studies.md). · **You'll learn** the investigation ≡ branch ≡ worktree identity, how the gated DAG accumulates a claim, and why reproducibility follows the branch.
 
 ## Investigation ≡ branch ≡ worktree
 

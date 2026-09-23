@@ -1,8 +1,19 @@
+---
+tags:
+  - getting-started
+  - concepts
+---
+
 # What is Vivarium?
 
 Vivarium is a framework for **composing multiscale biological models** and for turning
 their runs into **auditable scientific evidence**. This chapter gives you the mental
 model everything else in the guide builds on.
+
+!!! info "On this page"
+    **Assumes** no prerequisites — start here. · **You'll learn** why the rebuild tax
+    exists, the two spines and the discovery loop between them, and what makes a study's
+    conclusion trustworthy.
 
 ## The problem: the rebuild tax
 

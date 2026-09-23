@@ -1,3 +1,9 @@
+---
+tags:
+  - schema
+  - types
+  - state
+---
 # Schemas, types & state
 
 The `bigraph-schema` layer sits at the bottom of the stack. It answers one question
@@ -12,6 +18,9 @@ This chapter is the working reference for that layer. It builds on the vocabular
 deltas, `apply`, and the site/fill/ground story — and turns it into the concrete API you
 call. If you have not read Core concepts, start there; this chapter assumes you know *why*
 deltas merge and focuses on *how* the machinery works.
+
+!!! info "On this page"
+    **Assumes** [Core concepts](../foundations/core-concepts.md). · **You'll learn** the type-string grammar, the `Core` registry, how `apply` merges deltas, and why schema and state stay separate.
 
 !!! quote ""
     A **schema** is a map from paths to types; a **state** is a map from paths to values.

@@ -1,3 +1,8 @@
+---
+tags:
+  - process
+  - step
+---
 # Processes & Steps
 
 A model in Vivarium is made of two things: **state** that lives in stores, and
@@ -5,7 +10,11 @@ A model in Vivarium is made of two things: **state** that lives in stores, and
 are exactly two kinds, split by their relationship to time. This chapter shows you how to
 write both, from the base-class contract down to real, runnable code.
 
-!!! abstract "What you'll learn"
+!!! info "On this page"
+    **Assumes** [Core concepts](../foundations/core-concepts.md) and [Schemas, types & state](schema-types-state.md).
+
+    **You'll learn:**
+
     - What an **edge** is, and why it never talks to another edge directly
     - The `Process` contract — `config_schema`, `inputs()`, `outputs()`, `update(state, interval)`, `initial_state()`
     - The `@process` decorator shortcut that infers `config_schema` for you

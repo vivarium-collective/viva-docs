@@ -1,3 +1,9 @@
+---
+tags:
+  - template
+  - draft-process
+  - composite
+---
 # Templates & draft processes
 
 [Core concepts](../foundations/core-concepts.md) ends on a claim that sounds too tidy to be
@@ -15,6 +21,9 @@ There are two ways to leave a mechanism out, and they are worth keeping apart:
 
 A site makes a document refuse to run; a draft lets it run and simply does nothing. Both let
 you commit to the *shape* of a model before you commit to its *behaviour*.
+
+!!! info "On this page"
+    **Assumes** [Composites & wiring](composites-and-wiring.md), [Core concepts](../foundations/core-concepts.md). · **You'll learn** sites versus draft processes, the fill operation, the `is_ground` law, and how to model interface-first before committing to behaviour.
 
 ## Sites, fill, and ground
 

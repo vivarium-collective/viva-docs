@@ -1,3 +1,9 @@
+---
+tags:
+  - reference
+  - api
+  - agents
+---
 # HTTP API reference
 
 The Workbench is a **FastAPI app under uvicorn** (`vivarium_workbench/api/app.py`).
@@ -14,6 +20,13 @@ server.
 For the commands that call these endpoints, cross back to the
 [Skill reference](skills.md); for the agent's-eye view of the whole loop, see
 [Working with AI agents](../investigate/working-with-agents.md).
+
+!!! info "On this page"
+    **What's here** the Workbench REST surface organized along the
+    Investigations → Studies → Runs spine, as reference tables — plus the
+    generated-spec pointers (`/openapi.json`, `/docs`, `/redoc`) for exact
+    shapes. · **See also** the [Skill reference](skills.md) for the commands that
+    call these endpoints, and [Working with AI agents](../investigate/working-with-agents.md).
 
 !!! note "The agent access contract"
     - **Base URL** comes from `.pbg/server/server-info` — never hardcode a port.
