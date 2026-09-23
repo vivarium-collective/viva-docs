@@ -214,6 +214,14 @@ Under `run`, time advances one **tick** at a time, and each tick is **two passes
 the heart of the scheduler, and it's worth understanding because it explains why deltas
 never collide and why steps fire exactly when they should.
 
+<figure class="viva-figure">
+<img src="../assets/figures/orchestration-modes.svg" alt="Three orchestration patterns: multi-timestepping, a workflow of steps run to convergence, and event-driven graph rewrite.">
+<figcaption>The engine schedules three ways: <strong>multi-timestepping</strong> (temporal
+processes at different intervals sharing a store), a <strong>workflow</strong> (a DAG of
+steps run to convergence), and <strong>event-driven graph rewrite</strong> (divide/engulf
+events changing the topology).</figcaption>
+</figure>
+
 ```mermaid
 flowchart TB
     start([run interval]) --> due{"any process due?"}

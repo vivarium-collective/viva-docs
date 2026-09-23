@@ -1,4 +1,6 @@
-/* viva-docs house style — layered on Material for MkDocs */
+/* ============================================================
+   viva-docs house style — layered on Material for MkDocs
+   ============================================================ */
 
 :root {
   --viva-teal: #0f766e;
@@ -6,59 +8,202 @@
   --viva-amber: #ea580c;
   --viva-ink: #0f172a;
   --md-code-font: "JetBrains Mono", monospace;
+
+  /* per-part accent tokens (defaults; overridden by .part-* wrappers) */
+  --part: var(--viva-teal-bright);
+  --part-foundations: #6366f1;
+  --part-build: #14b8a6;
+  --part-investigate: #f59e0b;
+  --part-reference: #64748b;
+}
+:root:not([data-theme="light"]) {
+  @media (prefers-color-scheme: dark) {
+    --part-foundations: #818cf8;
+    --part-build: #2dd4bf;
+    --part-investigate: #fbbf24;
+    --part-reference: #94a3b8;
+  }
+}
+[data-md-color-scheme="slate"] {
+  --part-foundations: #818cf8;
+  --part-build: #2dd4bf;
+  --part-investigate: #fbbf24;
+  --part-reference: #94a3b8;
 }
 
-/* Hero on the landing page */
+/* Per-part accent binding — set --part on the wrapper/card */
+.part-foundations { --part: var(--part-foundations); }
+.part-build       { --part: var(--part-build); }
+.part-investigate { --part: var(--part-investigate); }
+.part-reference   { --part: var(--part-reference); }
+
+/* ---------- Hero (landing page) ---------- */
 .viva-hero {
   text-align: center;
-  padding: 2.5rem 1rem 1.5rem;
+  padding: 2.75rem 1rem 1.25rem;
 }
 .viva-hero h1 {
   font-weight: 800;
-  font-size: 2.6rem;
-  line-height: 1.1;
-  margin: 0 0 .4rem;
+  font-size: 2.8rem;
+  line-height: 1.08;
+  margin: 0 0 .5rem;
   background: linear-gradient(90deg, var(--viva-teal-bright), var(--viva-amber));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .viva-hero .tagline {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 500;
   opacity: .85;
   margin: 0 auto;
-  max-width: 42rem;
+  max-width: 44rem;
 }
 
-/* The two-spines / stack callout grid */
+/* ---------- Card grid ---------- */
 .viva-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 1rem;
   margin: 1.5rem 0;
 }
 .viva-card {
+  position: relative;
   border: 1px solid var(--md-default-fg-color--lightest);
   border-radius: 12px;
   padding: 1.1rem 1.2rem;
   background: var(--md-default-bg-color);
-  transition: border-color .2s ease, transform .2s ease;
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  overflow: hidden;
+}
+.viva-card::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--part);
+  opacity: .9;
 }
 .viva-card:hover {
-  border-color: var(--viva-teal-bright);
-  transform: translateY(-2px);
+  border-color: var(--part);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px -12px var(--part);
 }
 .viva-card h3 { margin-top: 0; font-size: 1.05rem; }
+.viva-card h3 a { color: inherit; }
 .viva-card .layer-num {
   display: inline-block;
   font-family: var(--md-code-font);
   font-size: .8rem;
-  color: var(--viva-teal);
+  color: var(--part);
   font-weight: 700;
 }
 
-/* Stack layers, top→bottom */
+/* ---------- Part eyebrow / badge ---------- */
+.part-eyebrow {
+  display: inline-block;
+  font-family: var(--md-code-font);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--part);
+  border: 1px solid var(--part);
+  border-radius: 999px;
+  padding: .15rem .7rem;
+  margin: 0 0 .3rem;
+}
+
+/* ---------- Clickable stack (home) ---------- */
+.stacknav {
+  margin: 1.75rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.stacknav-layer {
+  display: block;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-left: 5px solid var(--part);
+  border-radius: 0 10px 10px 0;
+  padding: .8rem 1.1rem;
+  background: var(--md-code-bg-color);
+  color: inherit !important;
+  text-decoration: none !important;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.stacknav-layer:hover {
+  transform: translateX(4px);
+  box-shadow: -6px 0 18px -14px var(--part);
+  background: var(--md-default-bg-color);
+}
+.stacknav-layer .sn-name { font-weight: 700; }
+.stacknav-layer .sn-pkg {
+  font-family: var(--md-code-font);
+  color: var(--part);
+  font-size: .82rem;
+  margin-left: .4rem;
+}
+.stacknav-layer .sn-desc {
+  display: block;
+  font-size: .9rem;
+  opacity: .82;
+  margin-top: .15rem;
+}
+
+/* ---------- Figures ---------- */
+.viva-figure {
+  margin: 1.75rem 0;
+  text-align: center;
+}
+.viva-figure img,
+.viva-figure svg {
+  max-width: 100%;
+  height: auto;
+  background: #ffffff;          /* keep diagrams legible in dark mode */
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 12px;
+  padding: 1rem;
+}
+.viva-figure figcaption {
+  font-size: .85rem;
+  opacity: .75;
+  margin-top: .6rem;
+  padding: 0 1rem;
+}
+
+/* ---------- Concept map (inline SVG) ---------- */
+.concept-map { margin: 1.5rem 0; text-align: center; }
+.concept-map svg { max-width: 100%; height: auto; }
+.concept-map .cnode rect {
+  fill: #ffffff;
+  stroke: var(--part);
+  stroke-width: 2;
+  transition: filter .15s ease;
+}
+.concept-map .cnode { transition: transform .15s ease; }
+.concept-map a { cursor: pointer; }
+.concept-map a:hover .cnode > rect { filter: brightness(0.97) drop-shadow(0 3px 8px rgba(0,0,0,.18)); }
+.concept-map a:hover .cnode { transform: translateY(-2px); }
+.concept-map .clabel {
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  fill: #0f172a;
+  pointer-events: none;
+}
+.concept-map .csub {
+  font-family: var(--md-code-font);
+  fill: #475569;
+  pointer-events: none;
+}
+.concept-map .cedge { stroke: #94a3b8; stroke-width: 1.5; fill: none; }
+.concept-map .cedge-label {
+  font-family: Inter, sans-serif;
+  font-size: 11px;
+  fill: var(--md-default-fg-color--light);
+}
+
+/* ---------- Legacy stack (used in the-stack.md) ---------- */
 .viva-stack { margin: 1.5rem 0; }
 .viva-stack .layer {
   border-left: 4px solid var(--viva-teal-bright);
@@ -69,17 +214,17 @@
 }
 .viva-stack .layer code { background: transparent; }
 
-/* "one sentence to remember" pull quote */
+/* ---------- Pull quote ---------- */
 .viva-pull {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 500;
   border-left: 4px solid var(--viva-amber);
   padding: .5rem 0 .5rem 1rem;
-  margin: 1.4rem 0;
+  margin: 1.5rem 0;
   font-style: italic;
 }
 
-/* subtle status pills reused from the workbench aesthetic */
+/* ---------- Status pills ---------- */
 .pill {
   display: inline-block;
   font-size: .72rem;
@@ -98,3 +243,13 @@
 [data-md-color-scheme="slate"] .pill.calib { background: #713f12; color: #fef08a; }
 [data-md-color-scheme="slate"] .pill.blocked,
 [data-md-color-scheme="slate"] .pill.neutral { background: #334155; color: #e2e8f0; }
+
+/* ---------- Home CTA row ---------- */
+.viva-cta {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1.5rem 0 .5rem;
+}
+.viva-cta .md-button { margin: 0; }

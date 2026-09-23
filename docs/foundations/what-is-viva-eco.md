@@ -22,6 +22,14 @@ are wrapped as typed **Processes** and wired together through explicit, checkabl
 interfaces. A whole cell becomes a single named composite you assemble from parts; adding
 or swapping a subsystem is *wiring*, not forking.
 
+<figure class="viva-figure">
+<img src="../assets/figures/multiscale-composite.png" alt="A multiscale composite: a custom cell and a dendritic cell inside a shared environment, processes wired to typed stores, plus a Process Card documenting a diffusion process.">
+<figcaption>A composed multiscale model: two cells inside a shared environment, each a
+composite of processes (transcription, translation, metabolism, transport…) wired to typed
+stores. Below, the <strong>Process Card</strong> documents one process's interface —
+its inputs, outputs, and the equation it realizes.</figcaption>
+</figure>
+
 !!! quote "The guiding principle"
     New science is a **new study**, not a patch to the model.
 

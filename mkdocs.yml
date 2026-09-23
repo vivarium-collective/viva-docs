@@ -35,11 +35,14 @@ theme:
     text: Inter
     code: JetBrains Mono
   features:
+    - navigation.instant
+    - navigation.instant.progress
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.sections
-    - navigation.expand
     - navigation.indexes
+    - navigation.path
+    - navigation.tracking
     - navigation.top
     - navigation.footer
     - toc.follow
@@ -104,17 +107,21 @@ extra:
 
 nav:
   - Home: index.md
+  - Start here: start-here.md
   - Foundations:
+      - foundations/index.md
       - foundations/what-is-viva-eco.md
       - foundations/core-concepts.md
       - foundations/the-stack.md
   - Build & run models:
+      - compute/index.md
       - compute/schema-types-state.md
       - compute/processes-and-steps.md
       - compute/composites-and-wiring.md
       - compute/emitters.md
       - compute/templates-and-draft-processes.md
   - Investigate:
+      - investigate/index.md
       - investigate/workspaces-and-workbench.md
       - investigate/studies.md
       - investigate/analyses-visualizations-report-cards.md
@@ -122,6 +129,7 @@ nav:
       - investigate/rigor-and-evidence.md
       - investigate/working-with-agents.md
   - Reference:
+      - reference/index.md
       - reference/skills.md
       - reference/http-api.md
       - reference/schemas.md
