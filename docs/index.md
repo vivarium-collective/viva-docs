@@ -145,18 +145,21 @@ See the **[Start here](start-here.md)** guide for full step-by-step learning pat
 ## What a composed model looks like
 
 <figure class="viva-figure">
-<img src="assets/figures/multiscale-composite.png" alt="A multiscale composite: a custom cell and a dendritic cell inside a shared environment, with processes wired to stores, plus a Process Card describing a diffusion process.">
-<figcaption>A composed multiscale model: two cells inside a shared environment, each a
-composite of processes (transcription, translation, metabolism, transport…) wired to
-typed stores — and, below, the <strong>Process Card</strong> that documents one process's
-interface. Composition is wiring, not forking.</figcaption>
+<img src="assets/figures/cell-environment.png" alt="A cell in its environment: left, an artistic rendering of a living cell with membrane receptors and extracellular matrix; right, its process bigraph — an environment of typed fields and a cell of processes wired to shared stores.">
+<figcaption>A cell modeled in its environment. <strong>Left:</strong> the living system.
+<strong>Right:</strong> its process bigraph — an <code>environment</code> of typed fields
+(mechanical, chemical, traction, uptake) and a <code>cell</code> whose processes
+(mechanical stress, reaction–diffusion, single-cell dynamics) read and write shared stores.
+Composition is wiring, not forking.</figcaption>
 </figure>
 
 <figure class="viva-figure">
-<img src="assets/figures/framework-overview.svg" alt="Four-panel overview: diverse biological formalisms, typed interfaces and explicit coupling, an executable composite model, and reusable model ecosystems.">
-<figcaption>The Process Bigraph framework: from diverse formalisms (ODEs, FBA, PDEs, ABMs)
-to typed interfaces and explicit coupling, to executable composites, to reusable model
-ecosystems.</figcaption>
+<img src="assets/figures/framework-overview.png" alt="Three-panel overview: each subsystem in its own best formalism; process bigraphs make coupling explicit as a nested composite; compositions become reusable, testable simulations.">
+<figcaption>The Process Bigraph framework, in three moves: <strong>(a)</strong> model each
+subsystem in its own best formalism (ODEs, FBA, PDEs, agent-based, learned dynamics);
+<strong>(b)</strong> process bigraphs make the coupling explicit — typed interfaces and
+wiring compose them into one nested system; <strong>(c)</strong> the composition becomes a
+reusable, testable simulation feeding emitters, analyses, visualizations, and report cards.</figcaption>
 </figure>
 
 ---

@@ -34,11 +34,11 @@ interfaces. A whole cell becomes a single named composite you assemble from part
 or swapping a subsystem is *wiring*, not forking.
 
 <figure class="viva-figure">
-<img src="../assets/figures/multiscale-composite.png" alt="A multiscale composite: a custom cell and a dendritic cell inside a shared environment, processes wired to typed stores, plus a Process Card documenting a diffusion process.">
-<figcaption>A composed multiscale model: two cells inside a shared environment, each a
-composite of processes (transcription, translation, metabolism, transport…) wired to typed
-stores. Below, the <strong>Process Card</strong> documents one process's interface —
-its inputs, outputs, and the equation it realizes.</figcaption>
+<img src="../assets/figures/cell-environment.png" alt="A cell in its environment: left, an artistic rendering of a living cell with membrane receptors and extracellular matrix; right, its process bigraph — an environment of typed fields and a cell of processes wired to shared stores.">
+<figcaption>A cell modeled in its environment. <strong>Left:</strong> the living system.
+<strong>Right:</strong> its process bigraph — an <code>environment</code> of typed fields
+and a <code>cell</code> of processes (mechanical stress, reaction–diffusion, single-cell
+dynamics) wired to shared stores. Adding or swapping a subsystem is <em>wiring</em>, not forking.</figcaption>
 </figure>
 
 !!! quote "The guiding principle"

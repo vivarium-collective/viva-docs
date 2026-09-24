@@ -226,7 +226,7 @@ the heart of the scheduler, and it's worth understanding because it explains why
 never collide and why steps fire exactly when they should.
 
 <figure class="viva-figure">
-<img src="../assets/figures/orchestration-modes.svg" alt="Three orchestration patterns: multi-timestepping, a workflow of steps run to convergence, and event-driven graph rewrite.">
+<img src="../assets/figures/orchestration-modes.png" alt="Three orchestration patterns: multi-timestepping, a workflow of steps run to convergence, and event-driven graph rewrite.">
 <figcaption>The engine schedules three ways: <strong>multi-timestepping</strong> (temporal
 processes at different intervals sharing a store), a <strong>workflow</strong> (a DAG of
 steps run to convergence), and <strong>event-driven graph rewrite</strong> (divide/engulf
