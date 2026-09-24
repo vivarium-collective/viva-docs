@@ -16,6 +16,7 @@ hide:
 [Start here](start-here.md){ .md-button .md-button--primary }
 [Quick start](quickstart.md){ .md-button }
 [What is Vivarium?](foundations/what-is-viva-eco.md){ .md-button }
+<a class="md-button" href="viva-docs.pdf" download>&#8595; Download PDF</a>
 </div>
 
 Vivarium is a framework for building **multiscale biological models** by composing

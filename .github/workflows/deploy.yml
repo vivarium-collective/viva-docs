@@ -23,9 +23,13 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install dependencies
-        run: pip install "mkdocs-material>=9.5" "pymdown-extensions>=10.7"
+        run: pip install "mkdocs-material>=9.5" "pymdown-extensions>=10.7" playwright pypdf
+      - name: Install Chromium
+        run: python -m playwright install --with-deps chromium
       - name: Build site
         run: mkdocs build --strict
+      - name: Build PDF (headless Chromium render)
+        run: python scripts/build_pdf.py
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

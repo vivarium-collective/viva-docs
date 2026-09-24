@@ -370,6 +370,26 @@
   margin: 0 0 1.5rem;
 }
 
+/* ---------- Print / PDF export ---------- */
+@media print {
+  .md-header, .md-tabs, .md-sidebar, .md-footer,
+  .md-content__button, .md-nav, .md-search,
+  .loom-toolbar, .loom-embed, .cat-controls, .viva-cta {
+    display: none !important;
+  }
+  .md-main__inner, .md-content, .md-grid {
+    margin: 0 !important;
+    max-width: none !important;
+  }
+  .md-typeset { font-size: 11pt; }
+  .md-typeset h1, .md-typeset h2 { page-break-after: avoid; }
+  .md-typeset pre, .md-typeset table, .viva-card, .cat-card,
+  .viva-figure, .admonition {
+    page-break-inside: avoid;
+  }
+  .md-typeset a { color: inherit; text-decoration: none; }
+}
+
 /* ---------- Home CTA row ---------- */
 .viva-cta {
   display: flex;
