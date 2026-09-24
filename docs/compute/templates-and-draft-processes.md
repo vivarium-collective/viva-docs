@@ -258,11 +258,6 @@ that keep the network running — and building such a model means repeating the 
 declare an interface, realize it with a conforming submodel, until the organization closes on
 itself.
 
-<figure class="viva-figure">
-<img src="../assets/figures/self-organized.png" alt="Self-organized processes forming a self-maintaining organization, and a minimal-cell composition of metabolism, containment, and replication.">
-<figcaption><strong>Self-organized processes, coarse-graining, and autopoiesis.</strong> (a) Self-organized processes — autocatalysis, membrane formation, template replication — combine into a self-maintaining organization. (b) A minimal-cell composition: metabolism, containment, and replication processes supporting one another through shared components. <small>(Meta-Modeler's Guide, Fig 8.)</small></figcaption>
-</figure>
-
 The through-line is the one this chapter opened with, now with teeth: a template is a
 document with holes, a draft is a document with an inert node, and the same act — filling the
 hole, supplying the mechanism — turns designed structure into executable behaviour without

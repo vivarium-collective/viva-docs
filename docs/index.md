@@ -145,15 +145,6 @@ See the **[Start here](start-here.md)** guide for full step-by-step learning pat
 ## What a composed model looks like
 
 <figure class="viva-figure">
-<img src="assets/figures/cell-environment.png" alt="A cell in its environment: left, an artistic rendering of a living cell with membrane receptors and extracellular matrix; right, its process bigraph — an environment of typed fields and a cell of processes wired to shared stores.">
-<figcaption><strong>Cell–environment coupling.</strong> (a) A cell interacts with
-environmental fields — chemical, electrical, mechanical — and physical barriers. (b) A
-composition diagram: a <code>cell</code> process couples internal state to environmental
-fields through exchange processes and shared stores, alongside environmental processes like
-diffusion. Composition is wiring, not forking. <small>(Meta-Modeler's Guide, Fig 4.)</small></figcaption>
-</figure>
-
-<figure class="viva-figure">
 <img src="assets/figures/framework-overview.png" alt="Three-panel overview: each subsystem in its own best formalism; process bigraphs make coupling explicit as a nested composite; compositions become reusable, testable simulations.">
 <figcaption><strong>Process Bigraph composes heterogeneous models into executable, reusable
 multiscale simulations.</strong> (a) Each subsystem is modeled in the formalism best suited
