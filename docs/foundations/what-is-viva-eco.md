@@ -31,7 +31,10 @@ monolith, and every edit risks breaking the parts that already worked.
 Vivarium removes that tax by making models **compose**. Independently-written simulators
 are wrapped as typed **Processes** and wired together through explicit, checkable
 interfaces. A whole cell becomes a single named composite you assemble from parts; adding
-or swapping a subsystem is *wiring*, not forking.
+or swapping a subsystem is *wiring*, not forking. It's a shift in stance: you work less as a
+modeler rebuilding biology from scratch than as a *meta-modeler*, wiring existing models
+together and letting the biological meaning emerge from how they are coupled and
+orchestrated across scales.
 
 <figure class="viva-figure">
 <img src="../assets/figures/cell-environment.png" alt="A cell in its environment: left, an artistic rendering of a living cell with membrane receptors and extracellular matrix; right, its process bigraph — an environment of typed fields and a cell of processes wired to shared stores.">
@@ -131,7 +134,10 @@ of compositional systems biology*** (arXiv:2512.23754), which introduces **Vivar
 as the open-source implementation across three libraries — `bigraph-schema`,
 `process-bigraph`, and `bigraph-viz` — demonstrated with **Spatio-Flux**, a library of
 microbial-ecosystem simulations combining kinetic equations, dynamic FBA, and spatial
-processes.
+processes. Its move is to take the architectural ideas that once lived inside the original
+Vivarium software and generalize them into a shared specification — of process interfaces,
+hierarchies, composition patterns, and orchestration — so models can be understood, reused,
+and built on rather than rebuilt.
 
 ---
 

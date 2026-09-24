@@ -146,20 +146,22 @@ See the **[Start here](start-here.md)** guide for full step-by-step learning pat
 
 <figure class="viva-figure">
 <img src="assets/figures/cell-environment.png" alt="A cell in its environment: left, an artistic rendering of a living cell with membrane receptors and extracellular matrix; right, its process bigraph — an environment of typed fields and a cell of processes wired to shared stores.">
-<figcaption>A cell modeled in its environment. <strong>Left:</strong> the living system.
-<strong>Right:</strong> its process bigraph — an <code>environment</code> of typed fields
-(mechanical, chemical, traction, uptake) and a <code>cell</code> whose processes
-(mechanical stress, reaction–diffusion, single-cell dynamics) read and write shared stores.
-Composition is wiring, not forking.</figcaption>
+<figcaption><strong>Cell–environment coupling.</strong> (a) A cell interacts with
+environmental fields — chemical, electrical, mechanical — and physical barriers. (b) A
+composition diagram: a <code>cell</code> process couples internal state to environmental
+fields through exchange processes and shared stores, alongside environmental processes like
+diffusion. Composition is wiring, not forking. <small>(Meta-Modeler's Guide, Fig 4.)</small></figcaption>
 </figure>
 
 <figure class="viva-figure">
 <img src="assets/figures/framework-overview.png" alt="Three-panel overview: each subsystem in its own best formalism; process bigraphs make coupling explicit as a nested composite; compositions become reusable, testable simulations.">
-<figcaption>The Process Bigraph framework, in three moves: <strong>(a)</strong> model each
-subsystem in its own best formalism (ODEs, FBA, PDEs, agent-based, learned dynamics);
-<strong>(b)</strong> process bigraphs make the coupling explicit — typed interfaces and
-wiring compose them into one nested system; <strong>(c)</strong> the composition becomes a
-reusable, testable simulation feeding emitters, analyses, visualizations, and report cards.</figcaption>
+<figcaption><strong>Process Bigraph composes heterogeneous models into executable, reusable
+multiscale simulations.</strong> (a) Each subsystem is modeled in the formalism best suited
+to it — ODEs, flux-balance analysis, reaction–diffusion PDEs, agent-based models, learned
+dynamics. (b) Typed <strong>process interfaces</strong> expose variables and make coupling
+explicit, connecting models across formalisms and scales. (c) Process Bigraph encodes
+components, interfaces, and couplings as declarative specifications that execute, analyze,
+test, and share. <small>(Agmon &amp; Spangler, Fig 1.)</small></figcaption>
 </figure>
 
 ---

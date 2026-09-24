@@ -40,6 +40,11 @@ from paths to types, `Σ : P ⇀ T` — "the typed organizational blueprint of t
 The separation between schema and state is the central principle: it lets you validate a
 model, reuse its structure, and reason about composition **independently of execution**.
 
+<figure class="viva-figure">
+<img src="../assets/figures/store-diagram.png" alt="Store diagrams: a single typed store, and stores nested in a place-graph hierarchy.">
+<figcaption><strong>Store diagrams.</strong> (a) A store is a rounded rectangle holding any data type, showing its name, value, and type. (b) Stores nest in hierarchies for multiscale representation — a place graph of nested stores (e.g. a cell containing cytoplasm, membrane, and nucleus). <small>(Fig 3.)</small></figcaption>
+</figure>
+
 ### Edges — the functionality
 
 An **Edge** is a unit of functionality attached to stores. Each input or output of an edge
@@ -60,10 +65,17 @@ things are, wires say *how* they are connected.
     - **Link graph** = wiring = ports connected to store paths. "Transcription reads the
       gene store and writes the mRNA store."
 
+<figure class="viva-figure">
+<img src="../assets/figures/bigraph-structure.png" alt="Composition framework overview: Milner bigraphs (link graph + place graph) and process bigraphs (place graph + process graph).">
+<figcaption><strong>Composition framework overview.</strong> (a) Milner's original bigraphs combine a <em>link graph</em> (hyperedges, dashed) with a <em>place graph</em> (solid containment edges) over a set of nodes. (b) Process bigraphs replace the link graph with a <strong>process graph</strong> — processes connect to nodes through their typed ports. <small>(Agmon &amp; Spangler, Fig 2.)</small></figcaption>
+</figure>
+
 ## Time: processes and steps
 
 The *Composition Interface Protocol* describes structure. What it does not specify is
 **time**. Process Bigraph adds a global clock and splits edges by their relationship to it.
+It helps to keep two things apart: *composition* is how edges are wired together through
+shared stores, while *orchestration* is when each one acts and how its updates combine.
 
 <div class="viva-grid" markdown>
 
@@ -138,7 +150,10 @@ A composite is a **document**: state + processes + the port wiring between them.
 a composite is *itself a Process* — it owns an internal state-tree and scheduler and
 exposes a **bridge** that maps its external ports onto internal store paths. So a composite
 drops into a parent composite as a single node. This is how multiscale models are built:
-**containment, not hole-filling** — big models are assembled from small ones.
+**containment, not hole-filling** — big models are assembled from small ones. And because
+the pieces take on their biological meaning from *how* they are composed, the same
+processes wired into different patterns — cell–environment coupling, growth, division —
+give rise to different biology.
 
 ```mermaid
 flowchart TB

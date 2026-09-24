@@ -159,7 +159,10 @@ containing a draft still builds and still runs; the draft just contributes nothi
 That last clause is the whole point. In a framework whose verdicts are computed from what a
 run actually produced, a placeholder that quietly invented some plausible dynamics would be
 a lie the evidence layer could not catch. A draft is honest by construction: stepped, it
-returns `{}`, and it announces itself as unfinished.
+returns `{}`, and it announces itself as unfinished. This is the meta-modeler's move made
+concrete: declare what a part *exposes* — its ports and intent — before committing to how it
+works, since an interface is a concrete, testable target even while the mechanism behind it
+stays open.
 
 ### `@draft_process`
 
@@ -247,6 +250,18 @@ The slogan that captures the discipline:
     two on this page: leave a hole (**site**) or leave a mechanism undeclared (**draft**),
     and fill it in when the science is ready. Treat the compiler itself as where the
     interface-first workflow is *heading*.
+
+The same discipline scales past a single process. Followed all the way up, a whole cell reads
+as a self-maintaining organization whose metabolism, containment, and replication processes
+each present an interface the others fill — supplying the components, gradients, and boundary
+that keep the network running — and building such a model means repeating the one move:
+declare an interface, realize it with a conforming submodel, until the organization closes on
+itself.
+
+<figure class="viva-figure">
+<img src="../assets/figures/self-organized.png" alt="Self-organized processes forming a self-maintaining organization, and a minimal-cell composition of metabolism, containment, and replication.">
+<figcaption><strong>Self-organized processes, coarse-graining, and autopoiesis.</strong> (a) Self-organized processes — autocatalysis, membrane formation, template replication — combine into a self-maintaining organization. (b) A minimal-cell composition: metabolism, containment, and replication processes supporting one another through shared components. <small>(Meta-Modeler's Guide, Fig 8.)</small></figcaption>
+</figure>
 
 The through-line is the one this chapter opened with, now with teeth: a template is a
 document with holes, a draft is a document with an inert node, and the same act — filling the

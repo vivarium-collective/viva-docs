@@ -75,9 +75,17 @@ The two kinds of edge differ in exactly one thing — **time**:
 ## The `Process` base class
 
 A **Process** is a temporal edge: it owns a timestep and advances dynamics over a span of
-time. You write one by subclassing `process_bigraph.Process` and filling in a handful of
-methods. Here is the canonical teaching process shipped in the repo (its one
-`accelerate` helper trimmed, so only the contract shows):
+time. Conceptually it is *a mechanism with an interface* — defined by what it reads, what
+it can update, and its configuration — that observes part of the current state, uses its
+config to decide how to respond, and proposes changes through its outputs. You write one by
+subclassing `process_bigraph.Process` and filling in a handful of methods. Here is the
+canonical teaching process shipped in the repo (its one `accelerate` helper trimmed, so
+only the contract shows):
+
+<figure class="viva-figure">
+<img src="../assets/figures/process-diagram.png" alt="A process drawn as a rectangle with typed input ports on the left and output ports on the right.">
+<figcaption><strong>Process diagram.</strong> A process is a rectangle with typed <strong>ports</strong> on its boundary — inputs on the left, outputs on the right. Its update function maps inputs to a typed <em>delta</em> of outputs, informed by its config (here, an <code>interval</code>). <small>(Agmon &amp; Spangler, Fig 4.)</small></figcaption>
+</figure>
 
 ```python
 from bigraph_schema import make_default
@@ -129,8 +137,9 @@ A bare type name is a valid shorthand — `config_schema = {'rate': 'float'}` �
 ### `inputs(self)` and `outputs(self)`
 
 Two methods that return the **port interface** — a dict mapping each port name to a
-[type expression](schema-types-state.md). Inputs declare what the process reads; outputs
-declare what it may write:
+[type expression](schema-types-state.md). Ports specify the type of information flowing in
+and out, so that data is passed consistently between edges. Inputs declare what the process
+reads; outputs declare what it may write:
 
 ```python
 def inputs(self):  return {'level': 'float'}

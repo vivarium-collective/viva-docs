@@ -9,7 +9,9 @@ tags:
 Vivarium is four packages in a strict dependency order. Each layer imports the ones below
 it and never the reverse. That acyclicity *is* the separation of concerns — and it is why
 you can swap the AI layer without touching the engine, or run the engine with no dashboard
-at all.
+at all. At its heart, `process-bigraph` is a *composition protocol*: rather than unifying
+models into one representation the way standards like SBML or CellML do, it standardizes how
+independently-built models connect, share state, and are orchestrated in time.
 
 !!! info "On this page"
     **Assumes** you've read [Core concepts](core-concepts.md). · **You'll learn** the four
