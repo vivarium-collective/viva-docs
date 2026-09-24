@@ -1,7 +1,7 @@
 site_name: Vivarium Users Guide
 site_description: >-
   The comprehensive guide to the viva ecosystem — bigraph-schema, process-bigraph,
-  vivarium-workbench, and viva-superpowers. Simulation you can compose. Reasoning you can audit.
+  vivarium-workbench, and viva-superpowers. Wire living models together.
 site_author: Vivarium Collective
 site_url: https://vivarium-collective.github.io/viva-docs/
 repo_url: https://github.com/vivarium-collective/viva-docs

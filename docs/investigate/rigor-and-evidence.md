@@ -12,9 +12,6 @@ the machinery that makes that sentence true — the deterministic pipeline that 
 measures it, rolls the measurements up into a verdict, and writes the whole chain back into
 the study's own files so a human can audit every hop.
 
-!!! quote ""
-    Simulation you can compose. **Reasoning you can audit.**
-
 !!! info "On this page"
     **Assumes** [Studies](studies.md), [Investigations](investigations.md). · **You'll learn** the evidence spine, the parallel-slot convention, and why the verdict is computed rather than asserted.
 

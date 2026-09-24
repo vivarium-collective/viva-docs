@@ -8,7 +8,7 @@ hide:
 
 # The Vivarium Users Guide
 
-<p class="tagline">Simulation you can compose. Reasoning you can audit.</p>
+<p class="tagline">Wire living models together.</p>
 
 </div>
 
