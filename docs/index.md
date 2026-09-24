@@ -8,7 +8,7 @@ hide:
 
 # The Vivarium Users Guide
 
-<p class="tagline">Wire living models together.</p>
+<p class="tagline">Compose living models.</p>
 
 </div>
 

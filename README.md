@@ -9,7 +9,7 @@ The comprehensive, versioned users guide to the **viva ecosystem**:
 - **vivarium-workbench** — the dashboard server
 - **viva-superpowers** — the `/viva-*` authoring skills
 
-> *Wire living models together.*
+> *Compose living models.*
 
 ## Build locally
 
