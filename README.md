@@ -1,6 +1,7 @@
 # Vivarium Users Guide (`viva-docs`)
 
 📖 **Read it live: <https://vivarium-collective.github.io/viva-docs/>**
+🔬 **Vivarium Lab: <https://vivariumlab.com/>**
 
 The comprehensive, versioned users guide to the **viva ecosystem**:
 
