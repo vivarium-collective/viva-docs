@@ -84,11 +84,6 @@
   background: var(--part);
   opacity: .9;
 }
-.viva-card:hover {
-  border-color: var(--part);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px -12px var(--part);
-}
 .viva-card h3 { margin-top: 0; font-size: 1.05rem; }
 .viva-card h3 a { color: inherit; }
 .viva-card .layer-num {
@@ -97,6 +92,61 @@
   font-size: .8rem;
   color: var(--part);
   font-weight: 700;
+}
+
+/* ---- Clickable nav cards: a card whose title is a link is one big link ---- */
+/* Hide per-heading permalink anchors inside cards so the title link is unambiguous */
+.viva-card h3 .headerlink { display: none; }
+
+/* NOTE: every heading gets a hidden `.headerlink` permalink anchor, so the
+   discriminator must look for a REAL title link: `h3 a:not(.headerlink)`. */
+.viva-card:has(h3 a:not(.headerlink)) { cursor: pointer; padding-right: 2.4rem; }
+/* Stretch the title's link across the whole tile (classic stretched-link) */
+.viva-card h3 a:not(.headerlink)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+/* The interactive lift + glow is reserved for cards that actually go somewhere */
+.viva-card:has(h3 a:not(.headerlink)):hover {
+  border-color: var(--part);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px -12px var(--part);
+}
+/* A visible "go" affordance so the tile reads as navigable, not decorative */
+.viva-card:has(h3 a:not(.headerlink))::after {
+  content: "→";
+  position: absolute;
+  right: 1rem;
+  bottom: .8rem;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: var(--part);
+  opacity: .4;
+  transform: translateX(-2px);
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.viva-card:has(h3 a:not(.headerlink)):hover::after { opacity: 1; transform: translateX(2px); }
+/* Keyboard focus lands on the whole tile */
+.viva-card:has(h3 a:not(.headerlink):focus-visible) {
+  outline: 2px solid var(--part);
+  outline-offset: 2px;
+  border-color: var(--part);
+}
+.viva-card h3 a:focus-visible { outline: none; }
+
+/* ---- Concept cards (no title link): flat, informational — never pose as buttons ---- */
+.viva-card:not(:has(h3 a:not(.headerlink))) {
+  cursor: default;
+  background: var(--md-code-bg-color);
+}
+.viva-card:not(:has(h3 a:not(.headerlink))):hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--md-default-fg-color--lightest);
 }
 
 /* ---------- Part eyebrow / badge ---------- */

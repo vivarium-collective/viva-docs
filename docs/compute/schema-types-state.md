@@ -645,15 +645,13 @@ operations do the right thing automatically.
 <div class="viva-grid" markdown>
 
 <div class="viva-card" markdown>
-### :material-arrow-right: Build dynamics
-[Processes & Steps](processes-and-steps.md) — write an `Edge` that declares typed
-`inputs()`/`outputs()` and returns deltas this layer merges.
+### [Build dynamics](processes-and-steps.md)
+Write an `Edge` that declares typed `inputs()`/`outputs()` and returns deltas this layer merges.
 </div>
 
 <div class="viva-card" markdown>
-### :material-arrow-right: Wire them up
-[Composites & wiring](composites-and-wiring.md) — connect ports to store paths and nest
-composites, where `view`/`project` and `resolve` do their work per tick.
+### [Wire them up](composites-and-wiring.md)
+Connect ports to store paths and nest composites, where `view`/`project` and `resolve` do their work per tick.
 </div>
 
 </div>

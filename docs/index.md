@@ -109,29 +109,23 @@ Every box links to the chapter that covers it.
 <div class="viva-grid" markdown>
 
 <div class="viva-card part-foundations" markdown>
-### :material-map-marker-path: New here?
-Start with **[What is Vivarium?](foundations/what-is-viva-eco.md)** for the mental model,
-then **[Core concepts](foundations/core-concepts.md)** for the vocabulary.
+### :material-map-marker-path: [New here?](foundations/what-is-viva-eco.md)
+The mental model and the vocabulary, from first principles — *What is Vivarium?* then *Core concepts*.
 </div>
 
 <div class="viva-card part-build" markdown>
-### :material-hammer-wrench: Build a model
-Go to **[Processes & Steps](compute/processes-and-steps.md)** and
-**[Composites & wiring](compute/composites-and-wiring.md)** to write and run your first
-composite.
+### :material-hammer-wrench: [Build a model](compute/processes-and-steps.md)
+Wrap simulators as processes, wire them through shared stores, and run your first composite.
 </div>
 
 <div class="viva-card part-investigate" markdown>
-### :material-flask: Do science
-Head to **[Studies](investigate/studies.md)** and
-**[Investigations](investigate/investigations.md)** to turn runs into gated, verdict-bearing
-evidence.
+### :material-flask: [Do science](investigate/studies.md)
+Turn runs into gated, verdict-bearing evidence — studies, report cards, investigations.
 </div>
 
 <div class="viva-card part-reference" markdown>
-### :material-book-open-variant: Look something up
-The **[Reference](reference/index.md)** section has the skill catalog, HTTP API, schemas,
-install/deploy, and a full worked example.
+### :material-book-open-variant: [Look something up](reference/index.md)
+The skill catalog, HTTP API, on-disk schemas, install &amp; deploy, and a full worked example.
 </div>
 
 </div>
