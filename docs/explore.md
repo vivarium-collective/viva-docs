@@ -8,16 +8,10 @@ tags:
 
 # Explore a bigraph
 
-The best way to understand a composite is to *look* at one. Below is a live, interactive
-**bigraph-loom** explorer — the very same viewer the [Workbench](investigate/workspaces-and-workbench.md)
-serves at `/loom-explore`, exported here so it runs with no server. Pan and zoom, expand a
-node to drill into a sub-composite, and inspect how **processes** and **steps** wire to
-shared **stores**.
-
-!!! info "On this page"
-    **What's here** a real composite rendered by the actual workbench loom viewer. · **Try it**
-    drag to pan, scroll to zoom, click a node to expand it, and use the picker to switch
-    composites. · **See also** [Composites & wiring](compute/composites-and-wiring.md).
+Below is a live, interactive **bigraph-loom** explorer — the same viewer the
+[Workbench](investigate/workspaces-and-workbench.md) serves at `/loom-explore`, exported
+here so it runs with no server. Pan and zoom, expand a node to drill into a sub-composite,
+and inspect how **processes** and **steps** wire to shared **stores**.
 
 <div class="loom-toolbar">
 <label for="loom-picker">Composite:</label>

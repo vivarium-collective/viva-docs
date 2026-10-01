@@ -7,24 +7,20 @@ tags:
 
 # Analyses, visualizations & report cards
 
-A simulation produces a wall of numbers. This chapter is about the machinery that
-turns that wall into something a person — or an agent — can read and trust: the
-**figures**, the **derived tables**, and the **graded scorecards** a study emits
-after it runs. All three are built from the same primitive you already met in
+This chapter is about the machinery that turns a run's output into something a
+person — or an agent — can read and trust: the **figures**, the **derived tables**,
+and the **graded scorecards** a study emits after it runs. All three are built from
+the same primitive you already met in
 [Core concepts](../foundations/core-concepts.md): a **Step** — a non-temporal edge
 that fires when its inputs are ready.
 
 <p class="viva-pull">Emitters, analyses, visualizations, and report cards are all
 Steps. The clock never drives them; the arrival of a completed run does.</p>
 
-!!! info "On this page"
-    **Assumes** [Studies](studies.md), [Composites & wiring](../compute/composites-and-wiring.md). · **You'll learn** the two-phase study, why emitters, analyses, visualizations, and report cards are all Steps, and how the flush network fires.
-
 ## The two-phase study
 
 A [study](studies.md) is not one simulation and then, separately, some plotting
-code you run by hand. It is a single **two-phase process bigraph**, and the seam
-between the phases is the most important idea in this chapter.
+code you run by hand. It is a single **two-phase process bigraph**.
 
 ```mermaid
 flowchart LR
@@ -188,14 +184,11 @@ and bulk observables — without your writing any code.
 
 A **report card** is a Step that reads a completed run and produces **pass/fail
 outcomes keyed by test**, rendered as a category scorecard. It is the point in the
-pipeline where evidence becomes a verdict — and the whole design turns on one
-rule.
+pipeline where evidence becomes a verdict.
 
-!!! quote ""
-    A study's conclusion is **computed from its evidence, not asserted.** You do
-    not write `status: pass`. The verdict is derived from the latest run's measured
-    outcomes — which is what stops a study from *claiming* a result it never
-    produced.
+A study's conclusion is **computed from its evidence, not asserted** (see
+[Rigor & evidence](rigor-and-evidence.md)): you do not write `status: pass`, and the
+verdict is derived from the latest run's measured outcomes.
 
 Two things drive that derivation, and neither is a human typing a verdict:
 

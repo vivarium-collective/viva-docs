@@ -6,7 +6,7 @@ hide:
 
 # Module catalog
 
-Every module here is a ready-to-install unit of capability — a simulator wrapped as process-bigraph Processes, a composite, or a whole workspace — from the [Vivarium Collective](https://github.com/vivarium-collective). Install one into a workspace with [`/viva-catalog`](reference/skills.md) (`install <name>`), or browse the source on GitHub.
+Every module here is an installable unit — a simulator wrapped as process-bigraph Processes, a composite, or a whole workspace — from the [Vivarium Collective](https://github.com/vivarium-collective). Install one into a workspace with [`/viva-catalog`](reference/skills.md) (`install <name>`), or browse the source on GitHub.
 
 !!! tip "Filter the catalog"
     Type to search, or click capability tags to narrow the list. There are **27 modules** across **22 capability tags**.

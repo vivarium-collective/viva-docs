@@ -17,7 +17,7 @@ The `bigraph-schema` type system — what state can be and how deltas merge back
 
 <div class="viva-card part-build" markdown>
 ### [Processes & Steps](processes-and-steps.md)
-The two kinds of edge, split by their relationship to time, from base-class contract to runnable code.
+The two kinds of edge — temporal and reactive — from base-class contract to runnable code.
 </div>
 
 <div class="viva-card part-build" markdown>
@@ -27,7 +27,7 @@ Assemble edges and stores into the one object the engine runs, and see what happ
 
 <div class="viva-card part-build" markdown>
 ### [Emitters](emitters.md)
-The one part of a composite allowed to leave the run — recording wired state each tick to a durable sink.
+Recording wired state each tick to a durable sink, so a run's trajectory survives.
 </div>
 
 <div class="viva-card part-build" markdown>
@@ -41,6 +41,3 @@ See a real composite in the live loom explorer — pan, zoom, and drill into its
 </div>
 
 </div>
-
-!!! tip "Suggested path"
-    Read in order: **Schemas** for the ground rules, **Processes & Steps** to write functionality, **Composites & wiring** to run it, then **Emitters** to capture the output. Reach for **Templates & draft processes** when you want to design an interface before its mechanism exists.

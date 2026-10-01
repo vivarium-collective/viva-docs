@@ -6,11 +6,10 @@ tags:
 ---
 # Templates & draft processes
 
-[Core concepts](../foundations/core-concepts.md) ends on a claim that sounds too tidy to be
-true: a composite, a template, a study, and an investigation are all *the same kind of
-thing* — a typed document — and they differ in structure, not in execution machinery. This
-chapter is where that claim earns its keep. It is about interface-first modeling: designing
-a document with the mechanism deliberately left out, and filling it in later.
+[Core concepts](../foundations/core-concepts.md) establishes that a composite, a template, a
+study, and an investigation are all *the same kind of thing* — a typed document — differing
+in structure, not in execution machinery. This chapter is about interface-first modeling:
+designing a document with the mechanism deliberately left out, and filling it in later.
 
 There are two ways to leave a mechanism out, and they are worth keeping apart:
 
@@ -22,17 +21,12 @@ There are two ways to leave a mechanism out, and they are worth keeping apart:
 A site makes a document refuse to run; a draft lets it run and simply does nothing. Both let
 you commit to the *shape* of a model before you commit to its *behaviour*.
 
-!!! info "On this page"
-    **Assumes** [Composites & wiring](composites-and-wiring.md), [Core concepts](../foundations/core-concepts.md). · **You'll learn** sites versus draft processes, the fill operation, the `is_ground` law, and how to model interface-first before committing to behaviour.
-
 ## Sites, fill, and ground
 
-The framework collapses a lot of apparent machinery into three ideas — one object, one
-operation, one law:
-
-!!! quote ""
-    One object (a typed **document**), one operation (**fill** its sites), one law
-    (**`is_ground`** — it runs iff no unfilled required site remains).
+Sites, fill, and ground are three ideas: a typed **document**, the **fill** operation that
+fills its sites, and the **`is_ground`** law that lets a document run only when no required
+site is left unfilled. (Core concepts states these as the "one object, one operation, one
+law" triad.)
 
 A **template** is just a document that still has holes. The holes are **sites**, written in
 the document as `{"_type": "site", ...}`; each site records the *face* (the port interface)
@@ -130,10 +124,8 @@ raises, naming the required site you left open — the same condition `Composite
 reported before construction so you see *which* hole is empty rather than a downstream
 constructor error.
 
-!!! quote ""
-    The composite is reusable across many questions; the template attaches one question by
-    filling one hole. Separating them means you can re-run the science without rewriting the
-    argument.
+The composite is reusable across many questions; the template attaches one question by
+filling one hole.
 
 This is exactly how the agentic spine works. A **study** is a template with its model site
 filled; an **investigation** is a document with one site per member study, admitted by
@@ -153,16 +145,13 @@ containing a draft still builds and still runs; the draft just contributes nothi
 
 !!! quote ""
     A draft lets the model topology — which process connects which stores — be designed and
-    reviewed *before* anyone commits to a mechanism. It never fabricates behaviour it does
-    not have.
+    reviewed *before* anyone commits to a mechanism.
 
-That last clause is the whole point. In a framework whose verdicts are computed from what a
-run actually produced, a placeholder that quietly invented some plausible dynamics would be
-a lie the evidence layer could not catch. A draft is honest by construction: stepped, it
-returns `{}`, and it announces itself as unfinished. This is the meta-modeler's move made
-concrete: declare what a part *exposes* — its ports and intent — before committing to how it
-works, since an interface is a concrete, testable target even while the mechanism behind it
-stays open.
+A draft never invents dynamics it does not have: stepped, it returns `{}`, and it announces
+itself as unfinished — which matters in a framework whose verdicts are computed from what a
+run actually produced. It is the meta-modeler's move: declare what a part *exposes* — its
+ports and intent — before committing to how it works, since an interface is a concrete,
+testable target even while the mechanism behind it stays open.
 
 ### `@draft_process`
 
@@ -216,29 +205,10 @@ node's *parameters*, not a hole and not a node.
 
 ## The compiler view
 
-Draft processes point at something larger than a scaffolding trick. Read the ecosystem's
-design notes and a picture emerges of the framework as a **compiler** — from what a biologist
-*means* to what an engine can *run*.
-
-!!! quote ""
-    People describe biological systems by their meaning. Simulators need an executable
-    graph. Between them sits a compiler. — *compiling-biology-to-bigraphs*
-
-In that framing (from the conceptual corpus, `compiling-biology-to-bigraphs.pdf`, dossier
-05 §4), a `DraftProcess` — a contract with roles, ports, and intent but no dynamics — is the
-**source-level semantic model**: the top layer of a small, nanopass-style pipeline. Below it
-sit a typed reaction-network intermediate representation, then an executable composite
-(processes, ports, place graph, an emitter), then `Composite.run()`. The step that turns an
-abstract mechanism into one concrete simulation is read as an **algebraic-effect handler**:
-one declared effect, many handlers, so a single semantic model can be closed off into a
-deterministic mass-action realization or a stochastic one — "same meaning, two executable
-interpretations, agreeing where theory says they must."
-
-The slogan that captures the discipline:
-
-!!! quote ""
-    A process-bigraph process should be *one possible realization* of a biological
-    mechanism, not the definition of that mechanism. — *vivarium_semantic_layer*
+Drafts and sites point past scaffolding: the ecosystem's design notes sketch the framework
+as a **compiler** from what a biologist *means* to what an engine can *run*, with a
+`DraftProcess` — a contract with roles, ports, and intent but no dynamics — as the
+source-level semantic model at the top of that pipeline.
 
 !!! warning "Accuracy note — direction, not a shipped one-click feature"
     The site/fill/ground machinery and `DraftProcess` are **shipped code** (verified above).
@@ -251,17 +221,9 @@ The slogan that captures the discipline:
     and fill it in when the science is ready. Treat the compiler itself as where the
     interface-first workflow is *heading*.
 
-The same discipline scales past a single process. Followed all the way up, a whole cell reads
-as a self-maintaining organization whose metabolism, containment, and replication processes
-each present an interface the others fill — supplying the components, gradients, and boundary
-that keep the network running — and building such a model means repeating the one move:
-declare an interface, realize it with a conforming submodel, until the organization closes on
-itself.
-
-The through-line is the one this chapter opened with, now with teeth: a template is a
-document with holes, a draft is a document with an inert node, and the same act — filling the
-hole, supplying the mechanism — turns designed structure into executable behaviour without
-ever letting the framework pretend a mechanism exists before it does.
+A template is a document with holes and a draft is a document with an inert node; the same
+act — filling the hole, supplying the mechanism — turns designed structure into executable
+behaviour, and never lets the framework pretend a mechanism exists before it does.
 
 ---
 

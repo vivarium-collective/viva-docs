@@ -17,14 +17,9 @@ the plain-language framing comes from the *Composition Interface Protocol* prime
 term has a legacy synonym, it is noted — the ecosystem is mid-migration and older
 documents use different words for the same idea.
 
-!!! info "On this page"
-    **Assumes** you've read [What is Vivarium?](what-is-viva-eco.md). · **You'll learn**
-    stores, edges and wires; processes vs steps; the delta-merge semantic that makes models
-    compose; and how composites, templates and studies are all one kind of typed document.
-
 ## Structure: stores, edges, and wires
 
-At its base, a Vivarium model is a **bigraph** — a structure with two orthogonal parts:
+A Vivarium model is a **bigraph** — a structure with two orthogonal parts:
 a **place graph** (what contains what) and a **link graph** (what is wired to what).
 
 ### Stores — the state
@@ -101,11 +96,8 @@ to conditions).
 
 ## The one semantic that makes it compose
 
-Here is the single most important idea in the framework:
-
-!!! quote ""
-    Processes never mutate state directly. Each `update()` returns a typed **delta**; the
-    runtime merges it into shared state through the schema's `apply` method.
+Processes never mutate state directly. Each `update()` returns a typed **delta**; the
+runtime merges it into shared state through the schema's `apply` method.
 
 A process reads the state it is wired to, computes, and **returns a change** — it does not
 write anything itself. The runtime collects every process's delta and applies it through
@@ -119,7 +111,7 @@ the type's own combination rule:
 Because *how deltas combine is a property of the data type, not the process*, two
 independently-written processes can write to the same store without knowing about each
 other. Numerical updates, structural rewrites, and scheduling therefore all live under one
-execution protocol. **This is what lets independently-written processes be wired together.**
+execution protocol.
 
 ## Types and the type system
 
@@ -180,12 +172,10 @@ A composite you can run is **ground** — every required slot is filled. A compo
 - The one law is **groundness** (`is_ground`): *a document runs iff it has no unfilled
   required sites.*
 
-This collapses a lot of apparent machinery into one idea:
-
-!!! quote ""
-    One object (a typed document), one operation (**fill** its sites), one law
-    (**`is_ground`**). A composite, a template, a study, and an investigation are all the
-    same kind of thing — they differ in structure, not in execution machinery.
+This collapses a lot of apparent machinery into one idea: one object (a typed document),
+one operation (**fill** its sites), one law (**`is_ground`**). A composite, a template, a
+study, and an investigation are all the same kind of thing — they differ in structure, not
+in execution machinery.
 
 !!! note "Legacy vocabulary"
     Older design documents call sites **slots**, and call filling them **bind** or

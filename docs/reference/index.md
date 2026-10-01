@@ -6,7 +6,7 @@ title: Reference
 
 # Reference
 
-Look-up material — the exhaustive detail behind the earlier parts. Come here when you need the exact skill, route, file shape, or install step, plus a full worked example and a glossary of every load-bearing term.
+Look-up material — the detail behind the earlier parts. Come here when you need the exact skill, route, file shape, or install step, plus a full worked example and a glossary.
 
 <div class="viva-grid" markdown>
 
@@ -37,7 +37,7 @@ One question followed from an empty directory to a graded study and the next stu
 
 <div class="viva-card part-reference" markdown>
 ### [Glossary](glossary.md)
-Every load-bearing term in one place, with its formal anchor and its legacy synonyms.
+Formal anchors and legacy synonyms for the framework's vocabulary.
 </div>
 
 <div class="viva-card part-reference" markdown>
@@ -48,4 +48,4 @@ Every installable Vivarium module — searchable and filterable by capability ta
 </div>
 
 !!! tip "Suggested path"
-    Reference is for look-up, not linear reading — jump to the entry you need. If you want it to cohere, follow **A worked end-to-end example** and open the other entries as it links to them.
+    Jump to the entry you need, or follow **A worked end-to-end example** and open the other entries as it links to them.

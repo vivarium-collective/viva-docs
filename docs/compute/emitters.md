@@ -12,13 +12,6 @@ asks to keep it. That something is an **emitter**: the Step that watches wired s
 writes it to a durable sink. When [Core concepts](../foundations/core-concepts.md) says a
 run "emits a run store of trajectories," the emitter is the object doing the emitting.
 
-!!! info "On this page"
-    **Assumes** [Composites & wiring](composites-and-wiring.md). · **You'll learn** the emitter contract, how an emitter attaches as a plain Step, how it writes wired state to a durable sink, and why it never writes back into the run.
-
-!!! quote ""
-    An emitter records wired state each tick into a durable sink — and it is the only part
-    of a composite that is allowed to leave the run.
-
 Because an emitter is a plain [Step](processes-and-steps.md), it inherits everything a Step
 already is: it declares input ports, it is scheduled on the data-flow DAG, and it fires
 when the state it depends on changes. What makes it an *emitter* is a two-line contract and
@@ -55,10 +48,6 @@ Four things are load-bearing here, and every built-in and custom emitter honours
 | `inputs()` returns `self.config['emit']` | The input interface **is** the emit schema. Whatever you declare to emit is exactly what the emitter is wired to read. |
 | `outputs()` returns `{'results': 'node'}` | One output port, `results`, carrying a **handle** — a reference to what was accumulated, not the data itself. |
 | `update(state)` records, returns `{}` | Each tick it persists the observed `state` and returns an **empty delta**, so it can never feed state back into the run. |
-
-The empty return is the discipline. A Step that returned a non-empty delta would be a
-process-in-disguise, mutating the model it is supposed to be passively recording. An
-emitter returns `{}` every tick — it is a pure sink.
 
 !!! note "Why `results` is not written every tick"
     The `results` port is produced at **completion**, by `finalize()`, not by `update()`.
@@ -216,9 +205,8 @@ flowchart LR
     H -->|"query() / resolve()"| SINK[("Durable sink<br/><small>RAM · JSON · SQLite · zarr</small>")]
 ```
 
-The dotted edges are the discipline made visible: state flows **into** the emitter, and the
-only thing that flows out is a handle. No arrow ever runs from the emitter back into a
-store.
+In the diagram, state flows **into** the emitter and only a handle flows back out — nothing
+runs from the emitter back into a store.
 
 ## Reading the trajectory
 
@@ -336,13 +324,12 @@ The contract to satisfy, in one list:
 
 ## Where emitters sit in the bigger picture
 
-An emitter is the **durable phase boundary** of a study. Phase one is the temporal
-simulation; the emitter writes the trajectory; phase two — the analyses, visualizations, and
-report cards that grade the run — are all Steps that read the emitter's `results` handle.
-That is why [Studies](../investigate/studies.md) tie each named readout to an exact store
-path: the study's *emit contract* is a promise about what its emitter records, and the
-verdict is computed from what actually came out. Getting the data out, cleanly and without
-letting it leak back into the model, is the seam the whole agentic spine stands on.
+An emitter separates a run into two phases. Phase one is the temporal simulation; the
+emitter writes the trajectory; phase two — the analyses, visualizations, and report cards
+that grade the run — are all Steps that read the emitter's `results` handle. That is why
+[Studies](../investigate/studies.md) tie each named readout to an exact store path: the
+study's *emit contract* is a promise about what its emitter records, and the verdict is
+computed from what actually came out.
 
 ---
 

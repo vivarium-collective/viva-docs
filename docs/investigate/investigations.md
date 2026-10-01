@@ -11,16 +11,6 @@ argument several studies build together — a named collection of studies under 
 research question, wired into a gated DAG that accumulates into a defensible
 claim.
 
-<p class="viva-pull">A Composite is the runnable object; a Study is the reason you
-run it; an Investigation is the argument several studies build together.</p>
-
-Read the collection top-down and it's an argument; read it bottom-up and it's a
-pile of simulations. The investigation is the layer that makes the difference —
-the place where a dozen questions become evidence the field can re-run.
-
-!!! info "On this page"
-    **Assumes** [Studies](studies.md). · **You'll learn** the investigation ≡ branch ≡ worktree identity, how the gated DAG accumulates a claim, and why reproducibility follows the branch.
-
 ## Investigation ≡ branch ≡ worktree
 
 An investigation is not just a folder of studies. It is a **1:1:1 identity**: the
@@ -132,8 +122,7 @@ flowchart TB
     T -->|leads-to| R
 ```
 
-A member whose prerequisite has not passed renders **🔒 blocked** — and here is
-the subtle part.
+A member whose prerequisite has not passed renders **🔒 blocked**.
 
 ## Investigation-as-composite
 
@@ -210,19 +199,10 @@ masquerade as settled.
 
 </div>
 
-Two roll-up behaviors are worth internalizing. First, the summary is designed so
-that a member lagging in an early phase — one study stuck in Design — holds the
-whole investigation back rather than letting a single finished study over-report
-progress. (Verify the exact lifecycle-rollup rule against the current index code;
-the guarantee that matters is that the summary never *over*-reports.) Second,
-because every member's verdict is derived from its latest run and the rigor
-scorecard is a deterministic `ok / warn / gap` per dimension, hardening an
-investigation is a *transformation an agent can apply and a human can verify* —
-not a matter of taste.
-
-<p class="viva-pull">Because the investigation is typed data, hardening it — filling
-gaps, citing bands, tightening a claim — is a transformation an agent can apply and
-a human can verify, not a vibe.</p>
+The summary is designed so that a member lagging in an early phase — one study stuck
+in Design — holds the whole investigation back rather than letting a single finished
+study over-report progress. (Verify the exact lifecycle-rollup rule against the current
+index code; the guarantee that matters is that the summary never *over*-reports.)
 
 That deterministic evidence engine — behavior tests, acceptance bands, verdict
 roll-up, and the rigor scorecard — is the subject of the next chapter.

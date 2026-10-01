@@ -9,9 +9,9 @@ tags:
 The `bigraph-schema` layer sits at the bottom of the stack. It answers one question
 before anything runs: **what can state be, and how do changes to it combine?** Every
 Store in a Vivarium model holds a value that this layer has typed, and every delta a
-Process returns is merged back into that state by a rule this layer owns. Get the type
-system right and independently-written simulators compose without knowing about each
-other; get it wrong and nothing above it can be trusted.
+Process returns is merged back into that state by a rule this layer owns. Because those
+merge rules belong to the types, independently-written simulators can compose without
+knowing about each other.
 
 This chapter is the working reference for that layer. It builds on the vocabulary from
 [Core concepts](../foundations/core-concepts.md) — stores, schema/state separation,
@@ -19,20 +19,15 @@ deltas, `apply`, and the site/fill/ground story — and turns it into the concre
 call. If you have not read Core concepts, start there; this chapter assumes you know *why*
 deltas merge and focuses on *how* the machinery works.
 
-!!! info "On this page"
-    **Assumes** [Core concepts](../foundations/core-concepts.md). · **You'll learn** the type-string grammar, the `Core` registry, how `apply` merges deltas, and why schema and state stay separate.
-
-!!! quote ""
-    A **schema** is a map from paths to types; a **state** is a map from paths to values.
-    The schema is the typed blueprint; the state is one thing that inhabits it. Keeping the
-    two separate is what lets you validate, reuse, and reason about a model independently of
-    running it.
+A **schema** is a map from paths to types; a **state** is a map from paths to values. The
+schema is the typed blueprint; the state is one thing that inhabits it. Keeping the two
+separate is what lets you validate, reuse, and reason about a model independently of
+running it.
 
 ## What `bigraph-schema` is
 
 `bigraph-schema` "provides a serializable type schema for compositional and multiscale
-modeling … the foundation of the Vivarium 2.0 simulation framework." Concretely it is
-three things wearing one coat:
+modeling … the foundation of the Vivarium 2.0 simulation framework." It is three things:
 
 <div class="viva-grid" markdown>
 
@@ -235,7 +230,7 @@ operation passes its schema argument through.
     same      = core.access(node_type)     # Node  -> Node (idempotent)
     ```
 
-!!! note "`access` is the great normalizer"
+!!! note "`access` normalizes every schema form"
     Every `Core` method that takes a schema calls `access` on it first. That is why you can
     hand `core.default`, `core.check`, `core.serialize`, `core.traverse`, and the rest
     either a terse string, a verbose dict, or a compiled `Node` and get the same behavior.
@@ -418,7 +413,7 @@ assert decoded_state['b'][2]['y'] == 11
 
 ## The `apply` law and update sentinels
 
-Here is the semantic the whole framework rests on. A Process never mutates state; it
+A Process never mutates state; it
 returns a typed **delta**, and the runtime folds that delta in through the type's own
 `apply`. **How a delta combines is a property of the data type, not the process** — which
 is exactly what lets two independently-written processes write to the same store.
@@ -662,11 +657,6 @@ composites, where `view`/`project` and `resolve` do their work per tick.
 </div>
 
 </div>
-
-!!! quote "The one sentence to keep"
-    A schema says what state can be; `apply` says how changes to it combine — and because
-    combination is a property of the *type*, not the *process*, independently-written
-    simulators compose without coordination.
 
 ---
 

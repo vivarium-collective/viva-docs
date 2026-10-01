@@ -19,11 +19,8 @@ defensible claim.
 argument — and audit the argument without re-reading the code.</p>
 
 A study is **never compiled into a composite of its own.** It stays *metadata that points
-at* a composite by a dotted id and reads back what came out. That is the whole design: the
-composite runs, the study records.
-
-!!! info "On this page"
-    **Assumes** [Workspaces & the Workbench](workspaces-and-workbench.md), [Composites & wiring](../compute/composites-and-wiring.md). · **You'll learn** the study/composite split, the three on-disk layers, and the five-phase authoring lifecycle.
+at* a composite by a dotted id and reads back what came out: the composite runs, the study
+records.
 
 ## Three on-disk layers
 
@@ -32,8 +29,6 @@ composite runs, the study records.
 | **Investigation** | `investigations/<slug>/investigation.yaml` | a named collection of studies = a git branch = a worktree |
 | **Study** | `studies/<slug>/study.yaml` | one question + its narrative spine (nests under its investigation, or flat for legacy) |
 | **Composite** | `viva_<pkg>/composites/<id>.composite.yaml` | the runnable process-bigraph document |
-
-Read top-down it is an argument; read bottom-up it is a simulation.
 
 ## The five-phase lifecycle
 
@@ -112,23 +107,14 @@ that composite in-process**, merges the params, runs it, and records the traject
 
 ## Derive-on-read: verdicts are computed, never asserted
 
-This is the single most important rule of the study spine, and it is worth internalizing:
+A study's conclusion is **computed from its evidence, not asserted** (see
+[Rigor & evidence](rigor-and-evidence.md)). You never write `status: pass` by hand; a
+per-test pass/fail pill is derived from the latest run's `outcomes[test].result` in `runs.db`.
 
-!!! quote ""
-    A study's conclusion is **computed from its evidence, not asserted.** You never write
-    `status: pass` by hand. A per-test pass/fail pill is derived from the latest run's
-    `outcomes[test].result` in `runs.db`. This is what stops a study from *claiming* a
-    result it never produced.
-
-The spine keeps **authored** intent and **computed** evidence in *parallel* fields, and a
-`diverges_from_authored` flag is the dashboard headline when they disagree:
-
-| Authored (a human writes) | Computed (code fills, on read) |
-|---|---|
-| `runs[].outcomes` | `runs[].computed_outcomes` |
-| `gate_status` | `pipeline_gate.gate_evaluator` |
-| `executive.verdict` | `.computed_acceptance` |
-| `finding.statement` / `.summary` | `finding.evidence` / `.expected` / `.provenance` |
+The spine keeps **authored** intent and **computed** evidence in *parallel* fields — the
+parallel-slot table is in
+[Rigor & evidence](rigor-and-evidence.md#the-parallel-slot-convention) — and a
+`diverges_from_authored` flag is the dashboard headline when they disagree.
 
 So a test authored `status: passed` but backed by **no** run outcome renders as a pending
 pill (<span class="pill draft">pending</span>), not a pass. A study renders
@@ -145,9 +131,8 @@ prerequisites into a code-computed gate state — passed iff `fail == 0 and pass
 
 It writes a *parallel coded slot* and never overwrites the authored gate.
 
-!!! quote ""
-    Because the study is typed data, hardening it — filling gaps, citing bands, tightening
-    a claim — is a transformation an agent can apply and a human can verify, not a vibe.
+Because the study is typed data, hardening it — filling gaps, citing bands, tightening a
+claim — is a transformation an agent can apply and a human can verify, not a matter of taste.
 
 ## "Five phases" vs "six status axes"
 

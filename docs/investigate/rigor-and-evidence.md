@@ -12,17 +12,13 @@ the machinery that makes that sentence true — the deterministic pipeline that 
 measures it, rolls the measurements up into a verdict, and writes the whole chain back into
 the study's own files so a human can audit every hop.
 
-!!! info "On this page"
-    **Assumes** [Studies](studies.md), [Investigations](investigations.md). · **You'll learn** the evidence spine, the parallel-slot convention, and why the verdict is computed rather than asserted.
-
-## The big idea: code where prose used to be
+## The evidence spine
 
 An [investigation](investigations.md) is a structured research effort — a shared question, a
 set of [studies](studies.md), each with baselines, variants, runs, acceptance criteria,
 findings, and expert feedback. Traditionally, the connective tissue between "here is a run"
 and "here is what it means" is **prose**: an agent or a scientist writes a paragraph asserting
-that the model passed. Prose is where results quietly drift away from the evidence that is
-supposed to back them.
+that the model passed.
 
 The **evidence spine** (the *investigation spine*) replaces that prose tissue with **code**.
 Information flows from sources to conclusions through deterministic Python functions that read
@@ -37,9 +33,8 @@ result it never produced.</p>
 
 ## The parallel-slot convention
 
-The spine's central trick is deceptively simple. For every place a human (or an AI acting as
-author) records **intent**, there is a **parallel slot** the code fills with **derived
-evidence**. The two never share a field. Authored intent is preserved verbatim; computed
+For every place a human (or an AI acting as author) records **intent**, there is a
+**parallel slot** the code fills with **derived evidence**. The two never share a field. Authored intent is preserved verbatim; computed
 evidence lands beside it; and the dashboard compares them.
 
 | What it is | Authored slot (human intent) | Computed slot (code-derived) |
@@ -136,12 +131,9 @@ bucket a human can act on.
 | **Investigation** | Do the member studies' verdicts satisfy the acceptance criteria? | met · partial · unmet |
 | **Feedback** | Has each expert item been resolved into an action? | open · actioned · closed |
 
-These compose into a single **gate trail** — the audit path from a raw source all the way to a
-resolved expert note:
-
-!!! quote ""
-    `source → band → readout validation → run → outcome → study verdict → finding →
-    investigation acceptance → feedback status`
+These compose into a single **gate trail** — the audit path from a raw source to a resolved
+expert note: `source → band → readout validation → run → outcome → study verdict → finding →
+investigation acceptance → feedback status`.
 
 The **observable gate** deserves special emphasis because it is the *never-fabricate guard*: a
 readout marked `not_in_structure` means the study declared an observable the composite cannot
@@ -150,8 +142,7 @@ tells you a human (or a model change) is needed.
 
 ## The three rules
 
-Every write the spine makes obeys three rules. They are the ethical spine of the evidence
-spine, and they recur across every design document.
+Every write the spine makes obeys three rules, and they recur across every design document.
 
 <div class="viva-grid" markdown>
 
@@ -238,14 +229,14 @@ with the run reader living in the sibling emitters package so the dashboard neve
 
 !!! quote "A behavior test is a machine-checkable spec, not prose."
     Two studies that cite the same band and measure the same path will grade the same way,
-    forever, on any machine that can replay the run.
+    on any machine that can replay the run.
 
 ## Hardening a study
 
 A study that *looks* done is not the same as a study whose conclusions survive scrutiny.
-**Hardening** is the transformation that closes the gap between the two — and because a study
-is typed data, hardening is a transformation an agent can apply and a human can verify, not a
-matter of taste.
+**Hardening** closes the gap between the two through a small set of concrete, verifiable
+moves (the signature of hardening as an agent-applicable, human-verifiable transformation is
+covered in [Studies](studies.md)).
 
 Three moves carry most of the work — one standalone skill plus two of its sibling subcommands:
 
@@ -267,25 +258,6 @@ Three moves carry most of the work — one standalone skill plus two of its sibl
     real divergence must be **root-caused before it is patched** — and a verdict of *real and
     understood* (no bug found) is itself a complete hardening. The point is to explain the
     signal, not to bury it under undifferentiated rigor.
-
-## Authored vs computed: the whole picture
-
-Pulling it together, here is who writes what across a study's spine. The left column is where
-human (or AI-as-author) judgment lives; the right is what the deterministic engine derives.
-
-| Stage | You (or an AI) author… | The spine computes… |
-|---|---|---|
-| **Design** | the question, readouts, behavior tests, acceptance bands | readout resolution status (observable gate) |
-| **Runs** | which composite to run, with what perturbations | `runs.db` trajectories + run provenance |
-| **Outcomes** | — | `computed_outcomes` per test (measure → `pass_if`) |
-| **Verdicts** | your intended `executive.verdict` | `computed_acceptance` + `diverges_from_authored` |
-| **Findings** | `statement`, `summary`, `explanation`, `status` | `evidence`, `expected.range`, `divergence_factor`, `provenance` |
-| **Acceptance** | the investigation's acceptance criteria | which criteria are met / partial / unmet |
-| **Feedback** | the expert note and the decision it demands | the tracked action → the child study it seeds |
-
-!!! quote ""
-    You can re-run the science without rewriting the argument — and audit the argument without
-    re-reading the code.
 
 ---
 
