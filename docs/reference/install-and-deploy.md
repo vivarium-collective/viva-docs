@@ -7,26 +7,17 @@ tags:
 # Install & deploy
 
 Getting a workspace and the Workbench running — on your laptop, in a container, and as a
-read-only site others can browse. The through-line is one fact worth fixing in your mind
-before anything else:
+read-only site others can browse.
 
-!!! quote "The direction of the dependency"
-    **The workspace depends on the Workbench, not the other way around.** `vivarium-workbench`
-    is a plain pip dependency of your workspace's `pyproject.toml`, installed into the
-    *workspace's own virtualenv* and run from there. The dashboard imports your workspace's
-    package (`build_core()`) and any installed simulation stacks to build and run composites —
-    a dashboard installed in some other environment could not see them.
+**The workspace depends on the Workbench, not the other way around.** `vivarium-workbench`
+is a plain pip dependency of your workspace's `pyproject.toml`, installed into the
+*workspace's own virtualenv* and run from there. The dashboard imports your workspace's
+package (`build_core()`) and any installed simulation stacks to build and run composites —
+a dashboard installed in some other environment could not see them.
 
 That is why there is no global "install the Workbench" step. You scaffold a workspace, and
 the Workbench comes along inside its venv. For the layers involved, see
 [The stack](../foundations/the-stack.md).
-
-!!! info "On this page"
-    **What's here** what to install and how to run it — prerequisites, the local
-    laptop path, the container image, and a read-only site others can browse. ·
-    **See also** [The stack](../foundations/the-stack.md) for the layers
-    involved, and the [worked example](worked-example.md) to see the setup used
-    end to end.
 
 ---
 

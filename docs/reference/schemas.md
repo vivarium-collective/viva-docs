@@ -7,11 +7,11 @@ tags:
 ---
 # On-disk schema reference
 
-Everything in the Vivarium ecosystem is a file on disk. A workspace is a git repository;
-the objects inside it — the workspace manifest, its studies, its investigations, its
-composites — are YAML and JSON documents that you author and the Workbench reads, writes,
-and commits. This chapter is the field guide to those shapes: what each file must contain,
-what it may contain, and how the schemas have drifted across versions.
+A workspace is a git repository; the objects inside it — the workspace manifest, its
+studies, its investigations, its composites — are YAML and JSON documents that you author
+and the Workbench reads, writes, and commits. This chapter is the field guide to those
+shapes: what each file must contain, what it may contain, and how the schemas have drifted
+across versions.
 
 Three documents carry almost all the structure:
 
@@ -22,16 +22,7 @@ Three documents carry almost all the structure:
 | `investigation.yaml` | a collection of studies under one research question | migrated on load; no frozen JSON schema (see note) |
 
 For the concepts these files encode — Composite, Study, Investigation, Run, Finding,
-Verdict — read [Core concepts](../foundations/core-concepts.md) first. This chapter is the
-reference; that chapter is the argument.
-
-!!! info "On this page"
-    **What's here** the field guide to the on-disk shapes — `workspace.yaml`,
-    `study.yaml`, and `investigation.yaml`: what each file must contain, what it
-    may, and how the schemas have drifted across versions. · **See also**
-    [Core concepts](../foundations/core-concepts.md) for what these files encode,
-    and [Schemas, types & state](../compute/schema-types-state.md) for the type
-    system underneath.
+Verdict — read [Core concepts](../foundations/core-concepts.md) first.
 
 !!! note "A word on `viva` vs `pbg`"
     The ecosystem was renamed from **pbg** to **viva**, and the migration is mid-flight.
@@ -162,7 +153,7 @@ is a directory (`studies/<slug>/` or, in current scaffolds,
     depending on them, and remember that only *declared* fields render — every field is
     optional.
 
-The v4 spec organizes into six groups. Read top to bottom, it is the life of one study.
+The v4 spec organizes into six groups.
 
 ### Framing — what you are asking
 
@@ -258,8 +249,7 @@ visualizations:
 !!! quote "Derive-on-read"
     A study renders **Ran · Tests N ✓ · Passed** only when `runs[].outcomes` (backed by
     `runs.db`) support the test results. A test with an authored `status: passed` but no run
-    outcome renders as pending — this is what stops a study from *claiming* a result it
-    never produced. See [Studies](../investigate/studies.md) and
+    outcome renders as pending. See [Studies](../investigate/studies.md) and
     [Rigor & evidence](../investigate/rigor-and-evidence.md).
 
 ---

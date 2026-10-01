@@ -17,13 +17,6 @@ it wraps. For the request surface those skills call, cross over to the
 [HTTP API reference](http-api.md); for how an agent drives them end to end, see
 [Working with AI agents](../investigate/working-with-agents.md).
 
-!!! info "On this page"
-    **What's here** the full `/viva-*` skill catalog — every command, what it
-    does, and which HTTP endpoint or `viva_superpowers` helper it wraps. · **See
-    also** the [HTTP API reference](http-api.md) for the request surface, and
-    [Working with AI agents](../investigate/working-with-agents.md) for the loop
-    an agent drives end to end.
-
 !!! note "Two preconditions every dashboard-touching skill assumes"
     1. **A workspace** — a directory with a `workspace.yaml` and a `viva_<pkg>/`
        Python package. Create one with [`/viva-workspace`](#workspace-lifecycle).
@@ -77,9 +70,9 @@ simulators together.
 
 **The default bridges the *real* upstream tool** — locate it (PyPI, GitHub,
 binary), install/build it into the wrapper's venv, run a minimal example, then
-drive it from the Process's `update()`. It keeps trying when the build is hard and
-**never silently downgrades** to fake behavior. Producing a mock or a
-reimplementation is always an explicit opt-in.
+drive it from the Process's `update()`. It keeps trying when the build is hard, and
+producing a mock or a reimplementation is always an explicit opt-in — it never
+downgrades on its own.
 
 | Mode | Flag | What lands | `update()` drives |
 |---|---|---|---|

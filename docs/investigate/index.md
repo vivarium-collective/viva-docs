@@ -12,7 +12,7 @@ The agentic spine — how runs become auditable scientific evidence. This part i
 
 <div class="viva-card part-investigate" markdown>
 ### [Workspaces & the Workbench](workspaces-and-workbench.md)
-The directory that *is* the model, and the AI-free server that turns it into a git-backed research notebook.
+The workspace directory that is the model, and the AI-free server that turns it into a git-backed research notebook.
 </div>
 
 <div class="viva-card part-investigate" markdown>
@@ -22,7 +22,7 @@ One question, one emit-contract, and one pass/fail bar wrapped around a composit
 
 <div class="viva-card part-investigate" markdown>
 ### [Analyses, visualizations & report cards](analyses-visualizations-report-cards.md)
-The machinery that turns a wall of numbers into figures, derived tables, and graded scorecards.
+Figures, derived tables, and graded scorecards built from a run's output.
 </div>
 
 <div class="viva-card part-investigate" markdown>

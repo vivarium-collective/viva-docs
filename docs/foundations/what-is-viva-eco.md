@@ -10,14 +10,9 @@ Vivarium is a framework for **composing multiscale biological models** and for t
 their runs into **auditable scientific evidence**. This chapter gives you the mental
 model everything else in the guide builds on.
 
-!!! info "On this page"
-    **Assumes** no prerequisites — start here. · **You'll learn** why the rebuild tax
-    exists, the two spines and the discovery loop between them, and what makes a study's
-    conclusion trustworthy.
-
 ## The problem: the rebuild tax
 
-Biological systems are modeled with wildly different formalisms. Gene expression is
+Biological systems are modeled with different formalisms. Gene expression is
 naturally a set of ODEs; metabolism is a flux-balance (FBA) linear program; a morphogen
 gradient is a PDE; a growing colony is an agent-based model. Each of these is written in
 its own tool, with its own assumptions, units, and time scales.
@@ -65,11 +60,8 @@ into a **verdict**, a **readiness** score, and open **epistemic debts**. Package
 
 A single simulation answers nothing on its own. The computational spine makes a model
 *run*; the agentic spine gives that run a *scientific shape* — a question it answers, a
-pass/fail bar it must clear, and a place in a larger argument.
-
-!!! quote ""
-    Neither spine is the engine — the engine is the closed loop between them, and the
-    **Workbench** is where the loop turns.
+pass/fail bar it must clear, and a place in a larger argument. Neither spine is the engine —
+the engine is the closed loop between them, and the **Workbench** is where the loop turns.
 
 ## The discovery loop
 
@@ -93,12 +85,10 @@ study page.
 
 ## What makes it trustworthy
 
-Two design commitments run through the whole framework, and they are worth internalizing
-before anything else:
+Two design commitments run through the whole framework:
 
 1. **A study's conclusion is computed from its evidence, not asserted.** You do not write
    `status: pass` by hand. The verdict is derived from the latest run's measured outcomes.
-   This is what stops a study from *claiming* a result it never produced.
 
 2. **The tool is AI-free; the AI is a swappable plugin.** The Workbench server, its data,
    and its evidence rendering contain no AI. All AI capability is packaged as the
@@ -106,8 +96,7 @@ before anything else:
    Workbench's HTTP API. This keeps the tool auditable and the AI replaceable.
 
 Because a study is **typed data**, hardening it — filling gaps, citing evidence, tightening
-a claim — is a transformation an agent can apply and a human can verify, not a matter of
-taste.
+a claim — is a transformation an agent can apply and a human can verify.
 
 ## Who this guide is for
 

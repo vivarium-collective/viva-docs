@@ -12,18 +12,10 @@ It is a map, not a copy-paste script — each step links to the chapter that cov
 depth, and the exact command surface evolves, so confirm specifics against your installed
 `/viva-*` skills and a live workspace.
 
-!!! info "On this page"
-    **Assumes** you've skimmed [Studies](../investigate/studies.md) and have `uv`
-    plus the `viva-superpowers` plugin installed. · **You'll learn** how one
-    question travels the whole loop — from an empty directory to a scaffolded
-    workspace, a composite, graded runs, a computed verdict, and the next study
-    it seeds.
-
-!!! tip "The shape of the loop"
-    Every step below is one hop of the discovery loop from
+!!! tip "The discovery loop"
+    Every step below is one hop of the loop from
     [What is Vivarium?](../foundations/what-is-viva-eco.md): **Question → Composite → Run →
-    Verdict → Next.** If you internalize that shape, the individual commands are just
-    details.
+    Verdict → Next.**
 
 The running example is a small microbial-growth question, in the spirit of the
 **Spatio-Flux** reference models and the **v2ecoli baseline** showcase: *does our cell
@@ -182,10 +174,7 @@ dashboard's headline (see the authored-vs-computed parallel slots in
 [Rigor & the evidence engine](../investigate/rigor-and-evidence.md)).
 
 A verdict is not the end; it tells you what to ask next. If growth held, the next study
-might perturb the medium; if it drifted, the next study calibrates a parameter. Either way:
-
-!!! quote ""
-    New science is a **new study**, not a patch to the model.
+might perturb the medium; if it drifted, the next study calibrates a parameter.
 
 ## 7. Group studies into an investigation
 
@@ -218,8 +207,7 @@ Two published investigations are worth reading as fully-worked exemplars of this
   combining kinetic equations, dynamic FBA, and spatial processes. It is a standalone
   library built to demonstrate the composition of metabolic, spatial, mechanical, and
   structural processes within a single process-bigraph type system — a testbed for wiring
-  independently developed mechanisms together through typed interfaces. The clearest example
-  of *composition across formalisms*.
+  independently developed mechanisms together through typed interfaces.
 
 <figure class="viva-figure">
 <img src="../assets/figures/spatio-flux.png" alt="The Spatio-Flux reference model: a composite of metabolic, spatial, mechanical, and structural processes, plus simulation snapshots of particles moving through nutrient fields.">

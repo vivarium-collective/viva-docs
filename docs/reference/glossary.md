@@ -15,13 +15,6 @@ idea.
 
 Entries are grouped by the layer they belong to. Each links to the chapter that develops it.
 
-!!! info "On this page"
-    **What's here** every load-bearing term in one place — its formal anchor, its
-    legacy synonym where one exists, and a link to the chapter that develops it,
-    grouped by the layer it belongs to. · **See also**
-    [Core concepts](../foundations/core-concepts.md) for the argument behind the
-    vocabulary, and [Schemas, types & state](../compute/schema-types-state.md).
-
 ---
 
 ## Process Bigraph core vocabulary
@@ -68,7 +61,7 @@ deltas rather than overwriting state. → [Core concepts](../foundations/core-co
 shared state through the type's own combination rule: numeric types **accumulate**, others
 **set** or **merge**. Because *how* deltas combine is a property of the data type, not the
 process, two independently-written processes can write to the same store without knowing about
-each other. This is what lets them compose. → [Core concepts](../foundations/core-concepts.md#the-one-semantic-that-makes-it-compose)
+each other. → [Core concepts](../foundations/core-concepts.md#the-one-semantic-that-makes-it-compose)
 
 **Port** — a single input or output of an edge. A process declares typed input and output
 ports; wiring connects them to stores. → [Composites & wiring](../compute/composites-and-wiring.md)
@@ -94,10 +87,9 @@ via `allocate_core()`. → [Schemas, types & state](../compute/schema-types-stat
 **Process bigraph** *(B = (Σ, x, R_T, R_L))* — the typed, executable organization as a whole:
 a schema, a state, and the two registries. → [Core concepts](../foundations/core-concepts.md)
 
-**Composite** — a state-tree of typed process and step nodes wired to shared stores; **the
-only object the engine actually runs**. A composite is itself a Process (via its bridge), so
-composites nest — big models are assembled from small ones by *containment, not
-hole-filling*. → [Composites & wiring](../compute/composites-and-wiring.md)
+**Composite** — a state-tree of typed process and step nodes wired to shared stores; the
+object the engine runs. A composite is itself a Process (via its bridge), so composites
+nest — big models are assembled from small ones. → [Composites & wiring](../compute/composites-and-wiring.md)
 
 **Bridge** *(bridge : (external port) → P)* — the map that packages a composite's internal
 process bigraph as a single higher-level process, wiring its external interface onto internal
@@ -119,7 +111,8 @@ The unifying idea — a composite, a template, a study, and an investigation are
 kind of typed document, differing in structure, not in execution machinery.
 
 **Document** — a `bigraph-schema`-typed object: a place graph (dict nesting), a link graph
-(wiring), and holes (sites). One object, one operation, one law. → [The stack](../foundations/the-stack.md#the-unifying-idea)
+(wiring), and holes (sites). A composite, template, study, and investigation are all one kind
+of document — see [Core concepts](../foundations/core-concepts.md). → [The stack](../foundations/the-stack.md#the-unifying-idea)
 
 **Site** *(legacy: slot, hole)* — a place-graph hole: a slot where a whole composite, process,
 or value plugs in. This is Milner's bigraph *site*. A composite refuses to run while any
@@ -160,7 +153,7 @@ dotted id and record what came out. None of them is the thing that runs.
 git branch and worktree. It stores no edges — the cross-study DAG is computed from its
 members' prerequisites and compiled into a composite. → [Investigations](../investigate/investigations.md)
 
-**Study** — the reason you run a composite: one question, one emit-contract, and one pass/fail
+**Study** — the reason you run a composite: a question, the readouts to emit, and a pass/fail
 bar wrapped around it. A study is never compiled into a composite itself — it stays metadata
 that points at one and reads back what came out. → [Studies](../investigate/studies.md)
 

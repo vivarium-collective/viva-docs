@@ -12,9 +12,6 @@ This chapter is about that seam: how the `/viva-*` skills drive the [Workbench](
 over a plain HTTP contract, and how the work divides between an AI agent doing high-throughput
 construction and a human curator owning the calls that matter.
 
-!!! quote ""
-    Same artifact, two kinds of author.
-
 <figure class="viva-figure">
 <img src="../assets/figures/agentic-loop.svg" alt="The agentic closed loop: hypothesis, prediction, workflow contract, simulation, evidence package, validation, and model update, over a process-bigraph execution substrate with human approval at each stage.">
 <figcaption>The agentic loop: AI agents assemble and run the investigation graph —
@@ -22,13 +19,9 @@ hypothesis → prediction → workflow → simulation → evidence → validatio
 over a process-bigraph execution substrate, with a human approving the stages that matter.</figcaption>
 </figure>
 
-!!! info "On this page"
-    **Assumes** [Workspaces & the Workbench](workspaces-and-workbench.md), [Rigor & the evidence engine](rigor-and-evidence.md). · **You'll learn** the AI-free-tool / swappable-plugin split, how the `/viva-*` skills drive the Workbench over plain HTTP, and how work divides between agent and human curator.
-
 ## The split: AI-free tool, swappable AI plugin
 
-The single most important architectural decision for agents is that the AI and the tool are
-**two separate layers, and they stay separate**:
+The AI and the tool are **two separate layers, and they stay separate**:
 
 <div class="viva-stack" markdown>
 
@@ -48,7 +41,7 @@ script, or a human at a keyboard is driving it.
 
 </div>
 
-Why go to this trouble? Two payoffs, and they are the whole reason the platform can be trusted:
+Why go to this trouble? Two payoffs:
 
 - **Auditability.** The evidence you read on the dashboard was rendered deterministically from
   declared fields by code with no model in the loop. There is no prompt that could have talked
@@ -179,15 +172,8 @@ to guard against them:
       are built to surface. The curator reconciles the claim to what the evidence actually
       supports.
 
-!!! quote ""
-    **Never auto-merge.** A merge is a scientific commitment; the human always approves it. AI
-    augments the investigation — it never replaces scientific accountability.
-
-The reason the boundary can be this clean is everything in the two preceding chapters: the tool
-is AI-free, so what the agent produces is graded by code; the evidence is computed, not
-asserted, so a curator reviewing an agent's study is reviewing *facts the spine derived*, not
-prose the agent wrote. Structure is what makes an agent-assembled model trustworthy rather than
-plausible-looking.
+**Never auto-merge.** A merge is a scientific commitment; the human always approves it. AI
+augments the investigation — it never replaces scientific accountability.
 
 ---
 

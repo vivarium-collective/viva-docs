@@ -14,17 +14,6 @@ of that is a **Composite** — the state-tree of typed nodes wired to shared sto
 document, how ports wire to store paths, how composites nest, and what happens on every
 tick when you call `run`.
 
-!!! info "On this page"
-    **Assumes** [Processes & Steps](processes-and-steps.md).
-
-    **You'll learn:**
-
-    - The composite **document shape** — a `state` tree of `process` / `step` nodes
-    - Wiring ports to shared-store **paths**, including relative paths like `['..']`
-    - **Nesting** composites through the `bridge`
-    - Running with `composite.run(interval)`
-    - The **tick lifecycle** — the invoke pass, the apply pass, and how steps get triggered
-
 ## The composite document
 
 A composite is a **document**: a plain Python dict (JSON-serializable) whose main key is
@@ -72,8 +61,8 @@ that isn't an edge node is state.
 ## Wiring: ports to store paths
 
 The coupling rule from [Core concepts](../foundations/core-concepts.md#structure-stores-edges-and-wires)
-is worth restating exactly, because it is the whole model: **edges never talk to each other
-directly.** They read and write shared stores, and *that shared wiring is the coupling.*
+is the whole model: **edges never talk to each other directly.** They read and write shared
+stores, and *that shared wiring is the coupling.*
 
 A **wire** is a **path** — a list of strings naming a location in the state tree:
 
@@ -90,9 +79,6 @@ An edge node's `inputs` and `outputs` map each **port name** to such a path:
 Change a path and you rewire the model; point two edges' ports at the **same** path and
 they are now coupled — one process's delta lands in the store the other reads, with no
 direct reference between them. Nothing else connects edges.
-
-<p class="viva-pull">Wiring is the coupling. To connect two processes you don't call one
-from the other — you point their ports at the same store path.</p>
 
 ### Relative paths climb and descend
 
@@ -119,7 +105,7 @@ used to wire a dynamic population of agents.
 
 ## Nesting: the bridge
 
-Here is the structural payoff of the whole design: **a `Composite` is itself a
+The structural payoff of this design is that **a `Composite` is itself a
 `Process`.** It owns an internal state-tree and scheduler, and it exposes external ports
 through a **bridge** that maps those ports onto internal store paths. Put another way, a
 composite **packages an internal process bigraph as a single higher-level process** — so a
@@ -163,9 +149,9 @@ flowchart TB
 <p class="viva-pull">Multiscale models are built by containment, not by editing a monolith:
 a cell composite drops into a colony composite the same way a process drops into a cell.</p>
 
-This is the mechanism behind the framework's central slogan — *composition is closed*.
 Because a composite is a process, a composite of composites is still a process, all the way
-up. See [Core concepts](../foundations/core-concepts.md#composition-the-composite).
+up — composition is closed. See
+[Core concepts](../foundations/core-concepts.md#composition-the-composite).
 
 ## Running a composite
 
@@ -229,12 +215,11 @@ built-in emitters, how to retrieve results, how to write your own — is the nex
 ## The tick lifecycle
 
 Under `run`, time advances one **tick** at a time, and each tick is **two passes**. This is
-the heart of the scheduler, and it's worth understanding because it explains why deltas
-never collide and why steps fire exactly when they should. Where the wiring above describes
-how processes are *connected*, the tick loop is **orchestration** — how they are *run in
-time*: at each step the composite decides which processes are eligible, gathers what they
-need from the state, invokes them, and merges their proposed changes back into the shared
-stores.
+what explains why deltas never collide and why steps fire exactly when they should. Where
+the wiring above describes how processes are *connected*, the tick loop is **orchestration**
+— how they are *run in time*: at each step the composite decides which processes are
+eligible, gathers what they need from the state, invokes them, and merges their proposed
+changes back into the shared stores.
 
 <figure class="viva-figure">
 <img src="../assets/figures/orchestration-modes.png" alt="Three orchestration patterns: multi-timestepping, a workflow DAG of steps, and event-driven graph rewrite (divide, engulf, burst).">

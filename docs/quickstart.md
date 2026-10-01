@@ -146,15 +146,10 @@ scaffold/serve workspace  →  viva-catalog (get processes)  →  viva-expert (w
 
 ### 4.6 The mental model you're operating in
 
-The framework collapses to **one object, one operation, one law**:
-
-- **One object** — a *document*. A composite, a study, an investigation, and a template are the **same kind of thing** (a bigraph document).
-- **One operation** — **fill**: substitute values / composites into a document's open **sites** (holes).
-- **One law** — **groundness** (`is_ground`): a document runs iff it has no unfilled required sites.
-
-Four features that look like separate machinery are that one idea in different places:
-optional members, gating on a failed prerequisite, pulling a cached result, and
-partial-graph triggering. See [Core concepts](foundations/core-concepts.md) and
+A composite, study, investigation, and template are the same kind of thing — a bigraph
+document. You **fill** values or sub-composites into its open **sites** (holes), and it runs
+once it is **ground** (no required site left unfilled). See
+[Core concepts](foundations/core-concepts.md) for this model and
 [The stack](foundations/the-stack.md) for the full picture.
 
 ---
@@ -187,6 +182,4 @@ curl -s "$BASE/openapi.json"                 # exact API shapes
 base URL) · `studies/<slug>/runs.db` (durable run artifacts) · `composites/`, `studies/`,
 `investigations/` (the documents).
 
-**Golden rules for an agent:** read `.pbg/server/server-info` for the URL; orient via
-`/api/workspace-manifest` first; trust `/openapi.json` for shapes; runs are async (poll,
-and check the *result*, not just HTTP 200); every write is a git commit.
+The access contract for an agent is in §4.3 above.

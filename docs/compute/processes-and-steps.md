@@ -10,17 +10,6 @@ A model in Vivarium is made of two things: **state** that lives in stores, and
 are exactly two kinds, split by their relationship to time. This chapter shows you how to
 write both, from the base-class contract down to real, runnable code.
 
-!!! info "On this page"
-    **Assumes** [Core concepts](../foundations/core-concepts.md) and [Schemas, types & state](schema-types-state.md).
-
-    **You'll learn:**
-
-    - What an **edge** is, and why it never talks to another edge directly
-    - The `Process` contract — `config_schema`, `inputs()`, `outputs()`, `update(state, interval)`, `initial_state()`
-    - The `@process` decorator shortcut that infers `config_schema` for you
-    - How a **Step** differs from a Process, and how Steps form a dataflow DAG that runs to quiescence
-    - Registering an edge with `core.register_link(name, cls)`
-
 ## What an edge is
 
 In [Core concepts](../foundations/core-concepts.md) an **edge** is defined as a unit of
@@ -29,7 +18,7 @@ that makes the whole framework compose is that **an edge never talks to another 
 directly** — it reads and writes **shared stores**, and that shared wiring *is* the
 coupling between edges.
 
-That gives an edge a very small, very strict job:
+That gives an edge a strict job:
 
 <div class="viva-grid" markdown>
 
@@ -60,8 +49,7 @@ flowchart LR
 ```
 
 <p class="viva-pull">Because an edge only ever returns a delta, two independently-written
-edges can write to the same store without knowing about each other. That is the one
-semantic that lets the whole framework compose.</p>
+edges can write to the same store without knowing about each other.</p>
 
 The two kinds of edge differ in exactly one thing — **time**:
 
@@ -330,12 +318,10 @@ it. In a document, an edge names its class through an `address` like `local:Grow
 ## Putting it together
 
 A process or step on its own is inert — it needs stores to read and write, and a composite
-to schedule it. Here is the full loop, using a class-based `Grow` process wired over a
-single shared store, with an emitter recording the trajectory:
+to schedule it. Here is the `Grow` process used from here on — just ports plus an update:
 
 ```python
-from process_bigraph import Composite, Process, allocate_core
-from process_bigraph.emitter import emitter_from_wires, gather_emitter_results
+from process_bigraph import Process
 
 
 class Grow(Process):                                  # a Process = ports + an update
@@ -344,26 +330,13 @@ class Grow(Process):                                  # a Process = ports + an u
     def outputs(self): return {'level': 'float'}
     def update(self, state, interval):
         return {'level': state['level'] * self.config['rate'] * interval}  # a delta
-
-
-core = allocate_core()
-core.register_link('Grow', Grow)                      # register it in the local registry
-
-composite = Composite({'state': {
-    'level': 1.0,                                     # a shared store
-    'grow': {'_type': 'process', 'address': 'local:Grow', 'config': {'rate': 0.5},
-             'interval': 1.0, 'inputs': {'level': ['level']}, 'outputs': {'level': ['level']}},
-    'emitter': emitter_from_wires({'level': ['level'], 'time': ['global_time']}),
-}}, core=core)
-composite.run(5.0)
-print(gather_emitter_results(composite))
 ```
 
-<small>Source: `README.md` quickstart.</small>
-
-That `{'state': {...}}` document — the stores, the `process`/`step` nodes, and the wiring
-between them — is the subject of the next chapter. How the emitter records state, and how
-you get the trajectory back out, is covered in [Emitters](emitters.md).
+Wiring this into a `{'state': {...}}` document — the stores, the `process`/`step` nodes,
+and the wiring between them — and running it is the subject of the next chapter; the full
+runnable example, with an emitter recording the trajectory, lives in
+[Composites & wiring](composites-and-wiring.md). Reading the trajectory back out is covered
+in [Emitters](emitters.md).
 
 ---
 

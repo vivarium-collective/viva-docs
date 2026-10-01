@@ -42,10 +42,6 @@ open epistemic debts.
 
 </div>
 
-!!! quote ""
-    Neither spine is the engine — the engine is the closed loop between them, and the
-    **Workbench** is where the loop turns.
-
 ## The four packages
 
 Each layer imports the ones below it and never the reverse. Click through to any layer.

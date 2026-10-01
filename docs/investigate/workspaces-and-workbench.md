@@ -9,17 +9,12 @@ tags:
 
 Everything in the [Investigate](studies.md) half of the guide happens in one place: a
 **workspace** — a directory that *is* the model — driven by the **Workbench**, an
-AI-free server that turns that directory into a git-backed research notebook.
+AI-free server that turns that directory into a git-backed research notebook. The data
+lives in the workspace, never in the server.
 
-<p class="viva-pull">A workspace is where research happens; the Workbench is the loop
-turning inside it. The data lives in the workspace, never in the server.</p>
+## The workspace/Workbench split
 
-!!! info "On this page"
-    **Assumes** [Core concepts](../foundations/core-concepts.md). · **You'll learn** the workspace/Workbench split, which way the dependency arrow points, and how every mutating action becomes a git commit.
-
-## The one crucial split
-
-The Workbench is *tooling*; the workspace is *data*. They are separate on purpose.
+The Workbench is *tooling*; the workspace is *data*.
 
 <div class="viva-grid" markdown>
 
@@ -60,10 +55,10 @@ flowchart LR
     WB -->|delegates| E["process-bigraph engine"]
 ```
 
-!!! quote ""
-    The Workbench is AI-free. All AI capability is packaged as the `viva-superpowers`
-    Claude Code plugin — a set of `/viva-*` skills that drive the Workbench's HTTP API.
-    This keeps the tool auditable and the AI swappable.
+The Workbench is AI-free. All AI capability is packaged as the `viva-superpowers` Claude
+Code plugin — a set of `/viva-*` skills that drive the Workbench's HTTP API — which keeps
+the tool auditable and the AI swappable. See
+[Working with AI agents](working-with-agents.md) for how that split works.
 
 ## Modules vs workspaces
 

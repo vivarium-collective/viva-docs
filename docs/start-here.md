@@ -133,9 +133,6 @@ Before any path, read these three — they're short and everything else builds o
 
 ---
 
-!!! quote ""
-    New science is a **new study**, not a patch to the model.
-
 Whichever path you take, the loop is the same: **Question → Composite → Run → Verdict →
 Next.** When you're ready for the full detail, everything is in the
 [Reference](reference/index.md).

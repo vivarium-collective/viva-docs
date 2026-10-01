@@ -8,25 +8,17 @@ tags:
 
 The Workbench is a **FastAPI app under uvicorn** (`vivarium_workbench/api/app.py`).
 Every `/viva-*` skill drives it; every mutating call commits to the active git
-branch in the workspace. The surface is large — at the verified HEAD `api/app.py`
-registers **253 routes** (122 GET, 122 POST, 7 DELETE, 2 PATCH; 245 unique paths,
-no WebSocket); the in-repo survey's older headline of "260 routes / 135 POST /
-119 GET" is stale, so trust a live recount over any fixed number — so this
-chapter organizes the ones that matter along the **Investigations → Studies →
-Runs** spine, as reference tables. It is not the generated spec: for exact request
-and response shapes, read `GET /openapi.json` (also `/docs`, `/redoc`) on a live
-server.
+branch in the workspace. At the verified HEAD `api/app.py` registers **253 routes**
+(122 GET, 122 POST, 7 DELETE, 2 PATCH; 245 unique paths, no WebSocket); the in-repo
+survey's older headline of "260 routes / 135 POST / 119 GET" is stale, so trust a
+live recount over any fixed number. This chapter organizes the routes that matter
+along the **Investigations → Studies → Runs** spine, as reference tables. It is not
+the generated spec: for exact request and response shapes, read `GET /openapi.json`
+(also `/docs`, `/redoc`) on a live server.
 
 For the commands that call these endpoints, cross back to the
 [Skill reference](skills.md); for the agent's-eye view of the whole loop, see
 [Working with AI agents](../investigate/working-with-agents.md).
-
-!!! info "On this page"
-    **What's here** the Workbench REST surface organized along the
-    Investigations → Studies → Runs spine, as reference tables — plus the
-    generated-spec pointers (`/openapi.json`, `/docs`, `/redoc`) for exact
-    shapes. · **See also** the [Skill reference](skills.md) for the commands that
-    call these endpoints, and [Working with AI agents](../investigate/working-with-agents.md).
 
 !!! note "The agent access contract"
     - **Base URL** comes from `.pbg/server/server-info` — never hardcode a port.
