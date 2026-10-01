@@ -36,28 +36,28 @@ Before any path, read these three — they're short and everything else builds o
 <div class="viva-grid" markdown>
 
 <div class="viva-card part-build" markdown>
-### 1. Types & state
-[Schemas, types & state](compute/schema-types-state.md) — how state is typed and how deltas merge.
+### 1. [Types & state](compute/schema-types-state.md)
+How state is typed and how deltas merge.
 </div>
 
 <div class="viva-card part-build" markdown>
-### 2. Processes & Steps
-[Processes & Steps](compute/processes-and-steps.md) — write the two kinds of edge.
+### 2. [Processes & Steps](compute/processes-and-steps.md)
+Write the two kinds of edge.
 </div>
 
 <div class="viva-card part-build" markdown>
-### 3. Compose & run
-[Composites & wiring](compute/composites-and-wiring.md) — assemble, wire, and run a composite.
+### 3. [Compose & run](compute/composites-and-wiring.md)
+Assemble, wire, and run a composite.
 </div>
 
 <div class="viva-card part-build" markdown>
-### 4. Get data out
-[Emitters](compute/emitters.md) — record the run into a durable store.
+### 4. [Get data out](compute/emitters.md)
+Record the run into a durable store.
 </div>
 
 <div class="viva-card part-build" markdown>
-### 5. Design interface-first
-[Templates & draft processes](compute/templates-and-draft-processes.md) — sketch an interface before the mechanism.
+### 5. [Design interface-first](compute/templates-and-draft-processes.md)
+Sketch an interface before the mechanism.
 </div>
 
 </div>
@@ -73,28 +73,28 @@ Before any path, read these three — they're short and everything else builds o
 <div class="viva-grid" markdown>
 
 <div class="viva-card part-investigate" markdown>
-### 1. Set up
-[Workspaces & the Workbench](investigate/workspaces-and-workbench.md) — scaffold and start the server.
+### 1. [Set up](investigate/workspaces-and-workbench.md)
+Scaffold and start the server.
 </div>
 
 <div class="viva-card part-investigate" markdown>
-### 2. Ask a question
-[Studies](investigate/studies.md) — wrap one question, one emit-contract, one pass/fail bar around a composite.
+### 2. [Ask a question](investigate/studies.md)
+Wrap one question, one emit-contract, one pass/fail bar around a composite.
 </div>
 
 <div class="viva-card part-investigate" markdown>
-### 3. See the result
-[Analyses, visualizations & report cards](investigate/analyses-visualizations-report-cards.md) — figures, tables, and graded scorecards.
+### 3. [See the result](investigate/analyses-visualizations-report-cards.md)
+Figures, tables, and graded scorecards.
 </div>
 
 <div class="viva-card part-investigate" markdown>
-### 4. Build the argument
-[Investigations](investigate/investigations.md) — group studies into a gated DAG.
+### 4. [Build the argument](investigate/investigations.md)
+Group studies into a gated DAG.
 </div>
 
 <div class="viva-card part-investigate" markdown>
-### 5. Make it defensible
-[Rigor & the evidence engine](investigate/rigor-and-evidence.md) — computed-not-asserted verdicts, gates, and provenance.
+### 5. [Make it defensible](investigate/rigor-and-evidence.md)
+Computed-not-asserted verdicts, gates, and provenance.
 </div>
 
 </div>
@@ -110,23 +110,23 @@ Before any path, read these three — they're short and everything else builds o
 <div class="viva-grid" markdown>
 
 <div class="viva-card part-reference" markdown>
-### 1. How agents fit
-[Working with AI agents](investigate/working-with-agents.md) — the AI-free tool + swappable-plugin split and the access contract.
+### 1. [How agents fit](investigate/working-with-agents.md)
+The AI-free tool + swappable-plugin split and the access contract.
 </div>
 
 <div class="viva-card part-reference" markdown>
-### 2. The skills
-[Skill reference](reference/skills.md) — every `/viva-*` command and what it wraps.
+### 2. [The skills](reference/skills.md)
+Every `/viva-*` command and what it wraps.
 </div>
 
 <div class="viva-card part-reference" markdown>
-### 3. The API
-[HTTP API reference](reference/http-api.md) — the endpoints agents call.
+### 3. [The API](reference/http-api.md)
+The endpoints agents call.
 </div>
 
 <div class="viva-card part-reference" markdown>
-### 4. The shapes
-[On-disk schema reference](reference/schemas.md) — the YAML shapes agents read and write.
+### 4. [The shapes](reference/schemas.md)
+The YAML shapes agents read and write.
 </div>
 
 </div>
