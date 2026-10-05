@@ -221,9 +221,9 @@ hardening it is a transformation an agent can apply and verify. → [Rigor & evi
     - **Python import names are stable**: `import process_bigraph`, `import bigraph_schema` —
       the rebrand did not touch them.
     - **Packages**: new workspaces use a `viva_<pkg>/` package; older ones use `pbg_<pkg>/`.
-    - **Still carrying the old prefix:** the runtime control directory `.pbg/`, and the
-      module ids the catalog installs by (e.g. `pbg-copasi`) — these track the upstream
-      repository names, which are mid-rename.
+    - **Still carrying the old prefix:** the runtime control directory `.pbg/`, and a few
+      catalog install ids (e.g. `pbg-amici`) whose package distribution name is still
+      mid-rename — though the module repos themselves are now `viva-*`.
     - **The scaffold repo** is `viva-template` (formerly `pbg-template`); both names resolve.
 
     When in doubt, prefer the **viva** spelling; this guide flags the exceptions where they
