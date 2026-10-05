@@ -51,10 +51,10 @@ def main() -> None:
     )
     out.append(
         '??? note "A note on install names"\n'
-        "    Modules are named `viva-*`, but the **install id** (and the source repo) often\n"
-        "    still carries the original `pbg-` prefix — the id tracks the upstream package,\n"
-        "    which is mid-rename. Copy the `/viva-catalog install …` line from each card\n"
-        "    verbatim; it is the id that currently resolves.\n"
+        "    Modules and their GitHub repos are named `viva-*`. Most **install ids** are now\n"
+        "    `viva-` too; a few still read `pbg-` because that package's distribution name is\n"
+        "    still mid-rename. Copy the `/viva-catalog install …` line from each card\n"
+        "    verbatim — it is the id that currently resolves.\n"
     )
     out.append(
         '!!! tip "Filter the catalog"\n'

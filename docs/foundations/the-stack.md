@@ -100,8 +100,9 @@ real but not complete, so you will see both:
 - Skills are `/viva-*`; the older `/pbg-*` command names are retired.
 - The plugin is distributed as `viva-superpowers` (with a `pbg_superpowers` import shim).
 - Python **import names are stable**: `import process_bigraph`, `import bigraph_schema`.
-- Still carrying the old prefix: the runtime control directory `.pbg/`, and the module ids
-  the catalog installs by (e.g. `pbg-copasi`), which track the upstream repo names mid-rename.
+- Still carrying the old prefix: the runtime control directory `.pbg/`, and a few catalog
+  install ids (e.g. `pbg-amici`) whose package distribution name is still mid-rename — though
+  the module repos themselves are now `viva-*`.
 - Newer workspaces use a `viva_<pkg>/` Python package; older ones use `pbg_<pkg>/`.
 
 When in doubt, prefer the **viva** spelling; this guide notes the exceptions where they
