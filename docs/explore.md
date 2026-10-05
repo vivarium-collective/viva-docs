@@ -51,7 +51,7 @@ To embed a specific composite on any other page, drop in an iframe pointing at t
 bundle and hand it a manifest (or a single composite file) — the small script in
 `docs/javascripts/loom-embed.js` does the `composite:load` handshake.
 
-!!! note "Keeping it current"
+??? note "Keeping it current"
     The bundle under `docs/assets/loom/` is the workbench's vendored loom build. To refresh
     it, rebuild `vivarium_workbench/loom/_dist` (`scripts/build_loom.sh`) and re-copy it
     here (minus the `*.map` source maps).

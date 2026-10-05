@@ -33,7 +33,7 @@ branch, one worktree, one server. An investigation is the unit of a branch and a
 draft PR — the natural boundary at which a line of work is proposed, reviewed, and
 merged. (Merges are always a human call; the tooling never auto-merges.)
 
-!!! note "Reproducibility follows the branch"
+??? note "Reproducibility follows the branch"
     Because an investigation *is* a branch, its history is its audit trail. Every
     workbench write is a git commit in the worktree, so the verdict, the readiness
     score, and the open debts are all diff-able. Checkout is archive plus current
@@ -153,7 +153,7 @@ or "continue from here without rerunning the expensive upstream" is then just
 already-satisfied prerequisite is read from its content-addressed cache rather than
 recomputed.
 
-!!! warning "Accuracy note — two run paths coexist"
+??? warning "Accuracy note — two run paths coexist"
     Investigation-as-composite has shipped, but it runs alongside an older
     orchestrator. On that older path, the study-to-study DAG is **advisory**: the
     workbench computes `blocked` / `blocked_by` for the UI, but no run endpoint

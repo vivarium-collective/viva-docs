@@ -29,7 +29,7 @@ it wraps. For the request surface those skills call, cross over to the
     warns but never fails. A missing precondition fails the skill with an
     actionable error that names the fix.
 
-!!! info "`pbg` → `viva` naming"
+??? info "`pbg` → `viva` naming"
     Skills are `/viva-*`; the older `/pbg-*` command names have been dropped (the
     Python import shim `pbg_superpowers` remains). The runtime control directory
     is still **`.pbg/`** and the global registry still **`~/.pbg/`** — those paths
@@ -49,7 +49,7 @@ Bootstrap a workspace, then bring the server up.
 | `/viva-workbench start\|stop\|status\|open\|restart` | Start / stop / open the interactive dashboard server (the side-rail-tabbed UI). Session-per-tab: one server multiplexes many workspaces, one per browser tab. `open --composite <spec-id>` opens the **Composite Explorer** focused on a spec. Formerly `/pbg-dashboard`. | `vwb serve` / `server-*`; writes `.pbg/server/server-info`, registers `~/.pbg/servers/*.json` |
 | `/viva-init` | One-shot, per-machine: symlink the `/viva-*` skills into `~/.claude/skills/` so Claude can invoke them. | filesystem symlinks (fallback: `/plugin install`) |
 
-!!! tip "`/viva-workspace` picks its mode from the flags"
+??? tip "`/viva-workspace` picks its mode from the flags"
     Pass `--upstream owner/repo` to branch a workspace on top of an existing model
     repo; pass nothing to clone the standalone template; pass `--in-place` inside
     an existing checkout to promote it. Composite-only repos (no `workspace.yaml`)
@@ -81,7 +81,7 @@ downgrades on its own.
 | **Reproduce** | `--reproduce` (alias `--reimplement`) | A clean-room, honestly-labeled `<Tool>ReproductionProcess` (secondary class, never the headline). | a clean-room reimplementation |
 | **Mock** | `--mock` (alias `--stub`) | A labeled, non-functional `<Tool>MockProcess` (real ports, inert `update()`) for scaffolding/wiring only. The **only** path that emits fake behavior. | nothing real |
 
-!!! warning "`--mock` and `--reproduce` are opt-in and mutually exclusive"
+??? warning "`--mock` and `--reproduce` are opt-in and mutually exclusive"
     The skill never chooses either on its own. If the real bridge genuinely can't
     run in the environment, it climbs an escalation ladder (PyPI → source build →
     pinned older release → the tool's own Docker/conda recipe for hints) and then
@@ -102,7 +102,7 @@ Turn composites into runs, and runs into gated evidence. See
 | `/viva-viz <viz-name> '<description>'` | Generate a v2 decorated-function `Visualization` into `viva_<pkg>/visualizations/` from a natural-language description. Pushes for the most interactive, informative figure the data supports. | `process_bigraph.visualization.as_visualization`; a disk handoff — reads `.pbg/viz-requests/<name>.md` (the dashboard writes the request via `POST /api/visualization-generate`; there is no `/api/study-viz-add`) |
 | `/viva-report [model \| --all \| --audit \| --lint \| --force]` | Regenerate the dashboard + per-investigation reports. Runs a reviewer-readiness audit (**Pass A** — verdict↔chart drift, stale framings, required new-viz proposals) then a structural lint (**Pass B**) then renders. Run it before sending a report out. Idempotent. | `report.py`, `report_linter.py`; renders `reports/index.html` |
 
-!!! note "`/viva-study` subcommands, by phase"
+??? note "`/viva-study` subcommands, by phase"
     - **Design** — `new <composite-id>`, `fill-overview`, `set-objective`,
       `baseline-add`/`baseline-remove`, `variant-add`/`variant-set-params`/`variant-delete`,
       `intervention-add`/`-update`/`-delete`, `add-literature-anchor`, `add-requirement`.
@@ -124,7 +124,7 @@ queries — no AI, no writes.
 | `/viva-catalog [list \| install <pkg> \| uninstall <pkg>]` | Browse or mutate the workspace module catalog — list installed/available modules, install a curated package, uninstall one. `list` is the default. | `GET /api/workspace-manifest`, `POST /api/catalog-install`, `POST /api/catalog-uninstall`; `workspace_catalog.py` |
 | `/viva-navigate <subcommand>` | Read-only knowledge-graph queries. `status` (workspace/server/git check) · `decisions <inv>` (the ranked "what needs your decision" list) · `ac-gaps <inv>` · `source <bib_key>` · `finding-by-observable <token>` · `dag <inv>` · `observable <token>` · `composite <id>`. | `GET /api/linkage-index`, `GET /api/needs-attention` |
 
-!!! info "`viva-status` and `viva-explore` are not separate skills at this HEAD"
+??? info "`viva-status` and `viva-explore` are not separate skills at this HEAD"
     They fold into the two skills above and into `viva-workbench`:
 
     | You may see | It is actually |
@@ -146,7 +146,7 @@ Make a study's claims defensible: grade it, cite its bands, write its biology.
 | `/viva-tests <author \| enrich \| run \| audit \| cite-bands> <study> [name]` | Author, enrich, run, audit, and cite a study's **graded report cards** — the `TestStep`s that compile a run into a pass/fail verdict *and* a signed `margin` (distance-to-pass) plus a cross-iteration diff. Bands over magic numbers. `audit` judges whether the tests are rigorous enough to validate *before* they're locked. | `viva_superpowers.check()` / `TestBuilder` (`test_contract.py`), `test_audit.py`, `band_provenance.py`; `POST /api/study-tests-run`, `/api/study-grade`, `/api/study-test-audit` |
 | `/viva-harden-investigation [slug \| biology-forward <study-slug>]` | Make an Investigation or Study rigorous — triage the load-bearing claim↔evidence gap, root-cause failing report-card gates, resolve open `decisions_needed`. The `biology-forward <study>` aspect fills quantitative finding slots (`evidence.observed`, `expected.range`, `divergence_factor`) deterministically, then guides you to author the mechanism prose over that scaffold. | `finding_observations.py`, `rigor.py`, `report_linter.py`; `POST /api/study-findings-populate-observations`, `/api/study-sync-runs` |
 
-!!! info "`viva-cite-bands` and `viva-biology-forward` are subcommands"
+??? info "`viva-cite-bands` and `viva-biology-forward` are subcommands"
     Like `viva-status`/`viva-explore`, these are not standalone dirs at this HEAD:
 
     | You may see | It is actually |
@@ -174,7 +174,7 @@ loop, remote compute, and session setup.
 | `/viva-orient` | Session-start orientation to the `/viva-*` skills, the two preconditions, and a routing table. **Auto-injected** by the SessionStart hook — not a command you run. | the SessionStart hook (`hooks/session-start`) |
 | `/viva-suggest <request-id>` | **Internal** dashboard callback for the Workbench "Suggest" button — drafts a repo name, PR title, or PR body from a request file. `user-invocable: false`; the dashboard prints the exact command when it's needed. | `.pbg/agent-requests/` ↔ `.pbg/agent-responses/` files; `POST /api/suggest` |
 
-!!! warning "Accuracy note — skill count drifts"
+??? warning "Accuracy note — skill count drifts"
     The repo's own docs disagree on the total (`README` says 15 in one place, 18 in
     another; `docs/skills.md` says "15 user-facing"). The `skills/` directory at the
     verified HEAD holds **18 skill directories**; of those, `viva-orient` is

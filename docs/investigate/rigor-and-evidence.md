@@ -50,13 +50,13 @@ author wrote "passing" but whose code-computed acceptance says otherwise does no
 passing; it renders as **diverged**, in red, with both values shown. Drift becomes impossible
 to hide because the disagreement is a first-class, diffable fact.
 
-!!! tip "Why the split earns its keep"
+??? tip "Why the split earns its keep"
     Authored and computed values live in the same file but in different fields, so a single
     `git diff` shows you *both* what a claim asserts and whether the evidence still supports it.
     Auditability, drift detection, and self-documenting studies all fall out of this one
     convention.
 
-!!! note "Where these live in code"
+??? note "Where these live in code"
     All four coded slots are real fields in `viva_superpowers`, not just design vocabulary:
     `runs[].computed_outcomes` (written by `study_evaluator` / `study_outcomes`),
     `executive.computed_acceptance` (`investigation_status`), and
@@ -227,7 +227,7 @@ The verdict is now *derived* from those seven numbers. If generation 7 had dippe
 possible runs `structure → readout → self-describing store → RunReader → measure → verdict`,
 with the run reader living in the sibling emitters package so the dashboard never has to.
 
-!!! quote "A behavior test is a machine-checkable spec, not prose."
+??? quote "A behavior test is a machine-checkable spec, not prose."
     Two studies that cite the same band and measure the same path will grade the same way,
     on any machine that can replay the run.
 
@@ -246,7 +246,7 @@ Three moves carry most of the work — one standalone skill plus two of its sibl
 | [`/viva-tests cite-bands`](../reference/skills.md) | Surfaces candidate evidence from expert PDFs for **uncited acceptance bands** and writes structured `cites` / `calibration_anchor` provenance into the study — so a threshold traces to a paper instead of being a magic number. Every write goes through the sanctioned `POST /api/band-provenance` path; the skill never fabricates a threshold. |
 | [`/viva-harden-investigation biology-forward`](../reference/skills.md) | Runs the deterministic populate step first (`populate_finding_observations` fills `evidence.observed`, `expected.range`, `divergence_factor`, `provenance.run_ids` from the computed outcomes and bands), **then** guides the author to write the biological interpretation over that scaffold. A `divergence_factor > 0` forces the status to `partial` or `contradicts` — never `confirms`. Numbers first, mechanism prose second. |
 
-!!! note "Skill surface consolidated (#281)"
+??? note "Skill surface consolidated (#281)"
     At the current package HEAD the `/viva-*` surface was consolidated (21 → 17 skills), so
     band-citing is now the `cite-bands` subcommand of [`/viva-tests`](../reference/skills.md) and
     biology-forward authoring is a mode of `/viva-harden-investigation`. Older installed plugin

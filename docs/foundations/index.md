@@ -27,5 +27,4 @@ How the four packages layer in strict dependency order, and why that acyclicity 
 
 </div>
 
-!!! tip "Suggested path"
-    Read **What is Vivarium?** for the mental model, then **Core concepts** for the vocabulary everything else builds on, then **The stack** to see how the packages fit.
+**Suggested path:** [What is Vivarium?](what-is-viva-eco.md) → [Core concepts](core-concepts.md) → [The stack](the-stack.md).

@@ -136,7 +136,7 @@ carries **no dynamics**. Stepped, it stays inert and never fabricates behavior; 
 the dashboard marked `DRAFT`. Distinct from a site: a draft process is an inert *node*, a site
 is an empty *hole*. → [Templates & draft processes](../compute/templates-and-draft-processes.md)
 
-!!! note "Legacy vocabulary"
+??? note "Legacy vocabulary"
     Design documents from mid-2026 use **slot / bind / reify** for what are now **site / fill
     / ground**. The unified-architecture plan renamed and narrowed these terms and explicitly
     retired *slot, bind, reify, gate evaluator, barrier, phase, flush engine*. Prefer site /
@@ -211,17 +211,19 @@ hardening it is a transformation an agent can apply and verify. → [Rigor & evi
 
 ## Naming: pbg vs viva
 
-!!! note "Prefer `viva`; expect `pbg` on disk"
+??? note "Prefer `viva`; expect `pbg` on disk"
     The ecosystem was renamed from **pbg** ("process-bigraph") to **viva**. The migration is
     real but not complete, so both spellings appear:
 
-    - **Skills** are `/viva-*` (older `/pbg-*` names still work as aliases).
+    - **Skills** are `/viva-*`; the older `/pbg-*` command names are retired.
+    - **The Claude Code plugin** is distributed as **`viva-superpowers`** (import
+      `viva_superpowers`, with a `pbg_superpowers` shim).
     - **Python import names are stable**: `import process_bigraph`, `import bigraph_schema` —
       the rebrand did not touch them.
     - **Packages**: new workspaces use a `viva_<pkg>/` package; older ones use `pbg_<pkg>/`.
-      The Claude Code plugin is still distributed as **`pbg-superpowers`** (import
-      `viva_superpowers`, with a `pbg_superpowers` shim).
-    - **The runtime control directory is still `.pbg/`** — that path was not renamed.
+    - **Still carrying the old prefix:** the runtime control directory `.pbg/`, and the
+      module ids the catalog installs by (e.g. `pbg-copasi`) — these track the upstream
+      repository names, which are mid-rename.
     - **The scaffold repo** is `viva-template` (formerly `pbg-template`); both names resolve.
 
     When in doubt, prefer the **viva** spelling; this guide flags the exceptions where they

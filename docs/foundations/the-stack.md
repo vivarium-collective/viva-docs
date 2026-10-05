@@ -85,7 +85,7 @@ study's prerequisites, and *the wiring is the orchestration*: the engine schedul
 network. Templates, studies, and investigations differ in **structure, not in execution
 machinery**.
 
-!!! info "Design vs shipped"
+??? info "Design vs shipped"
     The "everything is one typed document" unification is the framework's north star, and
     the load-bearing pieces have shipped (an investigation compiles to a composite;
     `bigraph-schema` has `fill`/`is_ground`). Some deeper unification is still in progress.
@@ -97,10 +97,11 @@ machinery**.
 The ecosystem was renamed from **pbg** ("process-bigraph") to **viva**. The migration is
 real but not complete, so you will see both:
 
-- Skills are `/viva-*` (older `/pbg-*` names still work as aliases).
+- Skills are `/viva-*`; the older `/pbg-*` command names are retired.
+- The plugin is distributed as `viva-superpowers` (with a `pbg_superpowers` import shim).
 - Python **import names are stable**: `import process_bigraph`, `import bigraph_schema`.
-- Some packaging still uses the old prefix (the plugin is distributed as `pbg-superpowers`;
-  the runtime control directory is `.pbg/`).
+- Still carrying the old prefix: the runtime control directory `.pbg/`, and the module ids
+  the catalog installs by (e.g. `pbg-copasi`), which track the upstream repo names mid-rename.
 - Newer workspaces use a `viva_<pkg>/` Python package; older ones use `pbg_<pkg>/`.
 
 When in doubt, prefer the **viva** spelling; this guide notes the exceptions where they

@@ -43,11 +43,18 @@ def main() -> None:
     out.append("---\n")
     out.append("# Module catalog\n")
     out.append(
-        "Every module here is a ready-to-install unit of capability — a simulator wrapped "
-        "as process-bigraph Processes, a composite, or a whole workspace — from the "
+        "Every module here is an installable unit — a simulator wrapped as process-bigraph "
+        "Processes, a composite, or a whole workspace — from the "
         "[Vivarium Collective](https://github.com/vivarium-collective). Install one into a "
         "workspace with [`/viva-catalog`](reference/skills.md) (`install <name>`), or browse "
         "the source on GitHub.\n"
+    )
+    out.append(
+        '??? note "A note on install names"\n'
+        "    Modules are named `viva-*`, but the **install id** (and the source repo) often\n"
+        "    still carries the original `pbg-` prefix — the id tracks the upstream package,\n"
+        "    which is mid-rename. Copy the `/viva-catalog install …` line from each card\n"
+        "    verbatim; it is the id that currently resolves.\n"
     )
     out.append(
         '!!! tip "Filter the catalog"\n'

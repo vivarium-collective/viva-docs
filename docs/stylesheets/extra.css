@@ -59,6 +59,9 @@
   margin: 0 auto;
   max-width: 44rem;
 }
+/* The home hero hides the TOC, so the heading's permalink anchor (¶) just
+   dangles after the title — suppress it here. */
+.viva-hero h1 .headerlink { display: none; }
 
 /* ---------- Card grid ---------- */
 .viva-grid {
@@ -212,14 +215,16 @@
   height: auto;
   background: #ffffff;          /* keep diagrams legible in dark mode */
   border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 12px;
-  padding: 1rem;
+  border-radius: 10px;
+  padding: .5rem;
 }
 .viva-figure figcaption {
-  font-size: .85rem;
-  opacity: .75;
-  margin-top: .6rem;
+  font-size: .82rem;
+  opacity: .72;
+  margin: .6rem auto 0;
   padding: 0 1rem;
+  max-width: 46rem;             /* keep long captions readable, not full-bleed */
+  text-align: left;
 }
 
 /* ---------- Concept map (inline SVG) ---------- */
@@ -410,9 +415,15 @@
 .loom-embed iframe {
   display: block;
   width: 100%;
-  height: 76vh;
-  min-height: 460px;
+  height: 68vh;
+  min-height: 440px;
   border: 0;
+}
+/* The vendored loom app is a light-themed canvas; in dark mode frame it as a
+   clearly-intentional preview panel rather than a raw white slab. */
+[data-md-color-scheme="slate"] .loom-embed {
+  border-color: var(--md-default-fg-color--lighter);
+  box-shadow: 0 10px 34px -16px rgba(0,0,0,.7);
 }
 
 /* ---------- Chapter "on this page" callout ---------- */

@@ -12,7 +12,7 @@ It is a map, not a copy-paste script — each step links to the chapter that cov
 depth, and the exact command surface evolves, so confirm specifics against your installed
 `/viva-*` skills and a live workspace.
 
-!!! tip "The discovery loop"
+??? tip "The discovery loop"
     Every step below is one hop of the loop from
     [What is Vivarium?](../foundations/what-is-viva-eco.md): **Question → Composite → Run →
     Verdict → Next.**
@@ -50,7 +50,7 @@ rather than hardcoding a port. Open the printed URL and you land in the
 [Workbench](../investigate/workspaces-and-workbench.md) — one workspace per browser tab,
 with the side rail (Resources · Catalog · Processes · Studies · Runs · Analysis).
 
-!!! note "Two preconditions"
+??? note "Two preconditions"
     Almost every `/viva-*` skill assumes **a workspace** and **a running Workbench**. If
     either is missing, fix that first — see
     [Working with AI agents](../investigate/working-with-agents.md).

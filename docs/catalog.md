@@ -8,6 +8,12 @@ hide:
 
 Every module here is an installable unit — a simulator wrapped as process-bigraph Processes, a composite, or a whole workspace — from the [Vivarium Collective](https://github.com/vivarium-collective). Install one into a workspace with [`/viva-catalog`](reference/skills.md) (`install <name>`), or browse the source on GitHub.
 
+??? note "A note on install names"
+    Modules are named `viva-*`, but the **install id** (and the source repo) often
+    still carries the original `pbg-` prefix — the id tracks the upstream package,
+    which is mid-rename. Copy the `/viva-catalog install …` line from each card
+    verbatim; it is the id that currently resolves.
+
 !!! tip "Filter the catalog"
     Type to search, or click capability tags to narrow the list. There are **27 modules** across **22 capability tags**.
 

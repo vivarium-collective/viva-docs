@@ -106,7 +106,7 @@ my-workspace/
     └── schemas/ · events.jsonl · state.json
 ```
 
-!!! note "`.pbg/` — a legacy prefix that stayed"
+??? note "`.pbg/` — a legacy prefix that stayed"
     The runtime control directory is still named `.pbg/`, and the global registry still
     lives at `~/.pbg/`, even in viva-branded workspaces. The `pbg → viva` rename covered
     skills and packages but deliberately left these paths alone so existing tooling keeps
@@ -127,7 +127,7 @@ def build_core(core=None):
     return core
 ```
 
-!!! warning "Accuracy note — `viva_` vs `pbg_`, `build_core()` vs `core.py`"
+??? warning "Accuracy note — `viva_` vs `pbg_`, `build_core()` vs `core.py`"
     The ecosystem is mid-migration. **Newer** scaffolds emit a `viva_<pkg>/` package
     exposing `build_core()`. **Older** docs and workspaces show a `pbg_<pkg>/` package and
     refer to the registration entry point simply as `core.py`. The *convention* —
@@ -155,7 +155,7 @@ def build_core(core=None):
 | `ui.composite_view` | which renderer draws composite wiring (`loom-explore` — the default — or legacy `bigraph-viz`) |
 | `layout` | optional per-directory relocations (e.g. group `studies/` under `workspace/studies/`) |
 
-!!! warning "Accuracy note — schema version and the `runtime:` block"
+??? warning "Accuracy note — schema version and the `runtime:` block"
     The shipped `workspace.schema.json` pins `schema_version` to the enum `[2, 3]` and does
     not constrain a top-level `runtime:` block. The concept docs describe a
     `runtime:` block (`default_emitter: parquet|sqlite`, `subprocess_timeout_s`,
@@ -182,7 +182,7 @@ CLI) creates a workspace in one of **three modes**, chosen by your starting stat
 - **in-place** promotes a checkout you already have (skipping any files that already
   exist), then registers it. This is the right answer for composite-only repos.
 
-!!! note "Template repo naming"
+??? note "Template repo naming"
     The scaffold source is the **viva-template** repo. The canonical scaffolder
     (`viva_superpowers/scaffold.py`) defaults its clone URL to
     `vivarium-collective/viva-template`; the older `/viva-workspace` skill prose still
@@ -224,7 +224,7 @@ curl -s "$BASE/api/workspace-manifest"   # one-call situational snapshot — sta
 Because the server runs in the workspace's venv, it can import the workspace's
 `build_core()` and any installed `pbg-*` / `viva_*` simulator stacks directly.
 
-!!! info "Running modes"
+??? info "Running modes"
     Point the server at a remote **viva-api** backend (`VIVA_API_BASE=...`) to submit runs
     that execute on GovCloud (Ray → AWS Batch → zarr/parquet on S3) and land back as study
     runs. The same codebase, with writes gated to a small whitelist, is what serves the
@@ -256,7 +256,7 @@ each surfaces:
 | **Runs** | the Simulations DB / runs index — every run across every emitter backend |
 | **Analysis** | saved interactive visualizations, 3D viewers, and the Analysis Tools / PTools card |
 
-!!! note "Two vocabularies"
+??? note "Two vocabularies"
     An earlier README describes "seven tabs" (Workspace · Registry · Composites · Studies ·
     Investigations · Visualizations · GitHub Branches). That is the *conceptual* model; the
     shipped rail above is the reorganized, renamed reality. Sections such as the single-study

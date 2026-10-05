@@ -65,7 +65,7 @@ Process, and Step on top:
 | **Process / Edge** `P` | reads state, emits updates | invoked per-tick |
 | **Composite** `C` | state containing processes | one tick = read → reconcile → apply |
 
-!!! warning "Accuracy note — this is the rewritten API"
+??? warning "Accuracy note — this is the rewritten API"
     `bigraph-schema` was substantially rewritten (this guide tracks **v1.4.x**). If you
     find older tutorials referring to a **`TypeSystem`** class, a single `type_system.py`,
     or type definitions as dicts of string-keyed `_apply`/`_serialize`/`_check` methods —
@@ -83,7 +83,7 @@ Process, and Step on top:
     *concepts* from [Core concepts](../foundations/core-concepts.md) are stable; verify
     *code* against the current package.
 
-!!! note "A note on the name"
+??? note "A note on the name"
     Unlike most of the ecosystem, this package was **not** renamed in the pbg→viva sweep.
     The import is `import bigraph_schema`, the PyPI distribution is `bigraph-schema`, and
     the repo stays at `vivarium-collective/bigraph-schema` — it is kept under its upstream
@@ -144,7 +144,7 @@ def test_allocate_core_isolation():
 <small>Abridged from `tests.py::test_allocate_core_isolation` (which also asserts
 `method_registry` and the internal caches are distinct, and probes link/method isolation).</small>
 
-!!! tip "Why isolation matters"
+??? tip "Why isolation matters"
     A study, a composite, and a scratch experiment can each hold their own `Core` and
     register bespoke types without stepping on one another. When you need the shared base
     plus package-discovered types, use `allocate_core()`. When you want *only* the base
@@ -230,7 +230,7 @@ operation passes its schema argument through.
     same      = core.access(node_type)     # Node  -> Node (idempotent)
     ```
 
-!!! note "`access` normalizes every schema form"
+??? note "`access` normalizes every schema form"
     Every `Core` method that takes a schema calls `access` on it first. That is why you can
     hand `core.default`, `core.check`, `core.serialize`, `core.traverse`, and the rest
     either a terse string, a verbose dict, or a compiled `Node` and get the same behavior.
@@ -280,7 +280,7 @@ The **Milner structural types** — `site` (a hole in the place graph), `inner_n
 turn a grounded schema into a composable context. They are the formal backbone of the
 site/fill/ground story from [Core concepts](../foundations/core-concepts.md#from-documents-to-templates-sites-fill-and-ground).
 
-!!! note "Type inheritance"
+??? note "Type inheritance"
     Types inherit two ways. **Python class inheritance** among the dataclasses drives
     method dispatch — `Delta ⊂ Float ⊂ Number ⊂ Atom ⊂ Node`, so a method defined for
     `Number` covers `Float` unless overridden. **Schema-level `_inherit`** lets a
@@ -350,13 +350,13 @@ one call.</small>
 `realize` returns a **triple** — `(schema, state, escape_merges)` — where the third element
 carries any *escaped* port merges: merges whose wires point outside the realized subtree,
 handed back for the caller to apply at a higher scope. For a top-level `realize` (the usual
-case) nothing escapes, so it is empty — which is why the examples here bind it to `_`. A
-related helper, `core.fill(schema,
-state, overwrite=False)`, builds the default state and merges your partial state over it
-(or under it, if `overwrite`); `process-bigraph`'s `Edge.__init__` uses it to complete a
-process's config.
+case) nothing escapes, so it is empty — which is why the examples here bind it to `_`.
 
-!!! tip "`infer` — schema from an example"
+A related helper, `core.fill(schema, state, overwrite=False)`, builds the default state and
+merges your partial state over it (or under it, if `overwrite`); `process-bigraph`'s
+`Edge.__init__` uses it to complete a process's config.
+
+??? tip "`infer` — schema from an example"
     Going the other way, `core.infer(state)` derives a schema that a given value inhabits.
     It round-trips with `default`: `core.default(core.infer(value))[1] == value` (the
     state element of the `(schema, state)` pair `default` returns).
@@ -406,7 +406,7 @@ assert decoded_state['b'][2]['y'] == 11
 ```
 <small>From `tests.py::test_realize`.</small>
 
-!!! note "`bundle` — serialize with big arrays spilled"
+??? note "`bundle` — serialize with big arrays spilled"
     For states carrying large numpy arrays, `core.bundle` is `serialize` plus a Parquet
     spill: the array data lands in a side file and the encoded state references it. Useful
     when an emit path would otherwise inline megabytes of array into JSON.
@@ -452,7 +452,7 @@ When you pass an optional `events` list, `apply` records the structural changes 
 sentinels caused — `_add`→`NodeAdded`, `_remove`→`NodeRemoved`, `_divide`→`Divided` — so a
 Composite can rebuild its process index after the state's shape changes.
 
-!!! warning "Accuracy note — `_divide` is real, `_react` is not"
+??? warning "Accuracy note — `_divide` is real, `_react` is not"
     `divide` is a **first-class, shipped method** (`methods/divide.py`), triggered by the
     `_divide` sentinel in `apply` on `map`/`tree` states — this is how cell division splits
     a mother store into daughters. A `_react` sentinel (tree-rewrite reaction rules) is

@@ -49,7 +49,7 @@ Four things are load-bearing here, and every built-in and custom emitter honours
 | `outputs()` returns `{'results': 'node'}` | One output port, `results`, carrying a **handle** — a reference to what was accumulated, not the data itself. |
 | `update(state)` records, returns `{}` | Each tick it persists the observed `state` and returns an **empty delta**, so it can never feed state back into the run. |
 
-!!! note "Why `results` is not written every tick"
+??? note "Why `results` is not written every tick"
     The `results` port is produced at **completion**, by `finalize()`, not by `update()`.
     Results are meaningful once — at the end of a run — and writing them each tick would
     re-fire every downstream consumer on every tick. `finalize()` returns
@@ -91,7 +91,7 @@ object per line to `history_<simulation_id>.json`. All three expose the **same**
 `query(paths=None)` API, so downstream plotting and analysis code never has to know which
 one produced the trajectory.
 
-!!! note "RAMEmitter has two knobs worth knowing"
+??? note "RAMEmitter has two knobs worth knowing"
     `subsample: N` records only every *N*th tick (default `1` = every tick), and `max_len:
     N` bounds `history` to the most recent *N* rows as a ring buffer (default `None` =
     unbounded). Both keep memory in check on long or heavy runs without distorting the time
@@ -114,7 +114,7 @@ retrieval helpers lazily — so `from process_bigraph.emitter import SQLiteEmitt
 working as long as the sibling package is installed. Install both backends at once via the
 `process-bigraph[emitters]` extra.
 
-!!! note "Package name: `viva-emitters` (formerly `pbg-emitters`)"
+??? note "Package name: `viva-emitters` (formerly `pbg-emitters`)"
     The sibling package completed the `pbg → viva` rename. The canonical distribution is
     **`viva-emitters`** and its import package is **`viva_emitters`** — which is exactly what
     the re-export shim in `process_bigraph/emitter.py` imports (`import viva_emitters`). The
@@ -237,7 +237,7 @@ for path, history in results.items():
 results = gather_emitter_results(composite, queries={('emitter',): [['Env', 'x']]})
 ```
 
-!!! note "Two places to filter, and which to prefer"
+??? note "Two places to filter, and which to prefer"
     You can filter **at emit time** (the wires you pass to `emitter_from_wires` — the
     emitter never even sees unwired state) or **at query time** (`emitter.query(paths)` —
     the full tree was stored, you read a slice back). For long runs prefer emit-time

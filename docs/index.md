@@ -104,33 +104,13 @@ Every box links to the chapter that covers it.
 </svg>
 </div>
 
-## Choose a path
+## Where to next
 
-<div class="viva-grid" markdown>
-
-<div class="viva-card part-foundations" markdown>
-### :material-map-marker-path: [New here?](foundations/what-is-viva-eco.md)
-The mental model and the vocabulary, from first principles — *What is Vivarium?* then *Core concepts*.
-</div>
-
-<div class="viva-card part-build" markdown>
-### :material-hammer-wrench: [Build a model](compute/processes-and-steps.md)
-Wrap simulators as processes, wire them through shared stores, and run your first composite.
-</div>
-
-<div class="viva-card part-investigate" markdown>
-### :material-flask: [Do science](investigate/studies.md)
-Turn runs into gated, verdict-bearing evidence — studies, report cards, investigations.
-</div>
-
-<div class="viva-card part-reference" markdown>
-### :material-book-open-variant: [Look something up](reference/index.md)
-The skill catalog, HTTP API, on-disk schemas, install &amp; deploy, and a full worked example.
-</div>
-
-</div>
-
-See the **[Start here](start-here.md)** guide for full step-by-step learning paths.
+New here, building a model, doing science, or driving it with agents? **[Start here](start-here.md)**
+lays out a short, numbered path for each — or jump straight to
+[What is Vivarium?](foundations/what-is-viva-eco.md),
+[Build a model](compute/processes-and-steps.md),
+[Do science](investigate/studies.md), or the [Reference](reference/index.md).
 
 ## What a composed model looks like
 

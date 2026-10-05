@@ -55,7 +55,7 @@ The `phase:` field on a study is a capitalized enum — `Design | Build | Simula
 Evaluate | Decide`. An investigation card surfaces its *slowest-phase* member, so one
 study stuck in Design holds the whole investigation in Design.
 
-!!! note "Phases vs the study-detail 'acts'"
+??? note "Phases vs the study-detail 'acts'"
     On the study-detail page the same work is grouped into five reading *acts* — **Study**
     (overview) · **Design** (what you author) · **Evidence** (what came back) · **Assurance**
     (what grades it) · **Decision**. The load-bearing boundary there: a **report card
@@ -116,7 +116,7 @@ parallel-slot table is in
 [Rigor & evidence](rigor-and-evidence.md#the-parallel-slot-convention) — and a
 `diverges_from_authored` flag is the dashboard headline when they disagree.
 
-So a test authored `status: passed` but backed by **no** run outcome renders as a pending
+So a test authored `status: passed` but backed by no run outcome renders as a pending
 pill (<span class="pill draft">pending</span>), not a pass. A study renders
 **Ran · Tests N&check; · Passed** only when `runs[].outcomes` actually back the results.
 
@@ -202,7 +202,7 @@ and render at the top of the report):
   each `{result, basis}`, so a study can be "PASS on regression but MIXED on biology"
   instead of one forced boolean.
 
-!!! warning "Accuracy note — the schema version is in flux"
+??? warning "Accuracy note — the schema version is in flux"
     Study specs exist as **v2 → v3 → v4**, migrated on load. This chapter presents **v4**;
     the `schema_version:` field selects the shape (and, at v4, the presence of a top-level
     `conditions:` block disambiguates two v4 variants). Set `schema_version: 4` to opt into
@@ -316,7 +316,7 @@ runs: []                                 # {run_id, outcomes{...}} — filled fr
 findings: []
 ```
 
-!!! note "You author fields; you do not author verdicts"
+??? note "You author fields; you do not author verdicts"
     The `runs[].outcomes`, `computed_outcomes`, the rolled-up gate verdict, and the
     per-finding `evidence`/`provenance` slots are all **derive-on-read**: code fills them
     from the latest run in `runs.db`. Your job is the *authored* side — the question, the

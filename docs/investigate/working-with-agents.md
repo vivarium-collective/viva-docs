@@ -21,7 +21,7 @@ over a process-bigraph execution substrate, with a human approving the stages th
 
 ## The split: AI-free tool, swappable AI plugin
 
-The AI and the tool are **two separate layers, and they stay separate**:
+The AI and the tool are two separate layers, and they stay separate:
 
 <div class="viva-stack" markdown>
 
@@ -51,7 +51,7 @@ Why go to this trouble? Two payoffs:
   client could make, the AI is a *plugin*, not a dependency. The tool outlives any particular
   model.
 
-!!! quote ""
+??? quote ""
     All AI capability is packaged as the `viva-superpowers` plugin — a set of `viva-*` skills
     that call the Workbench's HTTP API. **This keeps the tool auditable and the AI swappable.**
 
@@ -89,7 +89,7 @@ There is no separate "save." Each mutating call the tool commits to git, so ever
 agent takes has an audit trail and is reversible. This is what makes high-throughput,
 agent-driven construction safe: nothing an agent does is invisible or unrecoverable.
 
-!!! tip "The golden rules, in one line"
+??? tip "The golden rules, in one line"
     Read `.pbg/server/server-info` for the URL · orient via `/api/workspace-manifest` first ·
     trust `/openapi.json` for shapes · runs are async (poll, and check the *result*, not just
     HTTP 200) · every write is a git commit. See the [HTTP API reference](../reference/http-api.md).

@@ -50,7 +50,7 @@ A **store** in the document is just a plain typed entry in `state` — `'level':
 richer `{'_type': 'float', '_units': 'pg'}`. There is no special "store" keyword; anything
 that isn't an edge node is state.
 
-!!! info "Static vs generated documents"
+??? info "Static vs generated documents"
     The document above is a *static* composite — you write the `state` dict out by hand or
     load it from a `.composite.json` file. The workbench also builds documents
     *programmatically* (a generator or `CompositeSpec` that assembles `state` from
@@ -260,14 +260,14 @@ settles](processes-and-steps.md#steps-form-a-dataflow-dag-that-runs-to-quiescenc
 If no process is due, time simply jumps to the next scheduled event rather than crawling.
 The loop repeats until `global_time` reaches the requested end.
 
-!!! note "Why two passes"
+??? note "Why two passes"
     Separating *invoke* (collect deltas) from *apply* (merge them) is what lets
     independently-written processes write to the same store in one tick without racing:
     every delta for a tick is gathered first, then merged together through the type's
     `apply` rule. It is the runtime-level expression of the
     [one merge law](../foundations/core-concepts.md#the-one-semantic-that-makes-it-compose).
 
-!!! info "Scaling the loop — protocol batching"
+??? info "Scaling the loop — protocol batching"
     When many processes share one distributed runtime (for example, a grid of shards
     routed through a single Ray runtime), the per-process view-and-apply work can dominate
     the actual compute. A runtime can implement a `tick_lifecycle()` hook to take over the
