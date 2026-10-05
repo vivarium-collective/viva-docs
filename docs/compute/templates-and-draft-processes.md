@@ -52,7 +52,7 @@ The primitives live in **bigraph-schema** — this is the layer that owns "what 
 | **`fill`** | `Core.fill(schema, state, ...)` | substitute fillers into open sites; incremental |
 | **`is_ground`** | `bigraph_schema.assembly.is_ground(schema)` | true iff no sites remain and all ports are wired |
 
-!!! note "Verified against code"
+??? note "Verified against code"
     `is_ground` is a real function in `bigraph_schema/assembly.py` ("no Sites, all ports
     wired"); `Core.fill` is a real method in `bigraph_schema/core.py`; the `Site`
     place-graph hole is a real type defined in `bigraph_schema/schema.py` and used
@@ -61,7 +61,7 @@ The primitives live in **bigraph-schema** — this is the layer that owns "what 
     machinery the design docs describe as "shipped in bigraph-schema" — the site/fill/ground
     layer is current API, not a plan.
 
-!!! note "Legacy vocabulary"
+??? note "Legacy vocabulary"
     Older design documents call sites **slots**, and call filling them **bind** or
     **reify**. Prefer **site / fill / ground**; treat *slot / bind / reify* as synonyms when
     you meet them in older material.
@@ -184,7 +184,7 @@ contract, marked** <span class="pill draft">DRAFT</span> — with no extra wirin
 with a real `Process` once the mechanism is committed, and nothing else in the composite has
 to change.
 
-!!! note "Verified against code — `DraftProcess` is a shipped primitive"
+??? note "Verified against code — `DraftProcess` is a shipped primitive"
     `DraftProcess` and `@draft_process` are real, exported from `process_bigraph`
     (`process_bigraph/draft_process.py`; re-exported in `__init__.py`). The decorator
     signature is `@draft_process(*, name, inputs, outputs, contract)` — all keyword-only.
@@ -210,7 +210,7 @@ as a **compiler** from what a biologist *means* to what an engine can *run*, wit
 `DraftProcess` — a contract with roles, ports, and intent but no dynamics — as the
 source-level semantic model at the top of that pipeline.
 
-!!! warning "Accuracy note — direction, not a shipped one-click feature"
+??? warning "Accuracy note — direction, not a shipped one-click feature"
     The site/fill/ground machinery and `DraftProcess` are **shipped code** (verified above).
     The full "biology → executable" compiler — an elaborator library that turns a semantic
     `kind` into elementary reactions, a handler registry that fixes how each reaction is

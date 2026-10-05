@@ -8,10 +8,14 @@ tags:
 
 The Workbench is a **FastAPI app under uvicorn** (`vivarium_workbench/api/app.py`).
 Every `/viva-*` skill drives it; every mutating call commits to the active git
-branch in the workspace. At the verified HEAD `api/app.py` registers **253 routes**
+branch in the workspace.
+
+At the verified HEAD `api/app.py` registers **253 routes**
 (122 GET, 122 POST, 7 DELETE, 2 PATCH; 245 unique paths, no WebSocket); the in-repo
 survey's older headline of "260 routes / 135 POST / 119 GET" is stale, so trust a
-live recount over any fixed number. This chapter organizes the routes that matter
+live recount over any fixed number.
+
+This chapter organizes the routes that matter
 along the **Investigations → Studies → Runs** spine, as reference tables. It is not
 the generated spec: for exact request and response shapes, read `GET /openapi.json`
 (also `/docs`, `/redoc`) on a live server.
@@ -137,7 +141,7 @@ and measure, owns its `runs.db`, and rolls up to a verdict. See
 | `/api/study-seed-followup`, `/api/study-narrative-command` | POST | Seed a follow-up study; narrative writes. |
 | `/api/study/{slug}/figures.zip`, `/outputs.zip`, `/notebook` | GET | Bundled downloads. |
 
-!!! note "Two run engines behind the study spine"
+??? note "Two run engines behind the study spine"
     A **scratch run** (`/api/composite-test-run`) is detached and durable — it
     returns `202` and outlives the request. A **study run**
     (`/api/study-run-baseline` / `-run-variant`) runs *synchronously inside the
@@ -197,7 +201,7 @@ saved interactive visualizations, 3D viewers, and the Analysis Tools / PTools ca
 | `/api/observables`, `/api/observable`, `/api/generation`, `/api/study-results`, `/api/study-bigraph-paths` | GET | Observable listing and per-run result reads that back the explorer panels. |
 | `/api/analysis-tools`, `/api/analysis-viewers`, `/api/analysis-viewer/{uid}/launch` | GET/POST | The Analysis Tools catalog and external viewers (e.g. PTools). |
 
-!!! warning "Accuracy note — the `/api/explorer/*` routes"
+??? warning "Accuracy note — the `/api/explorer/*` routes"
     The design doc `docs/data-explorer.md` and older surveys describe explorer
     endpoints `GET /api/explorer/{runs,observables,flux,vector}` and
     `POST /api/explorer/series`. **These are not registered in `api/app.py` at the
@@ -272,7 +276,7 @@ is `lib/sms_api_client.py` (config `VIVA_API_BASE` / `SMS_API_BASE`, default
 `http://localhost:8080`). A run submitted remotely lands back as a study run in the
 local workspace, and the two records are joined on **`run_id`**.
 
-!!! info "Design vs shipped"
+??? info "Design vs shipped"
     The survey (`docs/workbench-api-survey.md`) is explicit that it "records what
     the API *does* today, not what it should" — some routes are accidental, some
     design specs (`WorkspaceStore`, `SessionRegistry`, a single `RunBackend`) are

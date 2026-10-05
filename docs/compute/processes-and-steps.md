@@ -163,7 +163,7 @@ def initial_state(self):
     return {'level': 4.4}
 ```
 
-!!! note "One more optional hook"
+??? note "One more optional hook"
     `initialize(self, config)` lets a process precompute expensive state from its config
     (a loaded scientific model, a JIT cache, a solver base). The default `reconfigure()`
     re-runs `initialize`, which is what lets a pooled actor be re-purposed per-sim without
@@ -199,7 +199,7 @@ Python-scalar annotations map onto bigraph types (`float → 'float'`, `int → 
 name, which is the escape hatch for richer types like `"map[float]"`. The class-based
 `Process` remains the escape hatch for anything stateful.
 
-!!! warning "Accuracy note — register with `register_link`, not `register_process`"
+??? warning "Accuracy note — register with `register_link`, not `register_process`"
     The `@process` docstring says to register the class with
     `core.register_process(name, cls)`. **That method does not exist.** The real registrar
     on the `Core` is `core.register_link(name, cls)`, and every working call site — the
@@ -284,7 +284,7 @@ no process to advance time, "run" just means "settle the DAG." This is exactly w
 **emitters, analyses, visualizations, and report cards are all Steps** — each should fire
 whenever the state it observes is ready, not on a clock of its own.
 
-!!! tip "By default, every input triggers"
+??? tip "By default, every input triggers"
     A Step re-fires when *any* of its input wires updates. Override `triggers()` to return
     only a subset of ports if some inputs should be *received but silent* (read without
     causing a re-trigger). There is also a `@step` decorator — the exact analogue of
@@ -309,7 +309,7 @@ is lazy: a registered link's module is only imported when an `address` first res
 it. In a document, an edge names its class through an `address` like `local:Grow` —
 `local:` means "resolve this name in this core's registry."
 
-!!! warning "Accuracy note — the registry is on bigraph-schema's `Core`"
+??? warning "Accuracy note — the registry is on bigraph-schema's `Core`"
     Composites are built on a `Core` produced by `allocate_core()` (from `bigraph_schema`),
     not on a legacy `TypeSystem` object. `core.register_link(name, cls)` is the one and
     only method for registering a process or step class. See

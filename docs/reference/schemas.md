@@ -24,7 +24,7 @@ Three documents carry almost all the structure:
 For the concepts these files encode — Composite, Study, Investigation, Run, Finding,
 Verdict — read [Core concepts](../foundations/core-concepts.md) first.
 
-!!! note "A word on `viva` vs `pbg`"
+??? note "A word on `viva` vs `pbg`"
     The ecosystem was renamed from **pbg** to **viva**, and the migration is mid-flight.
     Prefer the `viva` spelling, but expect exceptions on disk: the Python package is
     `viva_<pkg>/` in new scaffolds (older ones use `pbg_<pkg>/`), spec ids are written
@@ -72,7 +72,7 @@ Everything else is optional and additive. These are the ones you will actually a
 | `ui` | object | `{composite_view: "loom-explore" \| "bigraph-viz"}` — which renderer draws composite wiring. |
 | `layout` | object | Per-directory relocation overrides (`studies`, `investigations`, `composites`, `reports`, …). Omit it to keep the classic flat layout. |
 
-!!! warning "Accuracy note — `runtime:` is documented but not schema-validated"
+??? warning "Accuracy note — `runtime:` is documented but not schema-validated"
     The concept docs describe a `runtime:` block (`default_emitter: parquet|sqlite`,
     `subprocess_timeout_s`, `shared_artifacts: [...]`). The root object in
     `workspace.schema.json` does **not** forbid extra keys, so a `runtime:` block loads
@@ -129,7 +129,7 @@ references_bib: references/papers.bib
 server: {enabled: true}
 ```
 
-!!! note "Legacy keys you may still see"
+??? note "Legacy keys you may still see"
     `pbg_processes: []` and `stages: {}` are held over from the v0.1.x nine-stage flow.
     They remain optional so migrated workspaces validate; new workspaces omit them.
 
@@ -142,7 +142,7 @@ these readouts, and turn the result into a verdict, a figure, and a report card.
 is a directory (`studies/<slug>/` or, in current scaffolds,
 `investigations/<inv>/studies/<slug>/`) whose `study.yaml` is the spec.
 
-!!! warning "Accuracy note — no frozen JSON schema"
+??? warning "Accuracy note — no frozen JSON schema"
     Unlike `workspace.yaml`, there is **no** `study.schema.json` in the codebase. Specs are
     **versioned (v2 → v3 → v4) and migrated on load** by
     `vivarium_workbench.lib.spec_migration` and `investigations.load_spec()`; the
@@ -239,14 +239,14 @@ visualizations:
   - {name: DnaANucleotideTrajectory, address: local:DnaANucleotideTrajectory}
 ```
 
-!!! note "Reserved v4 field names"
+??? note "Reserved v4 field names"
     Schema v4 reserves `tests` (object), `references` (list of `{file, section}`), and
     `implementation_tasks` (string). A v3 spec with a differently-shaped field of the same
     name collides during v3 → v4 migration. The standard renames are `references:` (dict) →
     `bibliography:` and `implementation_tasks:` (list) → `tasks:`. Setting
     `schema_version: 4` short-circuits the migration.
 
-!!! quote "Derive-on-read"
+??? quote "Derive-on-read"
     A study renders **Ran · Tests N ✓ · Passed** only when `runs[].outcomes` (backed by
     `runs.db`) support the test results. A test with an authored `status: passed` but no run
     outcome renders as pending. See [Studies](../investigate/studies.md) and
@@ -260,7 +260,7 @@ An investigation is a named collection of studies building one cumulative argume
 shared question. On disk it is `investigations/<slug>/investigation.yaml` — and the slug is
 also a git branch and a worktree, so parallel agents never trample each other.
 
-!!! warning "Accuracy note"
+??? warning "Accuracy note"
     As with `study.yaml`, there is no frozen JSON schema; investigations are `schema_version:
     1` (minimal) or `2` (the current narrative spine), migrated on load. The member-list key
     is read by `investigation_member_slugs()`, which accepts **`studies:`** (pre-migration)
@@ -308,7 +308,7 @@ expert_docs:
   - {name: Boesen 2024, path: references/Boesen2024.pdf}
 ```
 
-!!! note "The dependency DAG is computed, not stored"
+??? note "The dependency DAG is computed, not stored"
     An investigation stores **no edges**. The cross-study DAG is computed at render time
     from each member's `pipeline_gate.prerequisites`. Since August 2026 an investigation is
     also *compiled* into a process-bigraph composite — each study becomes a `StudyStep` node
@@ -357,7 +357,7 @@ Two runtime artifacts are worth calling out because you will read them directly:
 - **`parquet-runs/<run>/`** — the emitted trajectories, when the workspace's emitter is
   Parquet. The SQLite emitter instead writes full per-step state into `runs.db`.
 
-!!! note "The relocatable layout"
+??? note "The relocatable layout"
     A workspace may move any of these directories via the `layout:` block in
     `workspace.yaml`; tooling resolves paths through `WorkspacePaths`, never by hardcoding
     the names. The tree above is the conventional flat default.

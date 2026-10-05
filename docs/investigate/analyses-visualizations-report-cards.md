@@ -60,7 +60,7 @@ convergence whenever the state it depends on changes. Re-run the study and the
 whole flush network re-fires against the new run. Nothing in Phase 2 is a script
 you remember to launch.
 
-!!! info "Design vs shipped"
+??? info "Design vs shipped"
     The clean "extractor Step → single typed `results` handle → uniform artifact
     DAG" picture is the framework-unification target (the two-phase **Study
     composite**, Layer 1). Much of it is real today: runs land in a durable
@@ -108,7 +108,7 @@ decorator stamps `__pb_kind__` / `__pb_aliases__` metadata so the class surfaces
 cleanly. You never touch `__init__.py` — discovery walks the package and
 auto-registers every `Step` subclass (see [Composites & wiring](../compute/composites-and-wiring.md)).
 
-!!! note "Decorator vs subclass — a real internal tension"
+??? note "Decorator vs subclass — a real internal tension"
     `/viva-viz` emits the `@as_visualization` **decorated-function** form. The
     `visualizations` convention doc, however, prefers subclassing
     `Visualization` directly (a real `Step` with an `html` output port, wireable
@@ -116,7 +116,7 @@ auto-registers every `Step` subclass (see [Composites & wiring](../compute/compo
     the codebase; v2ecoli uses subclasses. Treat them as two spellings of one
     idea — an HTML-emitting Step — and expect the tooling to converge.
 
-!!! quote "The bar is deliberately high"
+??? quote "The bar is deliberately high"
     From the `/viva-viz` skill: *"A bare line of one observable vs time almost
     never clears that bar."* Push for interactive Plotly — hover, toggleable
     legend, sliders — and let the form fit the question: phase portraits, Sankey,
@@ -151,7 +151,7 @@ directory and their paths come back in the run response. The post-run analysis
 hook reads the **Parquet** emitter output, so a SQLite-only run skips analyses —
 a real gotcha worth remembering.
 
-!!! warning "Two things share the name 'Analysis tab'"
+??? warning "Two things share the name 'Analysis tab'"
     The rail's **Analyses** page is a gallery of *saved, special interactive
     viewers* (embedded 3D structural scenes, a PTools launcher) — not the catalog
     of every analysis class. The class catalog lives under **Registry → Discovered
@@ -167,7 +167,7 @@ externally-produced run appears there once it is registered. From a run you open
 its per-study **Results** view, which reads the emitter store — scalar, vector,
 and bulk observables — without your writing any code.
 
-!!! warning "Accuracy note — the standalone Data Explorer was removed"
+??? warning "Accuracy note — the standalone Data Explorer was removed"
     Earlier builds shipped a no-code **Data Explorer** panel with four
     whole-cell-specific views (Timeseries, run-vs-run Scatter, a Voronoi
     Allocation treemap, and an Escher Flux map keyed to the *e. coli core* map).

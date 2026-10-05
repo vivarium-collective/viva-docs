@@ -56,13 +56,13 @@ vivarium-workbench serve --workspace . --host 0.0.0.0 --port 8000
 Ctrl-C. It writes its base URL to `.pbg/server/server-info` — skills read the URL from there
 rather than hardcoding it.
 
-!!! note "`vwb` is the short alias"
+??? note "`vwb` is the short alias"
     The CLI is aliased `vwb`, so `vwb serve --workspace .` is equivalent. Omitting `--port`
     picks a free port and prints the URL; a scaffolded workspace also ships a `scripts/serve.sh`
     wrapper that prefers the workspace venv's binary. The `/viva-workbench` skill wraps all of
     this (`/viva-workbench start`).
 
-!!! note "Renamed from `vivarium-dashboard`"
+??? note "Renamed from `vivarium-dashboard`"
     The distribution was `vivarium-dashboard`; it is now `vivarium-workbench`. The old
     `vivarium-dashboard` / `vdash` / `vivarium-dashboard-publish` CLIs and the
     `VIVARIUM_DASHBOARD_*` env vars keep working as deprecated aliases during the migration
@@ -103,7 +103,7 @@ Under the hood the standalone mode runs `vwb scaffold-workspace --name --target`
 clones the template), `uv venv .venv`, `uv pip install -e .[dev]`, commits the bootstrap, and
 registers the workspace in the global catalog at `~/.pbg/workspaces.json`.
 
-!!! note "Template repo naming"
+??? note "Template repo naming"
     The scaffold repo is **`viva-template`** (formerly `pbg-template`); some older docs and
     the `$PBG_TEMPLATE` / `--template-source` override still reference the `pbg-template`
     name. Both point at the same scaffold.
@@ -143,7 +143,7 @@ discoverable once it is pip-installed into the venv and declares `bigraph-schema
 dependency — that is how `allocate_core()` finds and registers its processes without any
 manual `register_link()` call.
 
-!!! warning "The `--no-deps` install traps"
+??? warning "The `--no-deps` install traps"
     When baking modules into a container image (or installing several at once), install them
     with **`pip install --no-deps`**. Two failure modes make this non-optional:
 
@@ -181,7 +181,7 @@ docker run --rm -p 8000:8000 \
 #   the image's default CMD is: serve --workspace /workspace --host 0.0.0.0 --port 8000
 ```
 
-!!! note "The workspace must bring its own venv"
+??? note "The workspace must bring its own venv"
     The image sets `VIVARIUM_WORKBENCH_REQUIRE_WORKSPACE_VENV=1`: the environment resolver
     refuses to silently fall back to the thin server venv for workspace work (which could not
     import the workspace package). The mounted `/workspace/.venv` is required, and the seam

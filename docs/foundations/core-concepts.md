@@ -12,10 +12,11 @@ This chapter builds the whole framework from first principles. The vocabulary is
 deliberately small: a handful of structural ideas, then a handful of temporal ones, then
 the way models compose. Everything later in the guide is an application of what is here.
 
-The formal anchors come from the **Process Bigraph** paper's core vocabulary (Table 1);
-the plain-language framing comes from the *Composition Interface Protocol* primer. Where a
-term has a legacy synonym, it is noted — the ecosystem is mid-migration and older
-documents use different words for the same idea.
+??? note "Where the vocabulary comes from"
+    The formal anchors come from the **Process Bigraph** paper's core vocabulary (Table 1);
+    the plain-language framing comes from the *Composition Interface Protocol* primer. Where a
+    term has a legacy synonym, it is noted — the ecosystem is mid-migration and older
+    documents use different words for the same idea.
 
 ## Structure: stores, edges, and wires
 
@@ -55,7 +56,7 @@ A **Wire** connects a port of an edge to a store by its path, `W : (process, por
 Wiring makes every coupling explicit and checkable. Where the place graph says *where*
 things are, wires say *how* they are connected.
 
-!!! note "Place graph vs link graph"
+??? note "Place graph vs link graph"
     - **Place graph** = containment = dict nesting. "Cell contains cytoplasm."
     - **Link graph** = wiring = ports connected to store paths. "Transcription reads the
       gene store and writes the mRNA store."
@@ -126,7 +127,7 @@ The operational object is a **Core** — a registry of types (and of process cla
 the engine consults. You will meet it directly in
 [Schemas, types & state](../compute/schema-types-state.md).
 
-!!! warning "Accuracy note"
+??? warning "Accuracy note"
     `bigraph-schema` was rewritten (v1.4.x). If you find older tutorials referring to a
     `TypeSystem` class or dict-keyed `_apply`/`_serialize` methods, that API is gone — the
     current object is `Core`, built via `allocate_core()`, with type behaviors dispatched
@@ -138,14 +139,16 @@ A **Composite** is a state-tree of typed process and step nodes wired to shared 
 **It is the only object the engine actually runs.** Everything higher up in the framework
 merely points at a composite and records what came out.
 
-A composite is a **document**: state + processes + the port wiring between them. Crucially,
-a composite is *itself a Process* — it owns an internal state-tree and scheduler and
-exposes a **bridge** that maps its external ports onto internal store paths. So a composite
-drops into a parent composite as a single node. This is how multiscale models are built:
-**containment, not hole-filling** — big models are assembled from small ones. And because
-the pieces take on their biological meaning from *how* they are composed, the same
-processes wired into different patterns — cell–environment coupling, growth, division —
-give rise to different biology.
+A composite is a **document**: state + processes + the port wiring between them.
+
+Crucially, a composite is *itself a Process* — it owns an internal state-tree and scheduler
+and exposes a **bridge** that maps its external ports onto internal store paths. So a
+composite drops into a parent composite as a single node. This is how multiscale models are
+built: **containment, not hole-filling** — big models are assembled from small ones.
+
+And because the pieces take on their biological meaning from *how* they are composed, the
+same processes wired into different patterns — cell–environment coupling, growth,
+division — give rise to different biology.
 
 ```mermaid
 flowchart TB
@@ -177,7 +180,7 @@ one operation (**fill** its sites), one law (**`is_ground`**). A composite, a te
 study, and an investigation are all the same kind of thing — they differ in structure, not
 in execution machinery.
 
-!!! note "Legacy vocabulary"
+??? note "Legacy vocabulary"
     Older design documents call sites **slots**, and call filling them **bind** or
     **reify**. Prefer **site / fill / ground**; treat *slot / bind / reify* as synonyms
     when you meet them.

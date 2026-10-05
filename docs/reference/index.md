@@ -47,5 +47,4 @@ Every installable Vivarium module — searchable and filterable by capability ta
 
 </div>
 
-!!! tip "Suggested path"
-    Jump to the entry you need, or follow **A worked end-to-end example** and open the other entries as it links to them.
+**Where to start:** jump to the entry you need, or follow [A worked end-to-end example](worked-example.md) and open the other entries as it links to them.

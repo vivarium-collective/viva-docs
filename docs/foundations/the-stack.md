@@ -85,7 +85,7 @@ study's prerequisites, and *the wiring is the orchestration*: the engine schedul
 network. Templates, studies, and investigations differ in **structure, not in execution
 machinery**.
 
-!!! info "Design vs shipped"
+??? info "Design vs shipped"
     The "everything is one typed document" unification is the framework's north star, and
     the load-bearing pieces have shipped (an investigation compiles to a composite;
     `bigraph-schema` has `fill`/`is_ground`). Some deeper unification is still in progress.

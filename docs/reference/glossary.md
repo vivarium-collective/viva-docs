@@ -136,7 +136,7 @@ carries **no dynamics**. Stepped, it stays inert and never fabricates behavior; 
 the dashboard marked `DRAFT`. Distinct from a site: a draft process is an inert *node*, a site
 is an empty *hole*. → [Templates & draft processes](../compute/templates-and-draft-processes.md)
 
-!!! note "Legacy vocabulary"
+??? note "Legacy vocabulary"
     Design documents from mid-2026 use **slot / bind / reify** for what are now **site / fill
     / ground**. The unified-architecture plan renamed and narrowed these terms and explicitly
     retired *slot, bind, reify, gate evaluator, barrier, phase, flush engine*. Prefer site /
@@ -211,7 +211,7 @@ hardening it is a transformation an agent can apply and verify. → [Rigor & evi
 
 ## Naming: pbg vs viva
 
-!!! note "Prefer `viva`; expect `pbg` on disk"
+??? note "Prefer `viva`; expect `pbg` on disk"
     The ecosystem was renamed from **pbg** ("process-bigraph") to **viva**. The migration is
     real but not complete, so both spellings appear:
 

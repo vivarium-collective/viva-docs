@@ -42,5 +42,4 @@ How the `/viva-*` skills drive the Workbench over plain HTTP, and how the work s
 
 </div>
 
-!!! tip "Suggested path"
-    Start with **Workspaces & the Workbench** for where the work lives, then **Studies** for the unit of evidence and **Investigations** for how studies combine. **Analyses** and **Rigor** explain how verdicts are produced; **Working with AI agents** shows who drives the loop.
+**Suggested path:** [Workspaces & the Workbench](workspaces-and-workbench.md) → [Studies](studies.md) → [Investigations](investigations.md). Then [Analyses](analyses-visualizations-report-cards.md) and [Rigor](rigor-and-evidence.md) explain how verdicts are produced; [Working with AI agents](working-with-agents.md) shows who drives the loop.
