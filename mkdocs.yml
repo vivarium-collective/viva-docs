@@ -125,6 +125,7 @@ nav:
       - compute/composites-and-wiring.md
       - compute/emitters.md
       - compute/templates-and-draft-processes.md
+      - compute/process-contracts.md
       - Explore a bigraph: explore.md
   - Investigate:
       - investigate/index.md
