@@ -113,7 +113,7 @@ whole simulation drops into a parent composite as a single node, wired exactly l
 other edge.
 
 <figure class="viva-figure">
-<img src="../assets/figures/composite-diagram.png" alt="Composite diagrams: a process graph wiring processes to stores, and a composite process exposing external ports through a bridge.">
+<img src="../../assets/figures/composite-diagram.png" alt="Composite diagrams: a process graph wiring processes to stores, and a composite process exposing external ports through a bridge.">
 <figcaption><strong>Composite diagrams.</strong> (a) A process graph wires processes (metabolism, gene expression) to stores (DNA, enzymes, nutrients, products) through ports whose type must match the store they connect to. (b) A <strong>composite process</strong> wraps an internal process bigraph and exposes external ports; matching internal ports link to the inner bigraph by dotted wires — the <strong>bridge</strong> — keeping inner and outer state synchronized. <small>(Agmon &amp; Spangler, Fig 5.)</small></figcaption>
 </figure>
 
@@ -222,7 +222,7 @@ eligible, gathers what they need from the state, invokes them, and merges their 
 changes back into the shared stores.
 
 <figure class="viva-figure">
-<img src="../assets/figures/orchestration-modes.png" alt="Three orchestration patterns: multi-timestepping, a workflow DAG of steps, and event-driven graph rewrite (divide, engulf, burst).">
+<img src="../../assets/figures/orchestration-modes.png" alt="Three orchestration patterns: multi-timestepping, a workflow DAG of steps, and event-driven graph rewrite (divide, engulf, burst).">
 <figcaption><strong>Orchestration patterns.</strong> (a) <strong>Multi-timestepping</strong> — temporal processes each update at their own interval, coordinated by a discrete-event co-simulation engine. (b) A <strong>workflow</strong> is a DAG that orders step processes, each triggered by changes to its inputs. (c) <strong>Event-driven graph rewrite</strong> — discrete events change the topology of an agent–environment system: <em>divide</em> splits one agent into two, <em>engulf</em> nests one inside another, <em>burst</em> dissolves an agent back into its environment. <small>(Fig 6.)</small></figcaption>
 </figure>
 

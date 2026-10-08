@@ -13,7 +13,7 @@ over a plain HTTP contract, and how the work divides between an AI agent doing h
 construction and a human curator owning the calls that matter.
 
 <figure class="viva-figure">
-<img src="../assets/figures/agentic-loop.svg" alt="The agentic closed loop: hypothesis, prediction, workflow contract, simulation, evidence package, validation, and model update, over a process-bigraph execution substrate with human approval at each stage.">
+<img src="../../assets/figures/agentic-loop.svg" alt="The agentic closed loop: hypothesis, prediction, workflow contract, simulation, evidence package, validation, and model update, over a process-bigraph execution substrate with human approval at each stage.">
 <figcaption>The agentic loop: AI agents assemble and run the investigation graph —
 hypothesis → prediction → workflow → simulation → evidence → validation → model update —
 over a process-bigraph execution substrate, with a human approving the stages that matter.</figcaption>

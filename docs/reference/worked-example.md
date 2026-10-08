@@ -210,7 +210,7 @@ Two published investigations are worth reading as fully-worked exemplars of this
   independently developed mechanisms together through typed interfaces.
 
 <figure class="viva-figure">
-<img src="../assets/figures/spatio-flux.png" alt="The Spatio-Flux reference model: a composite of metabolic, spatial, mechanical, and structural processes, plus simulation snapshots of particles moving through nutrient fields.">
+<img src="../../assets/figures/spatio-flux.png" alt="The Spatio-Flux reference model: a composite of metabolic, spatial, mechanical, and structural processes, plus simulation snapshots of particles moving through nutrient fields.">
 <figcaption><strong>The Spatio-Flux reference model.</strong> (a) Metabolic, spatial, mechanical, and structural processes connected through shared typed stores: Newtonian particles carry internal metabolic processes and exchange metabolites with a spatial lattice via particle–field adapters, while diffusion updates field concentrations and graph-rewrite processes govern particle division. (b) Simulation snapshots — particles moving through and reshaping glucose, acetate, and biomass fields. <small>(Agmon &amp; Spangler, Fig 8.)</small></figcaption>
 </figure>
 - **The v2ecoli baseline showcase** — from raw sources to a calibrated whole cell, showing

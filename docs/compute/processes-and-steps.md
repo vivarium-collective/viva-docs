@@ -71,7 +71,7 @@ canonical teaching process shipped in the repo (its one `accelerate` helper trim
 only the contract shows):
 
 <figure class="viva-figure">
-<img src="../assets/figures/process-diagram.png" alt="A process drawn as a rectangle with typed input ports on the left and output ports on the right.">
+<img src="../../assets/figures/process-diagram.png" alt="A process drawn as a rectangle with typed input ports on the left and output ports on the right.">
 <figcaption><strong>Process diagram.</strong> A process is a rectangle with typed <strong>ports</strong> on its boundary — inputs on the left, outputs on the right. Its update function maps inputs to a typed <em>delta</em> of outputs, informed by its config (here, an <code>interval</code>). <small>(Agmon &amp; Spangler, Fig 4.)</small></figcaption>
 </figure>
 

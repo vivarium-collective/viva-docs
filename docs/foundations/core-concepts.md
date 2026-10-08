@@ -37,7 +37,7 @@ The separation between schema and state is the central principle: it lets you va
 model, reuse its structure, and reason about composition **independently of execution**.
 
 <figure class="viva-figure">
-<img src="../assets/figures/store-diagram.png" alt="Store diagrams: a single typed store, and stores nested in a place-graph hierarchy.">
+<img src="../../assets/figures/store-diagram.png" alt="Store diagrams: a single typed store, and stores nested in a place-graph hierarchy.">
 <figcaption><strong>Store diagrams.</strong> (a) A store is a rounded rectangle holding any data type, showing its name, value, and type. (b) Stores nest in hierarchies for multiscale representation — a place graph of nested stores (e.g. a cell containing cytoplasm, membrane, and nucleus). <small>(Fig 3.)</small></figcaption>
 </figure>
 
@@ -62,7 +62,7 @@ things are, wires say *how* they are connected.
       gene store and writes the mRNA store."
 
 <figure class="viva-figure">
-<img src="../assets/figures/bigraph-structure.png" alt="Composition framework overview: Milner bigraphs (link graph + place graph) and process bigraphs (place graph + process graph).">
+<img src="../../assets/figures/bigraph-structure.png" alt="Composition framework overview: Milner bigraphs (link graph + place graph) and process bigraphs (place graph + process graph).">
 <figcaption><strong>Composition framework overview.</strong> (a) Milner's original bigraphs combine a <em>link graph</em> (hyperedges, dashed) with a <em>place graph</em> (solid containment edges) over a set of nodes. (b) Process bigraphs replace the link graph with a <strong>process graph</strong> — processes connect to nodes through their typed ports. <small>(Agmon &amp; Spangler, Fig 2.)</small></figcaption>
 </figure>
 
