@@ -231,6 +231,45 @@ with the run reader living in the sibling emitters package so the dashboard neve
     Two studies that cite the same band and measure the same path will grade the same way,
     on any machine that can replay the run.
 
+## The lint backstop
+
+The derive-on-read machinery keeps a *single* study honest. A second, independent
+layer keeps the *whole workspace* honest: a static, fail-loud linter
+(`scripts/lint-workspace.py` plus the pure checks in `viva_genesis/audit_checks.py`)
+that runs before anything is trusted and exits non-zero on a hard failure. It is the
+honest-bar backstop — it catches the ways a study or investigation can *look* finished
+while quietly referring to something that isn't there.
+
+The hard-fail checks that matter most:
+
+| Check | Fails when… |
+|---|---|
+| **YAML-parse** | `workspace.yaml` (or an `investigation.yaml`) is missing or unparseable — a broken file can no longer silently skip the checks below |
+| **dangling-ref** | a `finding`/`behavior_test` `cites` key is absent from `papers.bib`, or a `prerequisites[].study` doesn't resolve to a slug |
+| **dangling-edge-target** | a `parent_studies` / `parent_relations` / `builds_on` / `handoff` edge points at a study or `plan_id` that no longer exists (added as PR #147) |
+| **gate-member-roster** | a `plan_gates[].member_studies` entry isn't in the investigation's `studies:` roster |
+| **gate-matched-null** | a gate authored `passed` isn't confirmed by the derived plan-progress (its matched-null check) |
+| **verdict-evidence** | a study claims a pass but a `primary` behavior test has no `PASS` run outcome backing it |
+| **planned-but-passed** | a `planned` baseline/arm also claims a result (gate passed / `supported` / Accepted) |
+| **artifact-missing** | a `ran`/`passed` study's committed artifact file isn't on disk |
+| **datasets / references** | a declared dataset or cited PDF is missing, or its `sha256` doesn't match |
+
+Be honest about the limits. The linter **does not re-run simulations or re-derive any
+number** — it checks that recorded `outcomes[].result` tokens are `PASS` and that
+artifact *files* exist, not that the values are right. Value-level concerns
+(knife-edge margins, missing `_units`) are **WARN-only** heuristics, and per-study
+JSON-schema / dashboard `load_spec` correctness is advisory here and enforced
+dashboard-side.
+
+Alongside it, the **Workbench adds a live, graded assessment** the linter can't give:
+a deterministic **L0–L5 reproducibility grade** (`audit_grade.py`: Declared → Keyable
+→ Run recorded → Content-addressed output → Environment pinned → Rebuildable from
+sources; an investigation grades as its weakest member) and a **composite contract
+audit** (`composite_audit.py`: per-process contract completeness and unit-compatible
+wiring at every shared store). The linter is a static integrity gate over YAML, source,
+and files; the Workbench audit is a live reproducibility-and-contract report. They are
+complementary.
+
 ## Hardening a study
 
 A study that *looks* done is not the same as a study whose conclusions survive scrutiny.
