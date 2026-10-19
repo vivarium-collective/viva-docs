@@ -120,8 +120,9 @@ So a test authored `status: passed` but backed by no run outcome renders as a pe
 pill (<span class="pill draft">pending</span>), not a pass. A study renders
 **Ran · Tests N&check; · Passed** only when `runs[].outcomes` actually back the results.
 
-The rolled-up **verdict** (`study_verdict.roll_up_verdict()`) aggregates outcomes and
-prerequisites into a code-computed gate state — passed iff `fail == 0 and pass > 0`:
+The rolled-up **gate state** (`study_verdict.roll_up_verdict()`) aggregates outcomes
+and prerequisites into a code-computed `gate_status` — passed iff `fail == 0 and
+pass > 0`:
 
 <span class="pill pass">passed</span>
 <span class="pill fail">failed</span>
@@ -129,36 +130,60 @@ prerequisites into a code-computed gate state — passed iff `fail == 0 and pass
 <span class="pill draft">blocked</span>
 <span class="pill draft">not_started</span>
 
-It writes a *parallel coded slot* and never overwrites the authored gate.
+This is the mechanical **execution** gate — distinct from the study's scientific
+`verdict` (`supported` / `qualified` / `inconclusive` / `refuted`), which a person
+authors. It writes a *parallel coded slot* and never overwrites the authored gate.
 
 Because the study is typed data, hardening it — filling gaps, citing bands, tightening a
 claim — is a transformation an agent can apply and a human can verify, not a matter of taste.
 
-## "Five phases" vs "six status axes"
+## The four axes a study tracks
 
-Two similar-looking lists travel together in the docs. Keep them distinct:
+A study separates *where you are*, *whether it ran*, *whether the science holds*, and
+*how strong the modeling is* — four independent axes that are easy to conflate and
+must not be:
 
 <div class="viva-grid" markdown>
 
 <div class="viva-card" markdown>
-### Five **phases** — a sequence
-`Design → Build → Simulate → Evaluate → Decide`. *Where you are* in authoring the study.
-One value at a time; the `phase:` field.
+### Phase — where you are
+`Design → Build → Simulate → Evaluate → Decide`. One value at a time; the `phase:`
+field. *Position* in authoring the study.
 </div>
 
 <div class="viva-card" markdown>
-### Six **status axes** — independent dimensions
-`design · implementation · simulation · evaluation · gate · expert_review`. Each is a
-*separate*, nullable axis, so "we wrote it" is never confused with "it ran" or "it holds up."
+### Status axes — did it run?
+Independent, nullable axes — `design_status`, `simulation_status`,
+`evaluation_status`, `gate_status` (some specs add `implementation_status`,
+`expert_review_status`). Each has its own enum (`simulation_status: not_run ·
+running · ran · failed`; `gate_status: blocked · needs_calibration · passed ·
+failed`). The **execution** state — mechanical, not scientific.
+</div>
+
+<div class="viva-card" markdown>
+### Verdict — does it hold?
+The study's **scientific conclusion**: `supported` · `qualified` · `inconclusive` ·
+`refuted` (unset renders *pending*, never green). Authored, not mechanical — a study
+can have `gate_status: passed` and still be `qualified`.
+</div>
+
+<div class="viva-card" markdown>
+### Evidence tier — how strong?
+The **fidelity** of the modeling behind the verdict: `conceptual_demonstration` →
+`mechanistic_prediction` → `calibrated`. A separate axis from the verdict.
 </div>
 
 </div>
 
-The six axes replace the single coarse `status:` field for new specs, each with its own
-enum (e.g. `simulation_status: not_run · running · ran · failed`;
-`gate_status: blocked · needs_calibration · passed · failed`). The headline pill on
-the study page prefers `gate_status` when set. They are additive — a legacy study with only
-`status:` renders exactly as before.
+The last two are the easy mistakes. **Execution status is not a verdict** — "it ran
+and the gate passed" is not "the science holds"; that is a separate, authored call.
+And **higher fidelity is not stronger evidence**: `evidence_tier` and `verdict` are
+orthogonal, so a `calibrated` study can be `refuted` and a `conceptual_demonstration`
+can be `supported`. The investigation graph renders exactly this pair as each node's
+two marks (see [Investigations](investigations.md#two-marks-per-node-verdict-evidence-tier)).
+
+The status axes are additive — a legacy study with only a coarse `status:` renders
+exactly as before.
 
 ## The `study.yaml` narrative spine (v4)
 
@@ -322,6 +347,61 @@ findings: []
     from the latest run in `runs.db`. Your job is the *authored* side — the question, the
     tests, the bands, the prose. See [Rigor & evidence](rigor-and-evidence.md) for how the
     computed side is graded.
+
+## Multi-arm studies
+
+A study can fold several related studies or conditions into one, as **arms**. A
+consolidated study (`program: consolidated`) carries a top-level `verdict` and
+`evidence_tier` for the whole, and an `arms:` list in which each arm is a folded
+study/condition with its *own* verdict, fidelity, gate, and evidence:
+
+```yaml
+program: consolidated
+verdict: supported                     # the study's rolled-up conclusion
+evidence_tier: mechanistic_prediction
+plan_id: 1                             # the gate this study answers (see Investigations)
+arms:
+  - id: 01_geology_to_reduced_carbon
+    source_study: og-01-geology-to-reduced-carbon
+    concept_role: "Canonical: H2-driven CO2 reduction reproduces the Preiner-2020 hierarchy."
+    fidelity: mechanistic_prediction
+    verdict: supported
+    gate_status: passed
+    matched_null: controls-collapse-no-gradient-no-H2-no-catalyst
+    composite: viva_genesis.composites.carbon_fixation.hydrothermal_carbon_fixation
+    run_ids: [ "...__1792066785__b9f82a" ]
+    finding_ids: [ og01-preiner-yields, og01-gradient-drives-formate ]
+    canonical: true
+  - id: 01_cal_dx_label_disagreement
+    source_study: og-01-cal-dx-label-disagreement
+    status: planned                    # a proposed arm, not yet run
+    fidelity: null
+    verdict: null
+    note: "Planned diagnostic: why do empirical and Butler-Volmer classes disagree?"
+    seeded_from: { study: og-01-cal-electrochemistry }
+```
+
+Each completed arm pins:
+
+- its **own `verdict` and `fidelity`** — so a study can be `supported` overall while
+  one arm is `refuted` on a secondary question;
+- a **`matched_null`** — the null that must *fail* for the arm's claim to count (e.g.
+  "controls collapse with no gradient, no H2, no catalyst"). An arm's verdict means
+  nothing unless its claim out-performs that null;
+- the **`composite`** it ran, and the **`run_ids`** / **`finding_ids`** that back it;
+- **`canonical: true`** on the one arm that defines the study's headline claim.
+
+A **planned** arm carries `status: planned`, null `verdict`/`fidelity`, a `note`, and
+`seeded_from` — a proposal recorded in place, not a result. The lint pipeline refuses
+to let a planned arm, or an unconfirmed matched-null, masquerade as a pass (see
+[Rigor & the evidence engine](rigor-and-evidence.md)).
+
+!!! note "Not every study carries every section"
+    The eight authoring sections above describe a study being *designed*. A
+    consolidated, arms-based study is an *evidence record*: it carries the top-level
+    `verdict`/`evidence_tier`, `arms`, `behavior_tests`, `findings`, and `runs`, and
+    typically drops the design-time scaffolding (`pipeline_gate`, `simulation_set`,
+    `model_change`). Read a live `study.yaml` to see which profile you are in.
 
 ## Where studies fit
 

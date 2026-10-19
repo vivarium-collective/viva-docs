@@ -158,6 +158,13 @@ The co-authoring loop, in five beats: the **curator frames** → the **agent imp
 **agent analyzes** → the **curator reviews, sets the verdict, and decides the merge**;
 corrections then propagate upstream.
 
+In [study](studies.md) terms, that loop splits the three authorships into separate fields so
+none can quietly overwrite another: the **agent** builds the composite, runs the arms, and
+populates `findings` and `run_ids`; the **AI-free spine** computes each `gate_status` and the
+per-test outcomes; the **curator** sets the scientific `verdict` and `evidence_tier`. The tool
+enforces the gap — a `supported` verdict with no backing `PASS` outcome is a lint failure, not
+a rendering choice.
+
 Two responsibilities the curator must never delegate, because the structure exists specifically
 to guard against them:
 

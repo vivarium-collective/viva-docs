@@ -64,65 +64,141 @@ The `studies:` list is the membership (the loader also accepts `members:`).
 investigation-level criterion to a member study's named behavior test — the thread
 that later lets the report show which criteria are actually covered by evidence.
 
-Schema v2 adds a **nine-section spine** that a report renders automatically:
+Schema v2 adds a **narrative spine** that a report renders automatically. The
+top-level sections a real `investigation.yaml` carries:
 
 | Section | What it holds |
 |---|---|
-| `executive` | the state-first opening: `what_is_this`, `verdict`, `verdict_status`, `verdict_detail`, `decisions_needed[]` |
+| `executive` | the state-first opening — `what_is_this`, a `campaign_synthesis`, and per-gate status prose |
 | `scientific_argument` | the reasoning chain the studies build |
-| `biological_story` | the mechanism in prose |
-| `lead` · `at_a_glance` | the owner; `[{study, role}]` one-line member roles |
-| `how_to_read` · `glossary` | reader orientation |
+| `key_claims` · `competing_frameworks` | the headline claims, and the alternatives weighed against them |
+| `lead` · `at_a_glance` | the owner; `[{study, role}]` one-line member roles (the role prose carries the plain-word verdict) |
 | `guidelines` | investigation-wide rules |
-| `inputs` | owned datasets, references, expert docs |
+| `inputs` · `expert_docs` · `proposed_inputs` | owned datasets, references, and expert documents |
+| `plan_gates` | the gate spine (see below) |
 
-`verdict_status` is a small enum — `planning · in-progress · passed · complete ·
-blocked · failed` — and, like everything else that looks like a conclusion, it is
-governed by the derive-on-read discipline: authored intent and computed evidence
-live in parallel fields so the machine never silently overwrites the human.
+Like everything that looks like a conclusion, the summary is **derived, not stored**:
+the executive prose and the `at_a_glance` roles are authored, but the gate verdicts
+are computed at render time from the members' own evaluated verdicts, so the machine
+never silently overwrites the human.
 
-## Prerequisite gates and the computed DAG
+## The investigation graph
 
-An investigation stores **no edges**. The dependency DAG is **computed at render
-time** from each member study's `pipeline_gate.prerequisites`. A prerequisite is a
-bare slug or a small record:
+An investigation stores the **membership** and the **gates**; it does not store
+graph edges directly. The study-to-study DAG is **computed at render time** from the
+members' data dependencies, and each node is marked with its study's own verdict and
+evidence tier.
+
+### Where the edges come from
+
+The graph builder draws an edge wherever one study depends on another:
+
+- In the current **members model**, an edge comes from a member study's declared
+  interface **`inputs`** — study B consuming a result produced by study A *is* the
+  edge A → B.
+- On the **legacy path**, edges come from a study's `pipeline_gate.prerequisites`
+  (canonical), falling back to a **`parent_studies`** list of `{study, condition}`.
+  The fallback emits a deprecation warning naming the study.
+
+A study labels an edge with a **discourse relation** through a top-level
+`parent_relations` list:
 
 ```yaml
 # in a member study.yaml
-pipeline_gate:
-  prerequisites:
-    - {study: dnaa-atp-fraction-baseline, condition: tests-passed, relation: leads-to}
-    - {study: media-calibration, condition: ran, relation: supports}
+parent_studies:
+  - {study: og-vent-environment, condition: tests-passed}    # the data-dependency edge
+parent_relations:
+  - {study: og-vent-environment, relation: alternative-to}   # what KIND of link it is
 ```
 
-The `relation` carries **discourse semantics** — it says what *kind* of argumentative
-link the edge is, and the graph renders it accordingly:
+A `parent_relations` entry only **decorates an edge that already exists**. If its
+`study` is not already a prerequisite / parent / input, the relation is silently
+dropped — it never creates a new edge.
+
+### The relation vocabulary
+
+Four canonical relations drive the edge styling; older names still parse but fold
+into them:
 
 | Relation | Edge | Reading |
 |---|---|---|
-| `leads-to` | solid | this result sets up the next question |
-| `supports` | solid | this result is evidence for another |
-| `regulatory` | dashed | a modulating dependency |
-| `refutes` | dashed | this result argues against another |
+| `builds-on` | blue, solid, arrow | this study builds on the upstream result |
+| `tests` | purple, dashed, arrow | this study puts another's claim to the test |
+| `motivates` | amber, dashed, arrow | the upstream result motivates asking this |
+| `alternative-to` | slate, dotted, no arrow | two studies are competing alternatives |
 
-(The `/viva-study` convention adds a `refines` relation — a finer-grained
-realization — also drawn dashed.) Each node in the rendered graph reads as an
-**Ask** (its `question`) → **Finds** (its `claim` or top finding) → a
-**Confidence** badge, so the whole investigation is legible as an argument at a
-glance.
+Aliases map in: `leads-to` · `model-input` · `evidence` · `regulatory` →
+`builds-on`; `refutes` · `refutes-alternative` → `tests`; `precedes` → `motivates`;
+`alternative` → `alternative-to`. An unrecognized relation falls back to
+`builds-on`.
+
+### Two marks per node: verdict × evidence tier
+
+Each node carries **two orthogonal marks**, so the graph reads as *what held* ×
+*how strong the modeling is*:
+
+| Verdict (authored) | Mark | Evidence tier | Strength |
+|---|---|---|---|
+| `supported` | ◆ green | `conceptual_demonstration` | ● "demonstration" |
+| `qualified` | ◇ teal | `mechanistic_prediction` | ●● "mechanistic" |
+| `inconclusive` | ◐ slate | `calibrated` | ●●● "calibrated" |
+| `refuted` | ✗ red | | |
+
+The two axes are independent: **a higher evidence tier does not make a verdict
+stronger.** A `calibrated` study can still be `refuted`; a `conceptual_demonstration`
+can be `supported`. Verdict is authored-only — when nothing supports one the node
+renders as **pending** (never forced green), and its status badge is derived
+separately from `gate_status`. (Legacy `honest-negative` folds into `refuted`,
+`mixed` into `inconclusive`.)
 
 ```mermaid
 flowchart TB
-    B["dnaa-atp-fraction-baseline<br/><small>Asks: is DnaA-ATP measurable?</small><br/>✓ passed"]
-    C["media-calibration<br/><small>✓ passed</small>"]
-    T["dnaa-titration<br/><small>Asks: does it gate initiation?</small><br/>🔒 blocked"]
-    R["initiation-timing-readout<br/><small>⏳ not run</small>"]
-    B -->|leads-to| T
-    C -.->|supports| T
-    T -->|leads-to| R
+    V["og-vent-environment<br/><small>◆ supported · ●● mechanistic</small>"]
+    C["og-carbon-fixation<br/><small>◆ supported · ●● mechanistic</small>"]
+    A["og-autocatalysis-a2<br/><small>✗ refuted · ●● mechanistic</small>"]
+    N["og-network-persistence<br/><small>◇ qualified · ● demonstration</small>"]
+    V -->|builds-on| C
+    C -->|builds-on| N
+    A -.->|alternative-to| N
 ```
 
-A member whose prerequisite has not passed renders **🔒 blocked**.
+## Gates: the plan spine
+
+The study graph above is the *data-dependency* view. An investigation also carries a
+**plan spine** — an ordered chain of **gates**, each a milestone the argument must
+clear before the next one is admitted. It lives in `plan_gates`:
+
+```yaml
+plan_gates:
+  - id: A1
+    name: Network persistence
+    extends: null                         # the spine root
+    member_studies: [og-vent-environment, og-network-persistence]
+    criterion: "An endogenous reaction network persists on measured feeds."
+    status: pending                        # a STUB — the live status is derived
+  - id: A2
+    name: Endogenous autocatalysis
+    extends: A1                            # the typed edge: A2 depends on A1
+    off_spine: true                        # a branch; its refuted verdict never gates the spine
+    member_studies: [og-autocatalysis-a2]
+    criterion: "Any detected autocatalysis must beat a matched null."
+    criterion_findings: [og29-beats-matched-null]   # the matched-null evidence the gate audits
+```
+
+- **`extends`** names the single parent gate — that *is* the spine edge (`A2 → A1`);
+  a `null` extends is the root.
+- **`member_studies`** are the studies admitted at that gate; `pending_studies` holds
+  members that are planned but not yet scaffolded.
+- **`criterion`** states what the gate asserts; **`criterion_findings`** points at the
+  **matched-null** findings — the ablations a claim must out-perform before the gate
+  counts as met. A gate flagged **`off_spine`** is a side branch whose verdict (even
+  `refuted`) does not block the main line; **`optional`** marks an extension gate.
+
+The authored `status:` is only a placeholder. The **live gate verdict** — met /
+qualified / refuted, with its matched-null check — is **computed at render time**
+from the member studies' own evaluated verdicts. Authoring a gate `passed` does not
+make it pass: the lint pipeline's `gate-matched-null` check fails loudly if an
+authored pass is not confirmed by the derivation.
 
 ## Investigation-as-composite
 
