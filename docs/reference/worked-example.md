@@ -121,10 +121,10 @@ simulation_set:
   - base_model: cell_baseline        # which composite to run
     condition: glucose_replete
     seeds: [0, 1, 2]
-    duration: 3 generations
+    duration_s: 10800                # ~3 generations at this medium
 readouts:
   - name: growth_rate
-    store_path: [cell, growth_rate]  # the emit contract: a name tied to an exact store path
+    store_path: cell/growth_rate     # the emit contract: a name tied to an exact store path
 behavior_tests:
   - name: steady_exponential_growth
     classification: primary

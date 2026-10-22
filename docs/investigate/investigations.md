@@ -17,10 +17,15 @@ An investigation is not just a folder of studies. It is a **1:1:1 identity**: th
 slug is also a git branch name and a git worktree directory.
 
 ```
-investigations/<slug>/investigation.yaml   # the collection + its narrative spine
-investigations/<slug>/studies/<slug>/       # member studies, nested
+investigations/<slug>/investigation.yaml   # the collection + its narrative spine (lists members by slug)
 investigations/<slug>/reports/              # the rendered per-investigation report
+studies/<slug>/study.yaml                   # member studies live FLAT at the workspace root
 ```
+
+Member studies are **not** nested inside the investigation directory — they live flat at
+`studies/<slug>/`, and `investigation.yaml` references them by slug. Nesting a `study.yaml`
+under `investigations/**/` is a deliberate hard **L0** audit violation (`no-nested-study`);
+the flat layout is what the reproducibility contract mandates.
 
 The `/viva-investigation` skill makes this concrete:
 
@@ -51,7 +56,7 @@ title: "DnaA controls replication initiation timing"
 status: in-progress
 question: "Does the DnaA-ATP fraction gate replication initiation in the model?"
 hypothesis: "Initiation fires when DnaA-ATP crosses a threshold."
-studies:
+members:
   - dnaa-atp-fraction-baseline
   - dnaa-titration
   - initiation-timing-readout
@@ -59,8 +64,10 @@ acceptance_criteria:
   - {study: dnaa-titration, behavior: atp-fraction-in-range}
 ```
 
-The `studies:` list is the membership (the loader also accepts `members:`).
-`acceptance_criteria` are `{study, behavior}` pairs that link an
+The `members:` list is the canonical membership key — a list of member study slugs.
+(`studies:` is a legacy alias the loader still accepts but the audit **warns** on,
+`investigation-members-only`; prefer `members:`.) `acceptance_criteria` are
+`{study, behavior}` pairs that link an
 investigation-level criterion to a member study's named behavior test — the thread
 that later lets the report show which criteria are actually covered by evidence.
 
@@ -99,6 +106,12 @@ The graph builder draws an edge wherever one study depends on another:
 - On the **legacy path**, edges come from a study's `pipeline_gate.prerequisites`
   (canonical), falling back to a **`parent_studies`** list of `{study, condition}`.
   The fallback emits a deprecation warning naming the study.
+
+Both legacy forms **canonicalize into `inputs[].from` producer edges**: a
+`prerequisites` / `parent_studies` entry becomes an `inputs[].from` reference to the
+upstream study's output. The **L5 reproducibility DAG and its toposort read
+`inputs[].from`** — not `pipeline_gate` — so an executable topological order falls out of
+the same producer/consumer wiring the graph draws.
 
 A study labels an edge with a **discourse relation** through a top-level
 `parent_relations` list:
@@ -199,6 +212,16 @@ qualified / refuted, with its matched-null check — is **computed at render tim
 from the member studies' own evaluated verdicts. Authoring a gate `passed` does not
 make it pass: the lint pipeline's `gate-matched-null` check fails loudly if an
 authored pass is not confirmed by the derivation.
+
+!!! note "Matched-null controls and the campaign plan-progress board"
+    A gate's claim counts only if it **out-performs a matched null** — a
+    control / ablation arm that must *fail* for the positive result to be meaningful
+    (the arm `conditions.baseline` carries as its control, surfaced here through
+    `criterion_findings`). The derivation that resolves each gate rolls up into a
+    **campaign plan-progress board** — the per-gate met / qualified / refuted view, with
+    its matched-null status, that the report renders across the whole plan spine. It is
+    this board, not the authored `status:` stubs, that reports how far the argument has
+    actually advanced.
 
 ## Investigation-as-composite
 

@@ -90,13 +90,13 @@ my-workspace/
 │   ├── composites/<id>.composite.yaml      #   the runnable substrate (JSON/YAML or a generator .py)
 │   ├── processes/                          #   Process / Step classes
 │   └── visualizations/                     #   Visualization Steps
-├── investigations/<slug>/investigation.yaml   # a collection (= git branch = worktree)
-│   └── studies/<slug>/study.yaml           #   studies commonly nest under their investigation
-├── studies/<slug>/                         # (flat layout still resolves for legacy studies)
+├── studies/<slug>/                         # CANONICAL: studies live flat here, one dir per slug
 │   ├── study.yaml                          #   a question + its narrative spine
 │   ├── runs.db                             #   canonical run + outcome record (SQLite)
 │   ├── parquet-runs/<run>/                 #   emitted trajectories (Parquet hive)
 │   └── viz/                                #   rendered figures + report cards
+├── investigations/<slug>/investigation.yaml   # a collection (= git branch = worktree); lists its members by slug
+│                                           #   (nesting a study.yaml under investigations/ is a hard L0 audit violation)
 ├── references/papers.bib                   # shared bibliography
 ├── notes/                                  # field records — cleanup PRs must SPARE these
 └── .pbg/                                   # gitignored runtime state (see below)
@@ -105,6 +105,13 @@ my-workspace/
     ├── composite-runs.db · artifacts/      #   run metadata + content-addressed caches
     └── schemas/ · events.jsonl · state.json
 ```
+
+!!! warning "Studies are flat; investigations reference them by slug"
+    The canonical layout is `studies/<slug>/study.yaml` at the workspace root, with
+    `investigations/<slug>/investigation.yaml` naming its member studies through a
+    `members:` list of slugs. Nesting a `study.yaml` under `investigations/**/` is a
+    deliberate hard **L0** audit violation (`no-nested-study`) — the reproducibility
+    contract mandates the flat layout, and `study_audit.py` fails `--gate` CI on it.
 
 ??? note "`.pbg/` — a legacy prefix that stayed"
     The runtime control directory is still named `.pbg/`, and the global registry still

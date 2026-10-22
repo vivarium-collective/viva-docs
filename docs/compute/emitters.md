@@ -111,8 +111,8 @@ forcing them on every user:
 
 `process_bigraph.emitter` **re-exports** `SQLiteEmitter`, `ParquetEmitter`, and their
 retrieval helpers lazily — so `from process_bigraph.emitter import SQLiteEmitter` keeps
-working as long as the sibling package is installed. Install both backends at once via the
-`process-bigraph[emitters]` extra.
+working as long as the sibling package is installed. Install both backends at once via
+`pip install "viva-emitters[sqlite,parquet]"` (there is no aggregate extra).
 
 ??? note "Package name: `viva-emitters` (formerly `pbg-emitters`)"
     The sibling package completed the `pbg → viva` rename. The canonical distribution is
@@ -122,7 +122,7 @@ working as long as the sibling package is installed. Install both backends at on
     back-compat shim that emits a `DeprecationWarning`, so any older install instructions or
     docstrings that say **`pbg-emitters`** point at the same package. Prefer `viva_emitters`;
     verify against whatever is installed if in doubt. *(Verified against `viva-emitters`
-    0.2.3.)*
+    0.4.x.)*
 
     Two caveats to keep straight: **`XArrayEmitter` is not in the process-bigraph re-export
     set** — only `SQLiteEmitter`, `ParquetEmitter`, and their retrieval helpers are (see

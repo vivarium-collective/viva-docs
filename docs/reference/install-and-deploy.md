@@ -161,6 +161,37 @@ manual `register_link()` call.
 
 ---
 
+## Maintenance & migration commands
+
+Beyond `serve`, the CLI (`vivarium-workbench`, alias `vwb`) exposes a handful of
+workspace-maintenance verbs. These run against a workspace directory (`--workspace .`,
+default cwd); the migration ones all take `--dry-run` — run that first to see the plan.
+
+```bash
+# health check — stale process-bigraph / viva-superpowers give opaque ImportErrors on boot
+# or blank Audit+Build tabs; doctor reports them and exits non-zero if anything is stale.
+vivarium-workbench doctor
+
+# regenerate a workspace README's composite + investigation tables from the workspace
+# itself (between the <!-- BEGIN:composites/investigations --> markers).
+vivarium-workbench gen-readme --workspace .   # --check exits 1 if stale (wire into CI)
+```
+
+The `migrate-*` upgraders carry a workspace forward across schema and layout changes:
+
+| Command | What it does |
+|---|---|
+| `migrate-investigations` | One-shot legacy migration: `investigations/<name>/spec.yaml` → `studies/` (v2 → v3 spec rewrite). |
+| `migrate-studies` | Move nested `investigations/<inv>/studies/*` into the top-level `studies/` registry and rewrite investigations to `members:` references. |
+| `migrate-fields` | Rename deprecated study fields to their canonical names, driven by the workspace's own `.pbg/schemas/study.schema.json` (`deprecated` + `x-replaced-by`). Only provably-safe 1:1 renames are applied; value-aware changes are reported, not applied. |
+| `migrate-artifacts` | Re-key the artifact store onto the current content-address formula (process-bigraph 1.7.0 whole-float narrowing). Idempotent — safe to re-run. |
+
+(`cli.py` also defines `warm-catalog`, `smoke`, `audit`, `workspace-trust`,
+`scaffold-investigation`, `render-loom`, and the `run`/`rerun`/`runs`/`status`/`logs` and
+`server-*` run-management verbs; `--help` on the CLI is the live list.)
+
+---
+
 ## Docker
 
 The Workbench ships a container image that is **the tool, not the science environment**. It

@@ -45,7 +45,8 @@ Vivarium is built as **two spines wired into one discovery loop**.
 A compositional runtime built on Milner's bigraphs. State lives in typed **Stores**;
 dynamics live in **Processes** (temporal) and **Steps** (reactive) wired to those stores;
 whole simulations nest as **Composites**. Updates are **deltas** merged by the type
-system. Packages: `process-bigraph`, `bigraph-schema`, `viva-emitters`.
+system. Packages: `process-bigraph` (the engine, which ships the built-in emitters) and
+`bigraph-schema` (the type system beneath every store).
 </div>
 
 <div class="viva-card" markdown>
@@ -70,7 +71,7 @@ The two spines meet in a loop that runs at every scale of the work:
 ```mermaid
 flowchart LR
     Q["Question<br/><small>study.yaml</small>"] --> C["Composite<br/><small>run(interval)</small>"]
-    C --> R["Run store<br/><small>runs.&lt;id&gt;.zarr</small>"]
+    C --> R["Run store<br/><small>studies/&lt;slug&gt;/runs.db</small>"]
     R --> V["Verdict<br/><small>gate evaluator</small>"]
     V --> N["Next<br/><small>unblock / seed study</small>"]
     N -.-> Q
@@ -113,7 +114,9 @@ a claim — is a transformation an agent can apply and a human can verify.
 The framework is described in **Agmon & Spangler, *Process bigraphs and the architecture
 of compositional systems biology*** (arXiv:2512.23754), which introduces **Vivarium 2.0**
 as the open-source implementation across three libraries — `bigraph-schema`,
-`process-bigraph`, and `bigraph-viz` — demonstrated with **Spatio-Flux**, a library of
+`process-bigraph`, and `bigraph-viz` (a visualization library accompanying the paper,
+distinct from the four-package product stack described above) — demonstrated with
+**Spatio-Flux**, a library of
 microbial-ecosystem simulations combining kinetic equations, dynamic FBA, and spatial
 processes. Its move is to take the architectural ideas that once lived inside the original
 Vivarium software and generalize them into a shared specification — of process interfaces,

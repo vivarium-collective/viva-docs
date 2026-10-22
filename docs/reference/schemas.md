@@ -18,7 +18,7 @@ Three documents carry almost all the structure:
 | File | What it is | Authoritative schema |
 |---|---|---|
 | `workspace.yaml` | the repository manifest — one per workspace | `viva_superpowers/schemas/workspace.schema.json` (Draft-07) |
-| `study.yaml` | one question wrapped around a composite | migrated on load; no frozen JSON schema (see note) |
+| `study.yaml` | one question wrapped around a composite | `study.schema.json` (v3/v4, in `.pbg/schemas/`) + migrated on load (see note) |
 | `investigation.yaml` | a collection of studies under one research question | migrated on load; no frozen JSON schema (see note) |
 
 For the concepts these files encode — Composite, Study, Investigation, Run, Finding,
@@ -142,18 +142,22 @@ these readouts, and turn the result into a verdict, a figure, and a report card.
 is a directory (`studies/<slug>/` or, in current scaffolds,
 `investigations/<inv>/studies/<slug>/`) whose `study.yaml` is the spec.
 
-??? warning "Accuracy note — no frozen JSON schema"
-    Unlike `workspace.yaml`, there is **no** `study.schema.json` in the codebase. Specs are
-    **versioned (v2 → v3 → v4) and migrated on load** by
+??? warning "Accuracy note — a frozen schema ships, and specs are also migrated on load"
+    A frozen `study.schema.json` (title **"study.yaml (v3/v4)"**, `schema_version` enum
+    **`[3, 4]`**) **does** exist — it is scaffolded into every workspace's `.pbg/schemas/`
+    from `viva-template`, and `migrate-fields` drives its `deprecated` / `x-replaced-by`
+    renames. On top of that, specs are **migrated on load** by
     `vivarium_workbench.lib.spec_migration` and `investigations.load_spec()`; the
     execution-relevant subset is normalized by `study_spec.study_interface()` into
-    `{composite, config, inputs, outputs, emitter}`. The section names below are faithful to
-    the framework's own reference material, but exact field spellings drift between
-    versions. **Confirm field names against a live workspace** (or the loader) before
-    depending on them, and remember that only *declared* fields render — every field is
-    optional.
+    `{composite, config, inputs, outputs, emitter}`. The schema validates v3 and v4 only —
+    v2 exists just as legacy `investigations/<name>/spec.yaml`, migrated in memory and never
+    validated. The section names below are faithful to the framework's own reference
+    material, but exact field spellings drift between versions. **Confirm field names
+    against a live workspace** (or the loader) before depending on them, and remember that
+    only *declared* fields render — every field is optional.
 
-The v4 spec organizes into six groups.
+The v4 spec's canonical form is the **8-section** structure in the schema; the groups below
+are a reading aid that folds those sections into the narrative order.
 
 ### Framing — what you are asking
 
@@ -165,8 +169,9 @@ purpose:
 hypothesis: The reset network (RIDA/datA/DARS) is required, not optional.
 key_assumptions:
   - Single-seed trajectory is representative for this qualitative claim.
-conditions:                               # grouped replacement for baseline + variants
-  baseline: {composite: viva_ecoli.composites.baseline}
+conditions:                               # sub-keys: baseline, variants, model_settings, expert_inputs
+  baseline: {composite: viva_ecoli.composites.baseline}   # one {composite,params} mapping,
+                                          #   OR a list of arms (multi-arm / planned studies)
   model_settings:                         # tunable-parameter catalog (value/default/range/cite)
     - {name: k_hydrolysis, value: 0.046, units: 1/min, cites: [Boesen2024]}
 ```
@@ -369,11 +374,12 @@ Because the ecosystem is mid-migration, the three documents version independentl
 | Document | Versions | What later versions add |
 |---|---|---|
 | `workspace.yaml` | **2 → 3** | v3 adds `default_baseline`. |
-| `study.yaml` | **2 → 3 → 4** | v3 adds the canonical body; v4 adds the narrative spine and reserves `tests`/`references`/`implementation_tasks`. |
+| `study.yaml` | **2 → 3 → 4** | v3 adds the canonical body; v4 adds the narrative spine and reserves `tests`/`references`/`implementation_tasks`. The frozen `study.schema.json` validates **3 and 4 only**; v2 is migrate-only. |
 | `investigation.yaml` | **1 → 2** | v2 adds the 9-section narrative spine and the `executive` block. |
 
 Legacy v2 studies live at `investigations/<name>/spec.yaml` and are migrated in memory on
-read. When in doubt, the **loader is the authority**, not a frozen list.
+read — v2 is never validated against the frozen schema. When in doubt, the **loader is the
+authority**, and for `study.yaml` the frozen `study.schema.json` (v3/v4) alongside it.
 
 ---
 
