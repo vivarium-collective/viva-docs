@@ -128,7 +128,8 @@ the engine consults. You will meet it directly in
 [Schemas, types & state](../compute/schema-types-state.md).
 
 ??? warning "Accuracy note"
-    `bigraph-schema` was rewritten (v1.4.x). If you find older tutorials referring to a
+    `bigraph-schema` was rewritten (the `Core` API landed in the v1.4 line; the package is
+    now at v1.8.x). If you find older tutorials referring to a
     `TypeSystem` class or dict-keyed `_apply`/`_serialize` methods, that API is gone — the
     current object is `Core`, built via `allocate_core()`, with type behaviors dispatched
     as methods. The *concepts* above are stable; verify *code* against the current package.
@@ -144,7 +145,10 @@ A composite is a **document**: state + processes + the port wiring between them.
 Crucially, a composite is *itself a Process* — it owns an internal state-tree and scheduler
 and exposes a **bridge** that maps its external ports onto internal store paths. So a
 composite drops into a parent composite as a single node. This is how multiscale models are
-built: **containment, not hole-filling** — big models are assembled from small ones.
+built: big models are assembled from small ones. Nesting a ready-to-run composite inside a
+parent and **filling** a template's open site are two faces of one move — a nested
+sub-composite can be both at once — so composition and hole-filling are the same mechanism,
+not rivals.
 
 And because the pieces take on their biological meaning from *how* they are composed, the
 same processes wired into different patterns — cell–environment coupling, growth,
@@ -185,6 +189,16 @@ in execution machinery.
     **reify**. Prefer **site / fill / ground**; treat *slot / bind / reify* as synonyms
     when you meet them.
 
+### Process contracts
+
+An edge's interface can be made explicit as a **process contract** (`contract.face`): a
+typed declaration of its **input and output ports**, each carrying a `_type` and, where it
+applies, `_units`, `_min`, and `_max`. A contract is a mathematically-legible superset of
+the older `describe()` / ports convention — it states not just *which* ports exist but the
+type, units, and bounds each one obeys, so the wiring between two edges can be checked
+against the physics, not just the names. A **draft process** (below) is one application of a
+contract: an interface declared ahead of its mechanism.
+
 ### Draft processes
 
 A **draft process** is a template idea applied to a single process. A `DraftProcess`
@@ -212,12 +226,25 @@ thing that runs.
 | **Report card** | A Step that reads a run and produces pass/fail outcomes keyed by test — the raw evidence. |
 | **Acceptance band** | The tolerance or direction a test accepts (e.g. "within 2%"), ideally cited to literature. |
 | **Finding** | A summary of what was seen, floored by a lifecycle so an unproven claim can't look settled. |
-| **Verdict** | The study's computed conclusion state (passed / failed / needs_calibration / blocked). |
+| **Verdict** | The study's computed gate state — one of `blocked · needs_calibration · passed · failed · stale` (distinct from the free-form `report.verdict` narrative). |
 | **Provenance** | Every write is a git commit; verdict, readiness, and debts are diff-able. |
 
 !!! quote "The sentence to remember"
     A **Composite** is the runnable object; a **Study** is the reason you run it; an
     **Investigation** is the argument several studies build together.
+
+### Baselines, variants, and the workspace
+
+A study names the composites it runs by role:
+
+- A **Baseline** is a study's runnable composite(s) — the reference configuration the
+  question is asked against.
+- A **Variant** is a baseline plus a set of parameter **overrides** — the same wiring,
+  perturbed, so a study can compare conditions against its baseline.
+
+All of this lives in a **Workspace**: the git repository that *is* the model. Its typed
+documents — composites, studies, investigations — and their commit history are the
+versioned substrate the Workbench serves and every write lands in.
 
 Each of these gets a full chapter in [Investigate](../investigate/studies.md).
 

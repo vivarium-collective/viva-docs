@@ -34,7 +34,7 @@ modeling … the foundation of the Vivarium 2.0 simulation framework." It is thr
 <div class="viva-card" markdown>
 ### A type language
 A compact string grammar — `float`, `map[float]`, `array[(3|4),float]`,
-`link[x:int|y:string]` — plus a set of base types (scalars, containers, wiring types,
+`link[x:integer|y:string]` — plus a set of base types (scalars, containers, wiring types,
 Milner's structural types) that the grammar composes.
 </div>
 
@@ -66,7 +66,7 @@ Process, and Step on top:
 | **Composite** `C` | state containing processes | one tick = read → reconcile → apply |
 
 ??? warning "Accuracy note — this is the rewritten API"
-    `bigraph-schema` was substantially rewritten (this guide tracks **v1.4.x**). If you
+    `bigraph-schema` was substantially rewritten (this guide tracks **v1.8.x**). If you
     find older tutorials referring to a **`TypeSystem`** class, a single `type_system.py`,
     or type definitions as dicts of string-keyed `_apply`/`_serialize`/`_check` methods —
     **that API is gone.** There is no `TypeSystem` class in this tree. Today:

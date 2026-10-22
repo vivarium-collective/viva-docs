@@ -262,13 +262,47 @@ JSON-schema / dashboard `load_spec` correctness is advisory here and enforced
 dashboard-side.
 
 Alongside it, the **Workbench adds a live, graded assessment** the linter can't give:
-a deterministic **L0–L5 reproducibility grade** (`audit_grade.py`: Declared → Keyable
-→ Run recorded → Content-addressed output → Environment pinned → Rebuildable from
-sources; an investigation grades as its weakest member) and a **composite contract
-audit** (`composite_audit.py`: per-process contract completeness and unit-compatible
-wiring at every shared store). The linter is a static integrity gate over YAML, source,
-and files; the Workbench audit is a live reproducibility-and-contract report. They are
-complementary.
+the deterministic **L0–L5 reproducibility audit ladder**
+([below](#the-reproducibility-audit-ladder-l0l5); an investigation grades as its weakest
+member) and a **composite contract audit** (`composite_audit.py`: per-process contract
+completeness and unit-compatible wiring at every shared store). The linter is a static
+integrity gate over YAML, source, and files; the Workbench audit is a live
+reproducibility-and-contract report. They are complementary.
+
+## The reproducibility audit ladder (L0–L5)
+
+The spine gates above grade a study's *evidence*; a second, orthogonal ladder grades its
+*reproducibility* — whether the study could be rebuilt and re-run from its own files at
+all. The **L0–L5 audit** (`study_audit.py`, surfaced at `/api/study-audit`) walks six
+ascending tiers, each a set of named deterministic checks. A study — or an investigation,
+graded as its weakest member — earns a level only when every check below it passes.
+
+| Level | Asks | Representative checks |
+|---|---|---|
+| **L0 · Canonical** | Is the spec even in canonical shape? | `canonical-model-schema` (no top-level `baseline:` / `variants:`), `no-nested-study` (study lives flat, not under `investigations/**/`) |
+| **L1 · Resolvable** | Do its declarations resolve? | `composite-resolves` · `params-are-generator-accepted` · `inputs-from-resolves` |
+| **L2 · Keyable** | Can every run be content-addressed? | `node-keyable` |
+| **L3 · Recorded** | Did the runs leave outputs? | `outputs-present` |
+| **L4 · Graded** | Is there a real report-card verdict? | `report-card-verdict` |
+| **L5 · Executable** | Is the dependency graph a runnable DAG? | `dag-acyclic` · `no-dangling-edges` · `topological-executable` |
+
+The ladder is tiered by severity. **Hard-tier failures hard-gate `--gate` CI** — an L0
+`no-nested-study` or `canonical-model-schema` violation, or an L5 dangling edge, fails the
+build rather than merely warning. That is what makes the canonical layout and the flat
+`studies/` convention *enforced*, not just recommended.
+
+The audit's deeper purpose is to catch **post-hoc rationalization** — the ways a study can
+be dressed up to look settled after the fact:
+
+- **preregistration** — acceptance thresholds must be *pre-registered*, not back-filled
+  after seeing the data. A bar drawn to fit the result it was meant to test is not evidence.
+- **supporting-provenance** — a finding's claim must trace to a *resolvable*
+  `evidence.from_test` and to **real** `provenance.run_ids`, so a conclusion cannot cite
+  runs that do not exist.
+
+Where the spine gates ask "does the evidence support the verdict?", the audit ladder asks
+"could anyone else stand this study up again and get the same answer?" — and both must
+clear before a result is trustworthy.
 
 ## Hardening a study
 

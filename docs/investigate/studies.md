@@ -27,7 +27,7 @@ records.
 | Layer | File | What it is |
 |---|---|---|
 | **Investigation** | `investigations/<slug>/investigation.yaml` | a named collection of studies = a git branch = a worktree |
-| **Study** | `studies/<slug>/study.yaml` | one question + its narrative spine (nests under its investigation, or flat for legacy) |
+| **Study** | `studies/<slug>/study.yaml` | one question + its narrative spine (lives **flat** at the workspace root — nesting it under an investigation is a hard L0 audit violation) |
 | **Composite** | `viva_<pkg>/composites/<id>.composite.yaml` | the runnable process-bigraph document |
 
 ## The five-phase lifecycle
@@ -70,8 +70,11 @@ A study does not rebuild its composite. It *specializes* one through exactly fiv
 
 <div class="viva-card" markdown>
 ### 1 · Baselines
-`baseline[]` (or v4 `conditions.baseline`) — the runnable composite(s). A **non-empty
-list** so a study can compare several composites side by side: `{name, composite, params}`.
+`conditions.baseline` — the runnable composite(s). Canonically a single mapping
+`{composite, params}`; promoted to a **list of arms** (`{name, composite, params}` each)
+it declares a [multi-arm study](#multi-arm-and-planned-studies). A top-level `baseline:`
+is the legacy v3 shape the audit **rejects** (`canonical-model-schema`, a hard L0
+failure) — it auto-migrates into `conditions.baseline`.
 </div>
 
 <div class="viva-card" markdown>
@@ -104,6 +107,44 @@ pass or fail. A test may carry a `variant:` sub-field to scope it to one named v
 Running a baseline (`POST /api/study-run-baseline`) resolves the baseline id, **builds
 that composite in-process**, merges the params, runs it, and records the trajectory in
 `runs.db`. The study itself is never compiled.
+
+## Multi-arm and planned studies
+
+### Multi-arm: `conditions.baseline` as a list of arms
+
+`conditions.baseline` is canonically a single `{composite, params}` mapping. Make it a
+**list** and the study becomes **multi-arm** — one question studied across several
+distinct-composite arms, each its own `{name, composite, params}`. A typical shape pairs
+a **headline** arm with a **matched-null / ablation control** arm — the null that must
+*fail* for the headline claim to count — and one or more **alternative / fidelity** arms:
+
+```yaml
+conditions:
+  baseline:
+    - name: headline
+      composite: viva_genesis.composites.carbon_fixation.hydrothermal_carbon_fixation
+      params: {}
+    - name: matched-null                 # the control that must collapse
+      composite: viva_genesis.composites.carbon_fixation.no_gradient_no_catalyst
+      params: {}
+    - name: coarse-grained               # an alternative-fidelity arm
+      composite: viva_genesis.composites.carbon_fixation.reduced
+      params: {}
+```
+
+The list form is first-class in both the reproducibility audit and the Workbench renderer
+(the canonical schema types `baseline` as `["object", "array"]`). It is a different
+mechanism from a `program: consolidated` study's [`arms:` block](#multi-arm-studies),
+which folds several *whole studies* into one evidence record.
+
+### Planned studies — design-only shells
+
+A study can be declared before its models exist. A **planned** study carries
+`status: planned` and `phase: Design`, and its baseline arms may legitimately have **no
+`composite` yet** — they render as design-only shells. This is a valid state, not a gap to
+paper over: **never fabricate a composite to satisfy a check.** The lint and audit
+pipelines refuse to let a planned study claim a result (see
+[Rigor & evidence](rigor-and-evidence.md)).
 
 ## Derive-on-read: verdicts are computed, never asserted
 
@@ -215,10 +256,11 @@ and render at the top of the report):
 - **Executive** — `title`, `claim`, `confidence` (`Accepted | Investigating | Planned |
   Refuted`), `runtime`, **★ `report:`** (verdict / confidence / evidence_quality /
   key_metrics), **★ `study_card:`** (one-paragraph card).
-- **Framing** — **★ `question:`** + `assumptions:`, **★ `conditions:`** (the grouped v4
-  alternative to top-level `baseline:` + `variants:`, whose `model_settings[]` is the
-  source of truth for tunable parameters — current value + default + literature range +
-  cite), `enforced_params:` (values each run is *required* to apply).
+- **Framing** — **★ `question:`** + `assumptions:`, **★ `conditions:`** (the canonical
+  model declaration — `{baseline, variants, model_settings}`, which supersedes the legacy
+  top-level `baseline:` + `variants:` that the L0 audit now rejects; its `model_settings[]`
+  is the source of truth for tunable parameters — current value + default + literature
+  range + cite), `enforced_params:` (values each run is *required* to apply).
 - **Validation** — **★ `behavior_tests:`**, **★ `readouts:`** (`store_path` = the emit
   contract), `biological_summary:` (textbook prose), `literature_anchors:`.
 - **Implementation + decisions** — `model_change`, `implementation_requirements`,
@@ -270,9 +312,11 @@ pipeline_gate:
   enables: [dnaa-02-initiation]
   proceed_condition: tests-passed
 
-# 3 · SIMULATIONS  (v4 grouped form)
+# FRAMING · conditions = the model declaration (NOT the run recipe)
+# conditions: declares baseline + variants + tunables; simulation_set: (canonical
+# section 3, auto-derived) is the separate run set that actually schedules the runs.
 conditions:
-  baseline:
+  baseline:                              # canonical single mapping {composite, params}
     composite: v2ecoli.composites.baseline.baseline
     params: {}
   variants:

@@ -10,9 +10,9 @@ The Workbench is a **FastAPI app under uvicorn** (`vivarium_workbench/api/app.py
 Every `/viva-*` skill drives it; every mutating call commits to the active git
 branch in the workspace.
 
-At the verified HEAD `api/app.py` registers **253 routes**
-(122 GET, 122 POST, 7 DELETE, 2 PATCH; 245 unique paths, no WebSocket); the in-repo
-survey's older headline of "260 routes / 135 POST / 119 GET" is stale, so trust a
+At the verified HEAD `api/app.py` registers **276 routes**
+(133 GET, 133 POST, 8 DELETE, 2 PATCH; no WebSocket); older headlines (the in-repo
+survey's "260 routes / 135 POST / 119 GET", or a prior "253") are stale, so trust a
 live recount over any fixed number.
 
 This chapter organizes the routes that matter
