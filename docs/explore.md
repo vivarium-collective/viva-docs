@@ -10,7 +10,9 @@ tags:
 
 Below is a live, interactive **bigraph-loom** explorer — the same viewer the
 [Workbench](investigate/workspaces-and-workbench.md) serves at `/loom-explore`, exported
-here so it runs with no server. Pan and zoom, expand a node to drill into a sub-composite,
+here so it runs with no server. (In a git/editable Workbench install the loom bundle may be
+unbuilt, so the live `/loom-explore` route can 404 until `scripts/build_loom.sh` is run — the
+exported explorer below needs no server either way.) Pan and zoom, expand a node to drill into a sub-composite,
 and inspect how **processes** and **steps** wire to shared **stores**.
 
 <div class="loom-toolbar">

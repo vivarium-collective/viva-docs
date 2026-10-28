@@ -170,7 +170,7 @@ clear. The bar is deliberately high: a bare line of one observable versus time r
 it. Renders under Evidence › Visualizations. → [Analyses, visualizations & report cards](../investigate/analyses-visualizations-report-cards.md)
 
 **Behavior test** — a machine-checkable spec, not prose: it names how to *measure* a result
-from a run (`measure` + `window`) and what *passing* means (`pass_if`), so one definition
+from a run (`measure`) and what *passing* means (`pass_if`), so one definition
 drives both execution and the dashboard's pass/fail rendering. → [Rigor & evidence](../investigate/rigor-and-evidence.md)
 
 **Report card** — a Step (a `TestStep`) that reads a run and produces pass/fail outcomes keyed
@@ -221,9 +221,9 @@ hardening it is a transformation an agent can apply and verify. → [Rigor & evi
     - **Python import names are stable**: `import process_bigraph`, `import bigraph_schema` —
       the rebrand did not touch them.
     - **Packages**: new workspaces use a `viva_<pkg>/` package; older ones use `pbg_<pkg>/`.
-    - **Still carrying the old prefix:** the runtime control directory `.pbg/`, and a few
-      catalog install ids (e.g. `pbg-amici`) whose package distribution name is still
-      mid-rename — though the module repos themselves are now `viva-*`.
+    - **Still carrying the old prefix:** the runtime control directory `.pbg/` and the
+      `pbg_<pkg>` / `pbg_superpowers` import shims. (Catalog install ids and their source
+      repos are now `viva-*`.)
     - **The scaffold repo** is `viva-template` (formerly `pbg-template`); both names resolve.
 
     When in doubt, prefer the **viva** spelling; this guide flags the exceptions where they

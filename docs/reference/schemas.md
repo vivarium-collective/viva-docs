@@ -19,7 +19,7 @@ Three documents carry almost all the structure:
 |---|---|---|
 | `workspace.yaml` | the repository manifest — one per workspace | `viva_superpowers/schemas/workspace.schema.json` (Draft-07) |
 | `study.yaml` | one question wrapped around a composite | `study.schema.json` (v3/v4, in `.pbg/schemas/`) + migrated on load (see note) |
-| `investigation.yaml` | a collection of studies under one research question | migrated on load; no frozen JSON schema (see note) |
+| `investigation.yaml` | a collection of studies under one research question | `investigation.schema.json` (in `.pbg/schemas/`, permissive) + migrated on load (see note) |
 
 For the concepts these files encode — Composite, Study, Investigation, Run, Finding,
 Verdict — read [Core concepts](../foundations/core-concepts.md) first.
@@ -154,7 +154,8 @@ is a directory (`studies/<slug>/` or, in current scaffolds,
     validated. The section names below are faithful to the framework's own reference
     material, but exact field spellings drift between versions. **Confirm field names
     against a live workspace** (or the loader) before depending on them, and remember that
-    only *declared* fields render — every field is optional.
+    only *declared* fields render. Nearly every field is optional — the one exception is
+    `name`, which `study.schema.json` marks required.
 
 The v4 spec's canonical form is the **8-section** structure in the schema; the groups below
 are a reading aid that folds those sections into the narrative order.
@@ -266,8 +267,9 @@ shared question. On disk it is `investigations/<slug>/investigation.yaml` — an
 also a git branch and a worktree, so parallel agents never trample each other.
 
 ??? warning "Accuracy note"
-    As with `study.yaml`, there is no frozen JSON schema; investigations are `schema_version:
-    1` (minimal) or `2` (the current narrative spine), migrated on load. The member-list key
+    A permissive frozen schema now ships (`investigation.schema.json`, `additionalProperties:
+    true`); investigations are `schema_version: 1`–`4` (1 minimal, 2 the narrative spine, 3
+    adds the `knowledge` block, 4 adds `argument`), migrated on load. The member-list key
     is read by `investigation_member_slugs()`, which accepts **`studies:`** (pre-migration)
     or **`members:`** (post-migration), preferring `studies:` when both are present. Confirm
     field names against a live workspace.

@@ -178,7 +178,7 @@ CLI) creates a workspace in one of **three modes**, chosen by your starting stat
 |---|---|---|
 | No directory yet, no upstream model repo | **standalone** | `/viva-workspace <name>` |
 | No directory yet, want to branch off an existing repo | **upstream-branch** | `/viva-workspace <name> --upstream owner/repo` |
-| Already inside a git checkout you want to promote | **in-place** | `/viva-workspace <name> --target . --in-place` |
+| Already inside a git checkout you want to promote | **in-place** | `/viva-workspace <name> . --in-place` |
 
 - **standalone** clones the **viva-template** scaffold (`vwb scaffold-workspace`), runs
   `git init`, creates a `.venv` and `uv pip install -e .[dev]`, commits the bootstrap, and

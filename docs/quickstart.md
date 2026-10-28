@@ -51,13 +51,14 @@ cd my-workspace
 
 bash use-this-template-init.sh     # prompts for a workspace name; renders the .j2 files
 uv venv && source .venv/bin/activate
-uv pip install -e ".[dev]"          # this pulls in vivarium-workbench as a dependency
+uv pip install -e ".[dev]"          # pulls in vivarium-workbench; or: uv sync --extra dev (locked)
 python3 scripts/lint-workspace.py   # expect: "workspace lint: OK"
 ```
 
 After this you have: `workspace.yaml`, a `viva_<name>/` Python package (older templates use
-`pbg_<name>/`), `composites/`, `studies/`, `investigations/`, and a `.pbg/` control dir. The
-template works standalone — **no plugin or Claude Code required** for the base tool.
+`pbg_<name>/`), a `.pbg/` control dir, and a `workspace/` subtree holding
+`workspace/composites/`, `workspace/studies/`, and `workspace/investigations/` (created as you
+add them). The template works standalone — **no plugin or Claude Code required** for the base tool.
 
 !!! note "Adding to an existing project"
     If you're adding the Workbench to an *existing* process-bigraph project instead of
@@ -77,8 +78,10 @@ vivarium-workbench serve --workspace .            # picks a free port, renders o
 # or:  vwb serve --workspace . --port 8000 --host 0.0.0.0
 ```
 
-CLI subcommands (via `vivarium-workbench` or `vwb`): `serve · run · study · investigation ·
-composite · rerun · runs · status · logs`.
+CLI subcommands (via `vivarium-workbench` or `vwb`): top-level `serve · run · rerun · runs ·
+status · logs · doctor · scaffold-workspace · gen-readme · audit`. The `run` verb takes a
+target — `run study · run investigation · run composite · run process` — so it's
+`vwb run study …`, not `vwb study …`.
 
 On start it writes the live base URL to **`.pbg/server/server-info`** — that file is how
 *everything* (including agents) discovers the server.
@@ -126,7 +129,7 @@ author and run models. This keeps the tool auditable and the AI swappable.
 - **No token / no auth to fight:** the CSRF guard is **same-origin**, and a request with **no `Origin` header is always allowed** — so `curl`/`httpx`/CLI calls just work.
 - **Read the contract, not the prose:** `GET /openapi.json` is authoritative for shapes.
 - **Orient in one call:** `GET /api/workspace-manifest` (state) + `GET /api/linkage-index` (graph) before you start editing.
-- **Runs are asynchronous:** a run returns a `run_id`; poll its status until done; the durable artifact is `studies/<slug>/runs.db`. Check the run's *result field*, not just the HTTP status (a failed run can still return 200).
+- **Runs are asynchronous:** a run returns a `run_id`; poll its status until done; the durable artifact is `workspace/studies/<slug>/runs.db`. Check the run's *result field*, not just the HTTP status (a failed run can still return 200).
 - **Every write commits to git** in the workspace — your changes are a reviewable history.
 
 ### 4.4 The skills
@@ -179,7 +182,7 @@ curl -s "$BASE/openapi.json"                 # exact API shapes
 ```
 
 **Key files:** `workspace.yaml` (workspace root marker) · `.pbg/server/server-info` (live
-base URL) · `studies/<slug>/runs.db` (durable run artifacts) · `composites/`, `studies/`,
-`investigations/` (the documents).
+base URL) · `workspace/studies/<slug>/runs.db` (durable run artifacts) · `workspace/composites/`,
+`workspace/studies/`, `workspace/investigations/` (the documents).
 
 The access contract for an agent is in §4.3 above.
