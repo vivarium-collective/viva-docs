@@ -6,8 +6,10 @@ tags:
 
 # The stack
 
-Vivarium is four packages in a strict dependency order. Each layer imports the ones below
-it and never the reverse. That acyclicity *is* the separation of concerns — and it is why
+Vivarium is four packages in a strict dependency order. Each layer builds on the ones below
+it and never the reverse — layers 1–3 by direct import, and the AI layer (`viva-superpowers`)
+by calling the Workbench over HTTP rather than importing it. That acyclicity *is* the
+separation of concerns — and it is why
 you can swap the AI layer without touching the engine, or run the engine with no dashboard
 at all. `process-bigraph` is a *composition protocol*: rather than unifying
 models into one representation the way standards like SBML or CellML do, it standardizes how
@@ -100,9 +102,9 @@ real but not complete, so you will see both:
 - Skills are `/viva-*`; the older `/pbg-*` command names are retired.
 - The plugin is distributed as `viva-superpowers` (with a `pbg_superpowers` import shim).
 - Python **import names are stable**: `import process_bigraph`, `import bigraph_schema`.
-- Still carrying the old prefix: the runtime control directory `.pbg/`, and a few catalog
-  install ids (e.g. `pbg-amici`) whose package distribution name is still mid-rename — though
-  the module repos themselves are now `viva-*`.
+- Still carrying the old prefix: the runtime control directory `.pbg/`, and the
+  `pbg_<pkg>` / `pbg_superpowers` import shims. (Catalog install ids and their source repos
+  are now `viva-*`; older workspaces still use a `pbg_<pkg>/` package.)
 - Newer workspaces use a `viva_<pkg>/` Python package; older ones use `pbg_<pkg>/`.
 
 When in doubt, prefer the **viva** spelling; this guide notes the exceptions where they

@@ -206,7 +206,16 @@ declares a **contract** — its input and output ports plus a human-readable des
 the transformation it is *meant* to perform — but carries **no dynamics**. Stepped, it
 stays inert and never fabricates behavior; it appears in the dashboard marked
 <span class="pill draft">DRAFT</span>. This lets you design an interface first and supply
-the mechanism later. See [Templates & draft processes](../compute/templates-and-draft-processes.md).
+the mechanism later.
+
+!!! note "`DraftProcess` is deprecated — prefer a hole in place"
+    `DraftProcess` / `@draft_process` still work but now emit a
+    `DraftProcessDeprecationWarning`. The current way to declare an interface ahead of its
+    mechanism is a **hole**: an open site whose sort is a `ProcessContract`
+    (`bigraph_schema.contract`). `draft_to_contract()` (from `process_bigraph`) migrates an
+    existing draft to one. The interface-first *idea* is unchanged — only the primitive.
+
+See [Templates & draft processes](../compute/templates-and-draft-processes.md).
 
 ## The knowledge concepts
 

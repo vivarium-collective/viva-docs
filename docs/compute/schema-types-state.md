@@ -34,7 +34,7 @@ modeling … the foundation of the Vivarium 2.0 simulation framework." It is thr
 <div class="viva-card" markdown>
 ### A type language
 A compact string grammar — `float`, `map[float]`, `array[(3|4),float]`,
-`link[x:integer|y:string]` — plus a set of base types (scalars, containers, wiring types,
+`link[x:integer,y:string]` — plus a set of base types (scalars, containers, wiring types,
 Milner's structural types) that the grammar composes.
 </div>
 
@@ -565,6 +565,8 @@ sub-state, so you never lose the type on the way down:
   and `*` (wildcard fan-out).
 
 ```python
+from bigraph_schema.schema import Float, Link   # these dataclasses live in .schema, not the package root
+
 tree_a = {'a': {'b': 5.5, 'x': {'further': {'down': 111111.111}}}, 'c': 3.3}
 
 # descend a tree[float]:

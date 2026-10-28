@@ -66,8 +66,9 @@ you remember to launch.
     composite**, Layer 1). Much of it is real today: runs land in a durable
     emitter store, the workbench renders visualizations and runs analyses over
     that store after each run (`lib/composite_flush.py`, the post-run hooks), and
-    data-driven report cards read run records through a `ResultsStep` handle that
-    exposes a DuckDB view literally named `results`. Where the shipped path still
+    data-driven report cards read those run records back from the durable store (today the
+    post-run flush in `lib/composite_flush.py` reads the run's Parquet output at
+    `run_dir/parquet/<run_id>` and dispatches the analyses + report cards). Where the shipped path still
     uses per-artifact rendering hooks rather than one first-class extractor node,
     this guide flags it. The *mental model* — durable boundary, then a reactive
     network of artifact Steps — is stable; verify exact wiring against the current

@@ -26,9 +26,13 @@ the Workbench comes along inside its venv. For the layers involved, see
 - **[uv](https://github.com/astral-sh/uv)** — the package manager the ecosystem standardizes
   on. It creates the workspace venv and resolves the git-sourced dependencies.
 - **git** — a workspace *is* a git repository, and every Workbench action commits to it.
-- **Python 3.12** — the version the server image is built against.
-- **Node + npm** — only needed if you build the container image yourself (the vendored
-  `bigraph-loom` bundle is built with npm); not needed for local use.
+- **Python ≥ 3.11** — the floor both the workspace template and the Workbench declare
+  (`requires-python = ">=3.11"`). The published container image is built against 3.12, but
+  local use needs only 3.11.
+- **Node + npm** — needed to build the container image, and to render the graph / Composite
+  Explorer views locally: the vendored `bigraph-loom` bundle is built with npm at install
+  time, and a git/editable install without npm skips it, so those views won't render. The
+  server, HTTP API, studies, and report cards all work without it.
 
 The two things every dashboard-touching skill assumes are a **workspace** (a directory with
 `workspace.yaml` + a `viva_<pkg>/` package) and a **running server**. The rest of this
@@ -122,7 +126,8 @@ vivarium-workbench = { git = "https://github.com/vivarium-collective/vivarium-wo
 allow-direct-references = true
 ```
 
-The git ref can be overridden at init via `VIVARIUM_DASHBOARD_REF`.
+The git ref can be overridden at init via `VIVARIUM_WORKBENCH_REF` (e.g.
+`VIVARIUM_WORKBENCH_REF=my-branch bash template-init.sh`).
 
 ---
 

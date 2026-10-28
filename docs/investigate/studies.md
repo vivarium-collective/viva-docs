@@ -253,8 +253,8 @@ Cross-cutting: `key_assumptions:` (pairs with Build) and `conclusion_logic:`
 **The v4 narrative spine, four layers** (all optional; the six ★ fields are authored first
 and render at the top of the report):
 
-- **Executive** — `title`, `claim`, `confidence` (`Accepted | Investigating | Planned |
-  Refuted`), `runtime`, **★ `report:`** (verdict / confidence / evidence_quality /
+- **Executive** — `title`, `claim`, `confidence` (`Accepted | Investigating | Planned`),
+  `runtime`, **★ `report:`** (verdict / confidence / evidence_quality /
   key_metrics), **★ `study_card:`** (one-paragraph card).
 - **Framing** — **★ `question:`** + `assumptions:`, **★ `conditions:`** (the canonical
   model declaration — `{baseline, variants, model_settings}`, which supersedes the legacy
@@ -376,9 +376,8 @@ limitations: |
   Single-seed; ensemble replication pending.
 
 # 8 · REFERENCES
-bibliography:
-  - Boesen2024
-  - Hansen2018
+bibliography:                            # an object (section → list of keys), not a bare list
+  bib_keys: [Boesen2024, Hansen2018]
 
 # provenance — outcomes are written by the run, never by hand
 runs: []                                 # {run_id, outcomes{...}} — filled from runs.db

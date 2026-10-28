@@ -139,7 +139,7 @@ The five join fields — `simulation_set`, `readouts` (the emit contract), `beha
 plus baselines and variants — are what tie the study to the composite. See
 [Studies](../investigate/studies.md) for each field, and
 [Rigor & the evidence engine](../investigate/rigor-and-evidence.md) for how to make a
-behavior test honest (an acceptance band cited to the literature via `/viva-cite-bands`).
+behavior test honest (an acceptance band cited to the literature via `/viva-tests cite-bands`).
 
 ## 5. Run, emit, analyze, visualize, grade
 
