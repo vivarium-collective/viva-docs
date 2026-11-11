@@ -12,9 +12,25 @@ function initLoomExplorer() {
 
   var picker = document.getElementById("loom-picker");
   var caption = document.getElementById("loom-caption");
+  var openLink = document.querySelector(".loom-open");
   var manifestUrl = frame.getAttribute("data-manifest");
   var base = manifestUrl.replace(/[^/]*$/, ""); // directory of the manifest
+  // The loom index the iframe points at (path only, no query) — the standalone
+  // "Open in a new tab" link reuses it with serverless params so the new tab
+  // renders the same composite with no server (loom resolves ?id= against the
+  // static manifest under ?static=1). Keep it in sync with the picker.
+  var loomIndex = (frame.getAttribute("src") || "").split("?")[0];
   var payload = null;
+
+  function syncOpenLink(entry) {
+    if (!openLink || !loomIndex || !entry) return;
+    var ref = entry.id || entry.file;
+    if (!ref) return;
+    openLink.setAttribute(
+      "href",
+      loomIndex + "?chrome=off&tab=explore&static=1&id=" + encodeURIComponent(ref)
+    );
+  }
 
   function send() {
     if (!payload || !frame.contentWindow) return;
@@ -40,6 +56,7 @@ function initLoomExplorer() {
 
   function load(entry) {
     if (caption) caption.textContent = entry.description || "";
+    syncOpenLink(entry);
     fetch(base + entry.file)
       .then(function (r) { return r.json(); })
       .then(function (data) {

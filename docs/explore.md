@@ -18,7 +18,7 @@ and inspect how **processes** and **steps** wire to shared **stores**.
 <div class="loom-toolbar">
 <label for="loom-picker">Composite:</label>
 <select id="loom-picker" disabled><option>Loading…</option></select>
-<a class="loom-open" href="../assets/loom/index.html?chrome=off&amp;tab=explore" target="_blank" rel="noopener">Open in a new tab &#8599;</a>
+<a class="loom-open" href="../assets/loom/index.html?chrome=off&amp;tab=explore&amp;static=1&amp;id=whole-cell-ecoli" target="_blank" rel="noopener">Open in a new tab &#8599;</a>
 </div>
 <p id="loom-caption" class="loom-caption"></p>
 
@@ -52,6 +52,14 @@ The picker is driven by a small manifest, so adding a composite takes two steps 
 To embed a specific composite on any other page, drop in an iframe pointing at the same
 bundle and hand it a manifest (or a single composite file) — the small script in
 `docs/javascripts/loom-embed.js` does the `composite:load` handshake.
+
+Or link **straight to the standalone explorer, no server, no opener** — the explorer
+loads the composite from the URL itself:
+
+- `assets/loom/index.html?id=<id>&static=1` — resolves `<id>` against the sibling
+  `composites/manifest.json` (the "Open in a new tab" link above uses exactly this);
+- `assets/loom/index.html?src=<url-to-composite.json>` — loads any composite JSON directly;
+- `…&manifest=<url>` — resolve `?id=` against a manifest elsewhere.
 
 ??? note "Keeping it current"
     The bundle under `docs/assets/loom/` is the workbench's vendored loom build. To refresh
