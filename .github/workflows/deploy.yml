@@ -3,6 +3,15 @@ name: Deploy docs to GitHub Pages
 on:
   push:
     branches: [main]
+  # Daily safety net: rebuild once a day so the catalog is never more than ~24h
+  # stale even if the event trigger below misfires.
+  schedule:
+    - cron: "17 7 * * *"
+  # Fired by viva-superpowers when its catalog/modules.json changes (see that
+  # repo's notify-docs-catalog.yml), so the published catalog refreshes within
+  # minutes of a real change.
+  repository_dispatch:
+    types: [catalog-updated]
   workflow_dispatch:
 
 permissions:
@@ -26,6 +35,19 @@ jobs:
         run: pip install "mkdocs-material>=9.5" "pymdown-extensions>=10.7" playwright pypdf
       - name: Install Chromium
         run: python -m playwright install --with-deps chromium
+      - name: Refresh catalog from live modules.json
+        # Source of truth is viva-superpowers (public). Regenerate docs/catalog.md
+        # from its current main before building, so every deploy reflects the live
+        # catalog. The committed docs/catalog.md is the fallback if the fetch fails.
+        run: |
+          set -uo pipefail
+          URL="https://raw.githubusercontent.com/vivarium-collective/viva-superpowers/main/viva_superpowers/catalog/modules.json"
+          if curl -fsSL --retry 3 "$URL" -o /tmp/modules.json; then
+            python scripts/gen_catalog.py /tmp/modules.json
+            echo "Catalog regenerated from live modules.json"
+          else
+            echo "::warning::Could not fetch live modules.json; using committed docs/catalog.md"
+          fi
       - name: Build site
         run: mkdocs build --strict
       - name: Build PDF (headless Chromium render)
