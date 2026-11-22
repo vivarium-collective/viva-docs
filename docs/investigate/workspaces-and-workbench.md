@@ -171,14 +171,14 @@ def build_core(core=None):
 
 ## Scaffolding a workspace
 
-The `/viva-workspace` skill (backed by the `viva-scaffold` console script and the `vwb`
+The `/viva:workspace` skill (backed by the `viva-scaffold` console script and the `vwb`
 CLI) creates a workspace in one of **three modes**, chosen by your starting state:
 
 | Starting state | Mode | Command |
 |---|---|---|
-| No directory yet, no upstream model repo | **standalone** | `/viva-workspace <name>` |
-| No directory yet, want to branch off an existing repo | **upstream-branch** | `/viva-workspace <name> --upstream owner/repo` |
-| Already inside a git checkout you want to promote | **in-place** | `/viva-workspace <name> . --in-place` |
+| No directory yet, no upstream model repo | **standalone** | `/viva:workspace <name>` |
+| No directory yet, want to branch off an existing repo | **upstream-branch** | `/viva:workspace <name> --upstream owner/repo` |
+| Already inside a git checkout you want to promote | **in-place** | `/viva:workspace <name> . --in-place` |
 
 - **standalone** clones the **viva-template** scaffold (`vwb scaffold-workspace`), runs
   `git init`, creates a `.venv` and `uv pip install -e .[dev]`, commits the bootstrap, and
@@ -192,7 +192,7 @@ CLI) creates a workspace in one of **three modes**, chosen by your starting stat
 ??? note "Template repo naming"
     The scaffold source is the **viva-template** repo. The canonical scaffolder
     (`viva_superpowers/scaffold.py`) defaults its clone URL to
-    `vivarium-collective/viva-template`; the older `/viva-workspace` skill prose still
+    `vivarium-collective/viva-template`; the older `/viva:workspace` skill prose still
     names `pbg-template`, and either `$VIVA_TEMPLATE` or `$PBG_TEMPLATE` (or
     `--template-source`) overrides it. Same scaffold, two names. After scaffolding,
     `python3 scripts/lint-workspace.py` should print `workspace lint: OK`.

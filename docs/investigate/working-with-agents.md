@@ -101,26 +101,26 @@ report. Each step is a skill; each skill is a client over the contract above.
 
 ```mermaid
 flowchart LR
-    W["scaffold + serve<br/><small>/viva-workspace<br/>/viva-workbench</small>"] --> C["/viva-catalog<br/><small>get processes</small>"]
-    C --> E["/viva-expert<br/><small>wrap a simulator</small>"]
+    W["scaffold + serve<br/><small>/viva:workspace<br/>/viva:workbench</small>"] --> C["/viva:catalog<br/><small>get processes</small>"]
+    C --> E["/viva:model<br/><small>wrap a simulator</small>"]
     E --> B["build a composite<br/><small>the runnable object</small>"]
-    B --> S["/viva-study<br/><small>the question</small>"]
-    S --> R["/viva-run<br/><small>execute · poll</small>"]
-    R --> Z["/viva-viz · /viva-report<br/><small>render evidence</small>"]
-    Z --> N["/viva-investigation<br/><small>the argument</small>"]
+    B --> S["/viva:study<br/><small>the question</small>"]
+    S --> R["/viva:run<br/><small>execute · poll</small>"]
+    R --> Z["/viva:viz · /viva:report<br/><small>render evidence</small>"]
+    Z --> N["/viva:investigate<br/><small>the argument</small>"]
     N -.->|seed next study| S
 ```
 
 | Step | Skill | What the agent does |
 |---|---|---|
-| **Scaffold & serve** | `/viva-workspace`, `/viva-workbench` | Create the workspace (`workspace.yaml` + a `viva_<pkg>/` package), start the dashboard server. |
-| **Catalog** | [`/viva-catalog`](../reference/skills.md) | List, install, or uninstall the workspace's module catalog — pull in the processes you need. |
-| **Wrap** | [`/viva-expert`](../reference/skills.md) | Wrap a real upstream simulator as a typed Process (or compose several). The default is to bridge the *genuine* tool, never a stub. |
+| **Scaffold & serve** | `/viva:workspace`, `/viva:workbench` | Create the workspace (`workspace.yaml` + a `viva_<pkg>/` package), start the dashboard server. |
+| **Catalog** | [`/viva:catalog`](../reference/skills.md) | List, install, or uninstall the workspace's module catalog — pull in the processes you need. |
+| **Wrap** | [`/viva:model`](../reference/skills.md) | Wrap a real upstream simulator as a typed Process (or compose several). The default is to bridge the *genuine* tool, never a stub. |
 | **Compose** | — | Assemble the wrapped processes into a [composite](../compute/composites-and-wiring.md) — the only object the engine runs. |
-| **Ask** | [`/viva-study`](../reference/skills.md) | Wrap one question, one emit-contract, and one pass/fail bar around the composite. |
-| **Run** | [`/viva-run`](../reference/skills.md) | Execute a composite for N steps; poll to completion; read the emitted observables. |
-| **Render** | [`/viva-viz`](../reference/skills.md), [`/viva-report`](../reference/skills.md) | Generate interactive figures and regenerate the reviewer-ready report. |
-| **Argue** | [`/viva-investigation`](../reference/skills.md) | Group studies under one research question into a gated DAG; close it into a report and a PR. |
+| **Ask** | [`/viva:study`](../reference/skills.md) | Wrap one question, one emit-contract, and one pass/fail bar around the composite. |
+| **Run** | [`/viva:run`](../reference/skills.md) | Execute a composite for N steps; poll to completion; read the emitted observables. |
+| **Render** | [`/viva:viz`](../reference/skills.md), [`/viva:report`](../reference/skills.md) | Generate interactive figures and regenerate the reviewer-ready report. |
+| **Argue** | [`/viva:investigate`](../reference/skills.md) | Group studies under one research question into a gated DAG; close it into a report and a PR. |
 
 The full set is in the [skill catalog](../reference/skills.md). The arc is a loop, not a line:
 a finding's `next_action` [seeds the next study](rigor-and-evidence.md), and the agent rides
@@ -175,7 +175,7 @@ to guard against them:
       pre-registered thresholds exist to catch this, but the curator is the one who verifies a
       bar was set honestly, before the run.
     - **Over-claiming.** A confident verdict on thin evidence is the failure the
-      [`diverges_from_authored`](rigor-and-evidence.md) flag and `/viva-harden-investigation`
+      [`diverges_from_authored`](rigor-and-evidence.md) flag and `/viva:harden`
       are built to surface. The curator reconciles the claim to what the evidence actually
       supports.
 

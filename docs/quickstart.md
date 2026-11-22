@@ -118,8 +118,8 @@ author and run models. This keeps the tool auditable and the AI swappable.
 
 ```
 1. Install the `viva-superpowers` plugin in Claude Code.
-2. Run  /viva-init         — installs every viva-* skill into ~/.claude/skills/ (once per machine).
-3. Run  /viva-workbench start  — launches the Workbench and writes .pbg/server/server-info.
+2. Run  /viva:init         — installs every viva-* skill into ~/.claude/skills/ (once per machine).
+3. Run  /viva:workbench start  — launches the Workbench and writes .pbg/server/server-info.
    (Skills read that file for the base URL; if it's absent they'll tell you to start the server.)
 ```
 
@@ -176,9 +176,9 @@ curl -s "$BASE/api/linkage-index"            # navigation graph
 curl -s "$BASE/openapi.json"                 # exact API shapes
 
 # --- AI layer (Claude Code) ---
-# /viva-init            (once per machine: install skills)
-# /viva-workbench start (launch + write server-info)
-# /viva-catalog /viva-study /viva-run /viva-expert /viva-investigation ...
+# /viva:init            (once per machine: install skills)
+# /viva:workbench start (launch + write server-info)
+# /viva:catalog /viva:study /viva:run /viva:model /viva:investigate ...
 ```
 
 **Key files:** `workspace.yaml` (workspace root marker) · `.pbg/server/server-info` (live

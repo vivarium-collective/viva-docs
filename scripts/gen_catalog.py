@@ -46,13 +46,13 @@ def main() -> None:
         "Every module here is an installable unit — a simulator wrapped as process-bigraph "
         "Processes, a composite, or a whole workspace — from the "
         "[Vivarium Collective](https://github.com/vivarium-collective). Install one into a "
-        "workspace with [`/viva-catalog`](reference/skills.md) (`install <name>`), or browse "
+        "workspace with [`/viva:catalog`](reference/skills.md) (`install <name>`), or browse "
         "the source on GitHub.\n"
     )
     out.append(
         '??? note "A note on install names"\n'
         "    Modules, their GitHub repos, and their install ids are all `viva-*`. Copy the\n"
-        "    `/viva-catalog install …` line from each card verbatim — it is the id that\n"
+        "    `/viva:catalog install …` line from each card verbatim — it is the id that\n"
         "    resolves. (A couple of modules still import under a `pbg_` package name via a\n"
         "    back-compat shim; that is internal and does not affect installing them.)\n"
     )
@@ -100,7 +100,7 @@ def main() -> None:
             card.append('<div class="cat-tags">')
             card += [f'<span class="cat-tag">{t}</span>' for t in tags]
             card.append("</div>")
-        card.append(f'<code class="cat-install">/viva-catalog install {name}</code>')
+        card.append(f'<code class="cat-install">/viva:catalog install {name}</code>')
         card.append("</div>")
         out.append("".join(card))
     out.append("</div>")

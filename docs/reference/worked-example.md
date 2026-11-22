@@ -39,7 +39,7 @@ exposing `build_core()`. Scaffold one from the template, then start the server t
 later step drives.
 
 ```bash
-# scaffold (see /viva-workspace for the three modes)
+# scaffold (see /viva:workspace for the three modes)
 #   → creates workspace.yaml + viva_<pkg>/ + investigations/ + studies/
 # then start the dashboard server (alias: vwb)
 vivarium-workbench serve --workspace .
@@ -65,12 +65,12 @@ them three ways:
 <div class="viva-card" markdown>
 ### Install from the catalog
 Browse and install existing community modules (processes + composites + their deps) with
-`/viva-catalog`. This is the fastest path when the science already exists.
+`/viva:catalog`. This is the fastest path when the science already exists.
 </div>
 
 <div class="viva-card" markdown>
 ### Wrap a simulator
-Use `/viva-expert` to wrap an upstream simulator as a real, bridged `Process` — its heavy
+Use `/viva:model` to wrap an upstream simulator as a real, bridged `Process` — its heavy
 mode even spins up a sibling `viva-<name>/` repo with tests and a showcase. See the
 [Skill reference](skills.md).
 </div>
@@ -97,7 +97,7 @@ Smoke-test it for a few steps before attaching any science to it:
 
 ```bash
 # run a composite from the catalog for N steps and report emitted observables
-# (this is what /viva-run does under the hood: POST /api/composite-test-run)
+# (this is what /viva:run does under the hood: POST /api/composite-test-run)
 ```
 
 A green smoke test means the wiring type-checks and the composite is
@@ -107,7 +107,7 @@ ready to carry a question.
 ## 4. Author the study
 
 Now wrap the question around the composite. A [study](../investigate/studies.md) is
-`study.yaml`: one question, one emit-contract, one pass/fail bar. Use `/viva-study` (which
+`study.yaml`: one question, one emit-contract, one pass/fail bar. Use `/viva:study` (which
 canonicalizes the file and records provenance) rather than hand-editing.
 
 ```yaml
@@ -139,7 +139,7 @@ The five join fields — `simulation_set`, `readouts` (the emit contract), `beha
 plus baselines and variants — are what tie the study to the composite. See
 [Studies](../investigate/studies.md) for each field, and
 [Rigor & the evidence engine](../investigate/rigor-and-evidence.md) for how to make a
-behavior test honest (an acceptance band cited to the literature via `/viva-tests cite-bands`).
+behavior test honest (an acceptance band cited to the literature via `/viva:tests cite-bands`).
 
 ## 5. Run, emit, analyze, visualize, grade
 
@@ -150,7 +150,7 @@ fires: an extractor normalizes the emitted data, then analysis, visualization, a
 report-card Steps write their artifacts.
 
 - **Analyses & visualizations** attach figures and tables to the run; author a bespoke one
-  with `/viva-viz`. They surface on the Analysis rail and in each run's
+  with `/viva:viz`. They surface on the Analysis rail and in each run's
   [Results view](../investigate/analyses-visualizations-report-cards.md).
 - **Report cards** grade the `behavior_tests` and render a category scorecard, reused by the
   study's Tests tab.
@@ -182,7 +182,7 @@ Several such studies accumulate into an [investigation](../investigate/investiga
 a gated DAG under one research question, living on its own git branch/worktree. Each study
 declares its `pipeline_gate.prerequisites`; the dependency edges are computed at render
 time, and since the investigation compiles to a composite, a study's prerequisites are just
-store wiring. When you are ready, `/viva-report` audits and renders the investigation, and
+store wiring. When you are ready, `/viva:report` audits and renders the investigation, and
 the [Working with AI agents](../investigate/working-with-agents.md) division of labor
 applies: agents build and run in parallel; you own the framing, the verdicts, and the merge.
 

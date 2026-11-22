@@ -52,7 +52,7 @@ Start here. These read the local workspace and tell an agent where it is.
 | Endpoint | Method | Purpose |
 |---|---|---|
 | `/api/workspace-manifest` | GET | One-call situational snapshot: workspace, composites, studies, registry, health, skills. **Start here.** |
-| `/api/linkage-index` | GET | Deterministic cross-reference graph (`ac_gating_matrix`, `studies_for_source`, `findings_for_observable`, `study_dag`, `composite_emits`…). Backs `/viva-navigate`. |
+| `/api/linkage-index` | GET | Deterministic cross-reference graph (`ac_gating_matrix`, `studies_for_source`, `findings_for_observable`, `study_dag`, `composite_emits`…). Backs `/viva:explore`. |
 | `/api/needs-attention` | GET | The "decisions needed" scan (uncovered ACs, verdict divergence, open feedback, param drift, stale findings). |
 | `/api/events` | GET (SSE) | Server-sent workspace-state stream; `/api/events/log` is the durable `.pbg/events.jsonl`. |
 | `/api/workspace`, `/api/inputs`, `/api/state`, `/api/ui-config`, `/api/server-version` | GET | Workspace summary, declared inputs, UI config, server version. |
@@ -92,7 +92,7 @@ Switch which workspace or which built simulator a session points at.
 ## Composites { #composites }
 
 Resolve, inspect, run, and promote composites. The Composite Explorer is built on
-these; `/viva-run` calls `composite-test-run`.
+these; `/viva:run` calls `composite-test-run`.
 
 | Endpoint | Method | Purpose |
 |---|---|---|
@@ -107,7 +107,7 @@ these; `/viva-run` calls `composite-test-run`.
 | `/api/composite-run/{run_id}` | GET | One run; sub-paths `/status`, `/state`, `/stop`, `/download`, `/artifact/{name}`. |
 
 ```bash
-# Fire a 10-step scratch run, then poll it (the /viva-run pattern).
+# Fire a 10-step scratch run, then poll it (the /viva:run pattern).
 RID=$(curl -s -X POST "$BASE/api/composite-test-run" \
       -H 'Content-Type: application/json' \
       -d '{"composite_id":"viva_mymodel.composites.baseline","steps":10}' | jq -r .run_id)
@@ -174,7 +174,7 @@ orders execution.
 
 ## Visualizations { #visualizations }
 
-Declared Visualization Steps render to HTML after a run. `/viva-viz` authors them
+Declared Visualization Steps render to HTML after a run. `/viva:viz` authors them
 through a request/response handoff on disk.
 
 | Endpoint | Method | Purpose |
@@ -219,7 +219,7 @@ Off-load compute to **viva-api** (the GovCloud simulation backend). Point the
 server at it with `VIVA_API_BASE` (fallback alias `SMS_API_BASE`), then submit
 runs that execute remotely (Ray → AWS Batch → zarr/parquet on S3) and land back
 as study runs. Reaching a GovCloud endpoint needs an SSM tunnel. Backs
-`/viva-remote-run`.
+`/viva:remote-run`.
 
 | Endpoint | Method | Purpose |
 |---|---|---|
@@ -251,12 +251,12 @@ Branches tab).
 | Endpoint | Method | Purpose |
 |---|---|---|
 | `/api/registry`, `/api/registry/process-template`, `/api/registry/run-process` | GET/POST | The discovered Process/Step registry; run a process interactively. |
-| `/api/catalog`, `/api/catalog-install`, `/api/catalog-uninstall`, `/api/catalog-uninstall-impact`, `/api/marketplace` | GET/POST | The module catalog + marketplace. Backs `/viva-catalog`. |
+| `/api/catalog`, `/api/catalog-install`, `/api/catalog-uninstall`, `/api/catalog-uninstall-impact`, `/api/marketplace` | GET/POST | The module catalog + marketplace. Backs `/viva:catalog`. |
 | `/api/module-import-diagnostics`, `/api/ecosystem-index`, `/api/framework-metrics` | GET | Import diagnostics; ecosystem federation index; metrics. |
 | `/api/references-bib`, `/api/reference-bibtex`, `/api/reference-pdf`, `/api/dataset`, `/api/expert-doc`, `/api/expert-search` | GET/POST | Bibliography, PDFs, datasets, expert-doc search. |
 | `/api/report-lint`, `/api/citation-gaps`, `/api/band-provenance` | GET/POST | Report linter, uncited-band gaps, band provenance (the `cite-bands` write path). |
 | `/api/finding`, `/api/conclusion`, `/api/decision`, `/api/evidence` | POST | Narrative/decision writes. |
-| `/api/suggest`, `/api/suggest-poll` | POST/GET | The "Suggest" button → `/viva-suggest`. |
+| `/api/suggest`, `/api/suggest-poll` | POST/GET | The "Suggest" button → `/viva:suggest`. |
 
 ---
 
