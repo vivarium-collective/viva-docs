@@ -77,7 +77,7 @@ you remember to launch.
 ## Authoring a visualization
 
 A visualization is a **Step that emits HTML**. You do not have to write a class by
-hand — the `/viva-viz` skill generates one from a natural-language description into
+hand — the `/viva:viz` skill generates one from a natural-language description into
 your workspace package. What it writes is a single decorated function.
 
 ```python
@@ -110,7 +110,7 @@ cleanly. You never touch `__init__.py` — discovery walks the package and
 auto-registers every `Step` subclass (see [Composites & wiring](../compute/composites-and-wiring.md)).
 
 ??? note "Decorator vs subclass — a real internal tension"
-    `/viva-viz` emits the `@as_visualization` **decorated-function** form. The
+    `/viva:viz` emits the `@as_visualization` **decorated-function** form. The
     `visualizations` convention doc, however, prefers subclassing
     `Visualization` directly (a real `Step` with an `html` output port, wireable
     into composites) and marks the decorator as legacy. Both work and both are in
@@ -118,7 +118,7 @@ auto-registers every `Step` subclass (see [Composites & wiring](../compute/compo
     idea — an HTML-emitting Step — and expect the tooling to converge.
 
 ??? quote "The bar is deliberately high"
-    From the `/viva-viz` skill: *"A bare line of one observable vs time almost
+    From the `/viva:viz` skill: *"A bare line of one observable vs time almost
     never clears that bar."* Push for interactive Plotly — hover, toggleable
     legend, sliders — and let the form fit the question: phase portraits, Sankey,
     heatmap, violin, sunburst. Propose the figure the data deserves; don't just
@@ -264,7 +264,7 @@ look identical. That is not cosmetic: it is the guarantee that what you send a
 reviewer is exactly what you graded.
 
 These reports are what [agents](working-with-agents.md) produce and what the
-`/viva-report` skill regenerates — deterministically, from the fields the science
+`/viva:report` skill regenerates — deterministically, from the fields the science
 wrote, with no AI in the rendering path.
 
 ---

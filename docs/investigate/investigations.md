@@ -27,7 +27,7 @@ Member studies are **not** nested inside the investigation directory — they li
 under `investigations/**/` is a deliberate hard **L0** audit violation (`no-nested-study`);
 the flat layout is what the reproducibility contract mandates.
 
-The `/viva-investigation` skill makes this concrete:
+The `/viva:investigate` skill makes this concrete:
 
 - **`new`** writes `investigation.yaml`, creates the branch, and commits — no push.
 - **`open`** materializes a **worktree** at `<ws>/.pbg/worktrees/<slug>/` with its

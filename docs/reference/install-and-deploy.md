@@ -63,8 +63,8 @@ rather than hardcoding it.
 ??? note "`vwb` is the short alias"
     The CLI is aliased `vwb`, so `vwb serve --workspace .` is equivalent. Omitting `--port`
     picks a free port and prints the URL; a scaffolded workspace also ships a `scripts/serve.sh`
-    wrapper that prefers the workspace venv's binary. The `/viva-workbench` skill wraps all of
-    this (`/viva-workbench start`).
+    wrapper that prefers the workspace venv's binary. The `/viva:workbench` skill wraps all of
+    this (`/viva:workbench start`).
 
 ??? note "Renamed from `vivarium-dashboard`"
     The distribution was `vivarium-dashboard`; it is now `vivarium-workbench`. The old
@@ -90,17 +90,17 @@ vivarium-workbench serve --workspace .    # now runs your working copy
 New workspaces are scaffolded from the **[viva-template](https://github.com/vivarium-collective/viva-template)**
 repo. The template's `template-init.sh` renders its `.j2` files (the `pyproject.toml`, the
 `viva_<pkg>/core.py` with `build_core()`, the `.pbg/schemas/` validators) into a concrete
-workspace. The `/viva-workspace` skill drives this in three modes:
+workspace. The `/viva:workspace` skill drives this in three modes:
 
 ```bash
 # standalone — clone viva-template directly
-/viva-workspace my-project
+/viva:workspace my-project
 
 # upstream-branch — clone an existing repo and lay a workspace branch on top
-/viva-workspace my-project --upstream owner/repo
+/viva:workspace my-project --upstream owner/repo
 
 # in-place — promote an existing git checkout (e.g. a composite-only repo) into a workspace
-/viva-workspace my-project --target . --in-place
+/viva:workspace my-project --target . --in-place
 ```
 
 Under the hood the standalone mode runs `vwb scaffold-workspace --name --target` (which
@@ -135,12 +135,12 @@ The git ref can be overridden at init via `VIVARIUM_WORKBENCH_REF` (e.g.
 
 Simulation stacks (`viva-*` / `pbg-*` wrapper repos) are installed into the workspace venv as
 **community modules**. The curated catalog lives in `viva_superpowers/catalog/modules.json`;
-the `/viva-catalog` skill lists, installs, and uninstalls entries through the Workbench API:
+the `/viva:catalog` skill lists, installs, and uninstalls entries through the Workbench API:
 
 ```bash
-/viva-catalog                 # list installed + available modules (default)
-/viva-catalog install <pkg>   # add a module to the workspace
-/viva-catalog uninstall <pkg> # remove one
+/viva:catalog                 # list installed + available modules (default)
+/viva:catalog install <pkg>   # add a module to the workspace
+/viva:catalog uninstall <pkg> # remove one
 ```
 
 Modules are installed as git submodules / editable git installs, and a module only becomes

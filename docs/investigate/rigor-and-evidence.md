@@ -315,14 +315,14 @@ Three moves carry most of the work — one standalone skill plus two of its sibl
 
 | Move | What it hardens |
 |---|---|
-| [`/viva-harden-investigation`](../reference/skills.md) | Finds the **one load-bearing gap** that most weakens the headline claim — an unbacked scaffold, a knife-edge single-seed pass, an overclaimed verdict, a failing gate with a real divergence — and closes *that one* the right way for its kind, rather than pouring generic rigor onto an un-diagnosed failure. |
-| [`/viva-tests cite-bands`](../reference/skills.md) | Surfaces candidate evidence from expert PDFs for **uncited acceptance bands** and writes structured `cites` / `calibration_anchor` provenance into the study — so a threshold traces to a paper instead of being a magic number. Every write goes through the sanctioned `POST /api/band-provenance` path; the skill never fabricates a threshold. |
-| [`/viva-harden-investigation biology-forward`](../reference/skills.md) | Runs the deterministic populate step first (`populate_finding_observations` fills `evidence.observed`, `expected.range`, `divergence_factor`, `provenance.run_ids` from the computed outcomes and bands), **then** guides the author to write the biological interpretation over that scaffold. A `divergence_factor > 0` forces the status to `partial` or `contradicts` — never `confirms`. Numbers first, mechanism prose second. |
+| [`/viva:harden`](../reference/skills.md) | Finds the **one load-bearing gap** that most weakens the headline claim — an unbacked scaffold, a knife-edge single-seed pass, an overclaimed verdict, a failing gate with a real divergence — and closes *that one* the right way for its kind, rather than pouring generic rigor onto an un-diagnosed failure. |
+| [`/viva:tests cite-bands`](../reference/skills.md) | Surfaces candidate evidence from expert PDFs for **uncited acceptance bands** and writes structured `cites` / `calibration_anchor` provenance into the study — so a threshold traces to a paper instead of being a magic number. Every write goes through the sanctioned `POST /api/band-provenance` path; the skill never fabricates a threshold. |
+| [`/viva:harden biology-forward`](../reference/skills.md) | Runs the deterministic populate step first (`populate_finding_observations` fills `evidence.observed`, `expected.range`, `divergence_factor`, `provenance.run_ids` from the computed outcomes and bands), **then** guides the author to write the biological interpretation over that scaffold. A `divergence_factor > 0` forces the status to `partial` or `contradicts` — never `confirms`. Numbers first, mechanism prose second. |
 
 ??? note "Skill surface consolidated (#281)"
     At the current package HEAD the `/viva-*` surface was consolidated (21 → 17 skills), so
-    band-citing is now the `cite-bands` subcommand of [`/viva-tests`](../reference/skills.md) and
-    biology-forward authoring is a mode of `/viva-harden-investigation`. Older installed plugin
+    band-citing is now the `cite-bands` subcommand of [`/viva:tests`](../reference/skills.md) and
+    biology-forward authoring is a mode of `/viva:harden`. Older installed plugin
     builds may still expose `/viva-cite-bands` and `/viva-biology-forward` as standalone skills;
     the behavior is the same either way.
 
