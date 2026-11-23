@@ -39,6 +39,58 @@ it wraps. For the request surface those skills call, cross over to the
 
 ---
 
+## Calling a skill { #calling-a-skill }
+
+Skills are **Claude Code slash commands** in the plugin's `viva` namespace. You invoke one as:
+
+```
+/viva:<name> [args]
+```
+
+For example `/viva:workspace demo`, `/viva:workbench start`, `/viva:study new <composite-id>`,
+`/viva:run <composite-id> --steps 100`. The bare `/<name>` form also works when the name is
+unambiguous across your loaded skills, so you will see both spellings; prefer `/viva:<name>`.
+
+In practice you rarely type them. The usual mode is **conversational**: you describe what you
+want in plain language and Claude routes to the right skill — the auto-injected
+[`viva:orient`](#also-shipped) skill primes each session with the map of skills and the
+one automated arc (research question → generated, gated study content). So "wrap the
+Lotka–Volterra equations as a process and run it 100 steps" becomes
+`/viva:model` → `/viva:run` without you naming either.
+
+!!! note "Install once"
+    The skills ship as the `viva-superpowers` Claude Code plugin: `/plugin marketplace add
+    vivarium-collective/viva-superpowers` then `/plugin install viva-superpowers`, plus
+    `pip install viva-superpowers` for the Python helpers the skills call. Then
+    [`/viva:init`](#workspace-lifecycle) symlinks them into `~/.claude/skills/`. Verify with
+    `/help` — the `viva:` skills should be listed.
+
+## How a skill works { #how-a-skill-works }
+
+Each skill is a **thin client** — a short, declarative instruction file (`skills/<name>/SKILL.md`)
+that Claude *follows*, not a program that runs on its own. A dashboard-touching skill always:
+
+1. **Resolves the workspace** — walks up from the working directory to the nearest
+   `workspace.yaml` (fails with an actionable error if there is none).
+2. **Finds the server** — reads the Workbench base URL from `.pbg/server/server-info`, and runs
+   a version-skew preflight that *warns* but never fails.
+3. **Does the work through the backend** — shells out and `curl`s the
+   [Workbench HTTP API](http-api.md) and/or calls the `viva_superpowers` Python helpers. The
+   real logic lives in the Workbench and in the `discovery-engine` framework behind it (study
+   evaluation, verdicts, the rigor scorecard, the discovery cycle); the skill only *orchestrates*
+   and fills in prompt-generated content.
+4. **Leaves an audit trail** — every mutation the Workbench applies is committed to the
+   workspace's git branch, so a human can review or revert any step.
+
+This is why the skills are the ecosystem's **only** AI and the tool below them stays
+auditable: a skill is the generative half (it proposes a study, authors tests, writes a
+finding's prose), and the deterministic engine validates, grades, and records the result.
+Swap the skill layer — or drive the same HTTP API from another agent — and the engine is
+unchanged. See [Working with AI agents](../investigate/working-with-agents.md) for the loop
+end to end.
+
+---
+
 ## Workspace lifecycle { #workspace-lifecycle }
 
 Bootstrap a workspace, then bring the server up.
