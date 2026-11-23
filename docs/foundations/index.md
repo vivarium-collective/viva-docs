@@ -22,7 +22,7 @@ The whole vocabulary from first principles — stores, processes, steps, wiring,
 
 <div class="viva-card part-foundations" markdown>
 ### [The stack](the-stack.md)
-How the four packages layer in strict dependency order, and why that acyclicity is the separation of concerns.
+How the packages layer in strict dependency order, and why that acyclicity is the separation of concerns.
 </div>
 
 </div>

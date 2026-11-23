@@ -126,7 +126,9 @@ The full set is in the [skill catalog](../reference/skills.md). The arc is a loo
 a finding's `next_action` [seeds the next study](rigor-and-evidence.md), and the agent rides
 that loop at every hop — proposing studies, running composites, hardening findings, reading
 verdicts to choose what to ask next — while every step stays legible to a human on the study
-page.
+page. That loop is `discovery-engine`'s **discovery cycle** (frontier → opportunities → the
+next act); the [interactive cycle map](https://vivarium-collective.github.io/discovery-engine/cycle-map.html)
+shows each stage and the typed acts an agent fills.
 
 ## Curator and agent: the division of labor
 

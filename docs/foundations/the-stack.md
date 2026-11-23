@@ -6,33 +6,45 @@ tags:
 
 # The stack
 
-Vivarium is four packages in a strict dependency order. Each layer builds on the ones below
-it and never the reverse — layers 1–3 by direct import, and the AI layer (`viva-superpowers`)
-by calling the Workbench over HTTP rather than importing it. That acyclicity *is* the
-separation of concerns — and it is why
-you can swap the AI layer without touching the engine, or run the engine with no dashboard
-at all. `process-bigraph` is a *composition protocol*: rather than unifying
-models into one representation the way standards like SBML or CellML do, it standardizes how
-independently-built models connect, share state, and are orchestrated in time.
+Vivarium is a small stack of packages in a strict dependency order. Each layer builds on the
+ones below it and never the reverse — the lower layers by direct import, and the AI layer
+(`viva-superpowers`) by calling the Workbench over HTTP rather than importing it. That
+acyclicity *is* the separation of concerns — and it is why you can swap the AI layer without
+touching the engine, or run the engine with no dashboard at all. `process-bigraph` is a
+*composition protocol*: rather than unifying models into one representation the way standards
+like SBML or CellML do, it standardizes how independently-built models connect, share state,
+and are orchestrated in time.
 
 <div class="viva-stack" markdown>
 
 <div class="layer" markdown>
-**4 · `viva-superpowers`** — the `/viva-*` Claude Code skills + study/investigation
-authoring. Scaffolds workspaces, wraps simulators, authors and hardens studies, computes a
-deterministic rigor scorecard. **All AI in the ecosystem lives here.**
+**5 · `viva-superpowers`** — the `/viva-*` Claude Code skills. Scaffolds workspaces, wraps
+simulators, and authors / hardens / drives studies and investigations by calling the
+Workbench and the engine over HTTP. **All AI in the ecosystem lives here.**
 </div>
 
 <div class="layer" markdown>
-**3 · `vivarium-workbench`** — the dashboard server + the investigation-as-composite
-substrate. A FastAPI app that exposes the HTTP API, renders the study/investigation UI,
-runs composites, and commits every change to git. **Contains no AI.**
+**4 · `vivarium-workbench`** — the dashboard server + the investigation-as-composite
+substrate. A FastAPI app that exposes the HTTP API, renders the study / investigation UI,
+runs composites, publishes read-only snapshots, and commits every change to git. Embeds the
+`bigraph-loom` state-tree explorer. **Contains no AI.**
+</div>
+
+<div class="layer" markdown>
+**3 · `discovery-engine`** — the investigation / study framework and the discovery cycle.
+The code-computed study evaluator (verdict · readiness · epistemic debts), the deterministic
+**rigor scorecard**, the report linter, the argument / knowledge / narrative projections, and
+the project → frontier → opportunity cycle that turns a set of studies into "what to ask
+next" ([interactive cycle map](https://vivarium-collective.github.io/discovery-engine/cycle-map.html)).
+This is the **science** layer — pure, deterministic, and AI-free (an agent *drives* it;
+it never contains one). *(Extracted from `viva-superpowers` so the framework stands on its own.)*
 </div>
 
 <div class="layer" markdown>
 **2 · `process-bigraph`** — the engine + the composite / process / step / template
-primitives. The `Composite` object, the tick scheduler, per-process intervals, and the
-emitters that record state.
+primitives. The `Composite` object, the tick scheduler, and per-process intervals. Runs are
+recorded by **`viva-emitters`** — the sqlite / parquet / xarray emitters plus the `RunReader`
+that reads a run's trajectories back for grading and visualization.
 </div>
 
 <div class="layer" markdown>
@@ -46,9 +58,10 @@ consults.
 One-line version:
 
 !!! quote ""
-    `bigraph-schema` (the type system) ⊂ `process-bigraph` (the engine + composite/template
-    primitives) ⊂ `vivarium-workbench` (the dashboard server) ⊂ `viva-superpowers` (the
-    `/viva-*` skills).
+    `bigraph-schema` (types) ⊂ `process-bigraph` (the engine + composite/template primitives,
+    with `viva-emitters` recording runs) ⊂ `discovery-engine` (the study/investigation
+    framework + discovery cycle) ⊂ `vivarium-workbench` (the dashboard server, embedding
+    `bigraph-loom`) ⊂ `viva-superpowers` (the `/viva-*` skills).
 
 ## Read it two ways
 
@@ -64,7 +77,9 @@ rolls back up into a verdict.
 | Layer | You reach for it when… | Key objects |
 |---|---|---|
 | **bigraph-schema** | you need a new data type, units, or to understand how deltas merge | `Core`, types, `apply`, `resolve` |
-| **process-bigraph** | you are writing or wiring a model | `Process`, `Step`, `Composite`, emitters |
+| **process-bigraph** | you are writing or wiring a model | `Process`, `Step`, `Composite` |
+| **viva-emitters** | you are recording a run or reading its trajectories back | emitters (sqlite/parquet/xarray), `RunReader` |
+| **discovery-engine** | you need a study's verdict, rigor scorecard, or the "what to ask next" cycle | the evaluator, verdicts, rigor, report linter, the cycle |
 | **vivarium-workbench** | you are running, browsing, or grading models in the UI/API | the server, `/api/*`, studies, report cards |
 | **viva-superpowers** | you are driving the platform with an AI agent | the `/viva-*` skills |
 

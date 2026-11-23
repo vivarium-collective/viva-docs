@@ -45,16 +45,18 @@ Vivarium is built as **two spines wired into one discovery loop**.
 A compositional runtime built on Milner's bigraphs. State lives in typed **Stores**;
 dynamics live in **Processes** (temporal) and **Steps** (reactive) wired to those stores;
 whole simulations nest as **Composites**. Updates are **deltas** merged by the type
-system. Packages: `process-bigraph` (the engine, which ships the built-in emitters) and
-`bigraph-schema` (the type system beneath every store).
+system. Packages: `bigraph-schema` (the type system beneath every store), `process-bigraph`
+(the engine), and `viva-emitters` (records each run and reads its trajectories back).
 </div>
 
 <div class="viva-card" markdown>
 ### :material-brain: The agentic spine — *what reasons*
 A knowledge layer that frames each model run as a **Study** inside an **Investigation**.
 Studies form a DAG through prerequisite gates; a code-computed evaluator rolls runs up
-into a **verdict**, a **readiness** score, and open **epistemic debts**. Packages:
-`viva-superpowers`, the study spine, the `/viva-*` skills.
+into a **verdict**, a **readiness** score, and open **epistemic debts**. The framework itself
+is `discovery-engine` (the study/investigation model, the evaluator + rigor scorecard, and
+the discovery cycle) — pure and AI-free; `viva-superpowers` adds the `/viva-*` skills that
+*drive* it. An agent reasons over this spine; the spine never contains one.
 </div>
 
 </div>
@@ -66,7 +68,9 @@ the engine is the closed loop between them, and the **Workbench** is where the l
 
 ## The discovery loop
 
-The two spines meet in a loop that runs at every scale of the work:
+The two spines meet in a loop that runs at every scale of the work. `discovery-engine`
+projects this loop as a navigable map — the stages, the frontier it computes, and the typed
+acts it emits: see the [interactive discovery-cycle map](https://vivarium-collective.github.io/discovery-engine/cycle-map.html).
 
 ```mermaid
 flowchart LR
@@ -115,7 +119,7 @@ The framework is described in **Agmon & Spangler, *Process bigraphs and the arch
 of compositional systems biology*** (arXiv:2512.23754), which introduces **Vivarium 2.0**
 as the open-source implementation across three libraries — `bigraph-schema`,
 `process-bigraph`, and `bigraph-viz` (a visualization library accompanying the paper,
-distinct from the four-package product stack described above) — demonstrated with
+distinct from the product stack described above) — demonstrated with
 **Spatio-Flux**, a library of
 microbial-ecosystem simulations combining kinetic equations, dynamic FBA, and spatial
 processes. Its move is to take the architectural ideas that once lived inside the original
