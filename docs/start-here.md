@@ -25,7 +25,7 @@ Before any path, read these three — they're short and everything else builds o
 
 1. [**What is Vivarium?**](foundations/what-is-viva-eco.md) — the Two Spines and the problem it solves.
 2. [**Core concepts**](foundations/core-concepts.md) — stores, processes, steps, wiring, the `apply` law, and sites/fill/ground.
-3. [**The stack**](foundations/the-stack.md) — how the four packages layer.
+3. [**The stack**](foundations/the-stack.md) — how the packages layer.
 
 ---
 

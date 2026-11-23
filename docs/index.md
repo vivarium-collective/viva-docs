@@ -42,22 +42,26 @@ open epistemic debts.
 
 </div>
 
-## The four packages
+## The stack
 
 Each layer imports the ones below it and never the reverse. Click through to any layer.
 
 <div class="stacknav">
 <a class="stacknav-layer part-reference" href="investigate/working-with-agents/">
 <span class="sn-name">viva-superpowers</span><span class="sn-pkg">the /viva-* skills</span>
-<span class="sn-desc">The Claude Code skills that author and run everything. All AI lives here, so the tool below stays auditable.</span>
+<span class="sn-desc">The Claude Code skills that author and drive everything. All AI lives here, so the tool below stays auditable.</span>
 </a>
 <a class="stacknav-layer part-investigate" href="investigate/">
 <span class="sn-name">vivarium-workbench</span><span class="sn-pkg">the dashboard server</span>
-<span class="sn-desc">The AI-free server: investigations, studies, runs, analyses, report cards — every change committed to git.</span>
+<span class="sn-desc">The AI-free server: investigations, studies, runs, analyses, report cards — every change committed to git. Embeds the loom explorer.</span>
+</a>
+<a class="stacknav-layer part-investigate" href="investigate/rigor-and-evidence/">
+<span class="sn-name">discovery-engine</span><span class="sn-pkg">the study framework</span>
+<span class="sn-desc">The AI-free science framework: the study/investigation model, the code-computed verdict + rigor scorecard, and the discovery cycle that says what to ask next.</span>
 </a>
 <a class="stacknav-layer part-build" href="compute/composites-and-wiring/">
 <span class="sn-name">process-bigraph</span><span class="sn-pkg">the engine</span>
-<span class="sn-desc">The composite / process / step / template primitives, the tick scheduler, and the emitters that record state.</span>
+<span class="sn-desc">The composite / process / step / template primitives, the tick scheduler, and per-process intervals. Runs are recorded by <code>viva-emitters</code>.</span>
 </a>
 <a class="stacknav-layer part-build" href="compute/schema-types-state/">
 <span class="sn-name">bigraph-schema</span><span class="sn-pkg">the type system</span>

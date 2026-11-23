@@ -259,4 +259,4 @@ Each of these gets a full chapter in [Investigate](../investigate/studies.md).
 
 ---
 
-**Next:** [The stack](the-stack.md) — how the four packages layer and depend on each other.
+**Next:** [The stack](the-stack.md) — how the packages layer and depend on each other.
