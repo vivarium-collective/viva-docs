@@ -35,7 +35,8 @@ runs composites, publishes read-only snapshots, and commits every change to git.
 The code-computed study evaluator (verdict · readiness · epistemic debts), the deterministic
 **rigor scorecard**, the report linter, the argument / knowledge / narrative projections, and
 the project → frontier → opportunity cycle that turns a set of studies into "what to ask
-next." This is the **science** layer — pure, deterministic, and AI-free (an agent *drives* it;
+next" ([interactive cycle map](https://vivarium-collective.github.io/discovery-engine/cycle-map.html)).
+This is the **science** layer — pure, deterministic, and AI-free (an agent *drives* it;
 it never contains one). *(Extracted from `viva-superpowers` so the framework stands on its own.)*
 </div>
 

@@ -68,7 +68,9 @@ the engine is the closed loop between them, and the **Workbench** is where the l
 
 ## The discovery loop
 
-The two spines meet in a loop that runs at every scale of the work:
+The two spines meet in a loop that runs at every scale of the work. `discovery-engine`
+projects this loop as a navigable map — the stages, the frontier it computes, and the typed
+acts it emits: see the [interactive discovery-cycle map](https://vivarium-collective.github.io/discovery-engine/cycle-map.html).
 
 ```mermaid
 flowchart LR

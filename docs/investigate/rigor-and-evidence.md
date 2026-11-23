@@ -10,7 +10,11 @@ tags:
 A study's conclusion is **computed from its evidence, not asserted**. This chapter is about
 the machinery that makes that sentence true — the deterministic pipeline that reads a run,
 measures it, rolls the measurements up into a verdict, and writes the whole chain back into
-the study's own files so a human can audit every hop.
+the study's own files so a human can audit every hop. That pipeline is **`discovery-engine`**
+(the study/investigation framework, extracted so it stands on its own): the evaluator, the
+verdict roll-up, the rigor scorecard, and the report linter all live there — pure and AI-free,
+driven by an agent but never containing one. It also projects the investigation as a navigable
+[discovery-cycle map](https://vivarium-collective.github.io/discovery-engine/cycle-map.html).
 
 ## The evidence spine
 
@@ -57,7 +61,8 @@ to hide because the disagreement is a first-class, diffable fact.
     convention.
 
 ??? note "Where these live in code"
-    All four coded slots are real fields in `viva_superpowers`, not just design vocabulary:
+    All four coded slots are real fields written by `discovery_engine` (the study/investigation
+    framework), not just design vocabulary:
     `runs[].computed_outcomes` (written by `study_evaluator` / `study_outcomes`),
     `executive.computed_acceptance` (`investigation_status`), and
     `pipeline_gate.gate_evaluator` (`study_verdict.write_gate_evaluator`) — the last two each

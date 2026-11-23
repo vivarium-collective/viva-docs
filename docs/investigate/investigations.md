@@ -304,7 +304,10 @@ study over-report progress. (Verify the exact lifecycle-rollup rule against the 
 index code; the guarantee that matters is that the summary never *over*-reports.)
 
 That deterministic evidence engine — behavior tests, acceptance bands, verdict
-roll-up, and the rigor scorecard — is the subject of the next chapter.
+roll-up, and the rigor scorecard — is `discovery-engine`, and it is the subject of the next
+chapter. Beyond grading what has run, `discovery-engine` also projects the investigation as a
+**discovery cycle** — frontier → opportunities → "what to ask next"; see the
+[interactive cycle map](https://vivarium-collective.github.io/discovery-engine/cycle-map.html).
 
 ---
 
