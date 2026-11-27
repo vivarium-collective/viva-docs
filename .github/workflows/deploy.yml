@@ -7,9 +7,10 @@ on:
   # stale even if the event trigger below misfires.
   schedule:
     - cron: "17 7 * * *"
-  # Fired by viva-superpowers when its catalog/modules.json changes (see that
-  # repo's notify-docs-catalog.yml), so the published catalog refreshes within
-  # minutes of a real change.
+  # Fired when the marketplace ledger changes, so the committed fallback snapshot
+  # refreshes within minutes of a real change. (The catalog page itself is live —
+  # it fetches the ledger at load time — so this only keeps the offline fallback
+  # current.)
   repository_dispatch:
     types: [catalog-updated]
   workflow_dispatch:
@@ -35,18 +36,17 @@ jobs:
         run: pip install "mkdocs-material>=9.5" "pymdown-extensions>=10.7" playwright pypdf
       - name: Install Chromium
         run: python -m playwright install --with-deps chromium
-      - name: Refresh catalog from live modules.json
-        # Source of truth is viva-superpowers (public). Regenerate docs/catalog.md
-        # from its current main before building, so every deploy reflects the live
-        # catalog. The committed docs/catalog.md is the fallback if the fetch fails.
+      - name: Refresh catalog fallback snapshot from the marketplace ledger
+        # The catalog page is live (it fetches the viva-catalog ecosystem index at
+        # load time). This step only refreshes the committed fallback snapshot
+        # docs/catalog-data.json so offline builds / a gh-pages hiccup still render.
+        # Non-fatal: if the fetch fails, the previously committed snapshot is used.
         run: |
           set -uo pipefail
-          URL="https://raw.githubusercontent.com/vivarium-collective/viva-superpowers/main/viva_superpowers/catalog/modules.json"
-          if curl -fsSL --retry 3 "$URL" -o /tmp/modules.json; then
-            python scripts/gen_catalog.py /tmp/modules.json
-            echo "Catalog regenerated from live modules.json"
+          if python scripts/snapshot_catalog.py; then
+            echo "Catalog fallback snapshot refreshed from the marketplace ledger"
           else
-            echo "::warning::Could not fetch live modules.json; using committed docs/catalog.md"
+            echo "::warning::Could not refresh snapshot; using committed docs/catalog-data.json"
           fi
       - name: Build site
         run: mkdocs build --strict
