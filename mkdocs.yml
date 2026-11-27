@@ -135,6 +135,7 @@ nav:
       - investigate/investigations.md
       - investigate/rigor-and-evidence.md
       - investigate/working-with-agents.md
+  - Module catalog: catalog.md
   - Reference:
       - reference/index.md
       - reference/skills.md
@@ -143,5 +144,4 @@ nav:
       - reference/install-and-deploy.md
       - reference/worked-example.md
       - reference/glossary.md
-      - Module catalog: catalog.md
       - Tags: tags.md
