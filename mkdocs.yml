@@ -58,6 +58,7 @@ extra_css:
 
 extra_javascript:
   - javascripts/catalog.js
+  - javascripts/catalog-map.js
   - javascripts/loom-embed.js
 
 markdown_extensions:
@@ -135,7 +136,9 @@ nav:
       - investigate/investigations.md
       - investigate/rigor-and-evidence.md
       - investigate/working-with-agents.md
-  - Module catalog: catalog.md
+  - Module catalog:
+      - catalog.md
+      - Ecosystem map: catalog/map.md
   - Reference:
       - reference/index.md
       - reference/skills.md
