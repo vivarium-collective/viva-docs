@@ -6,7 +6,7 @@ hide:
 
 # Ecosystem map
 
-A graph of the whole [module catalog](../): every repo is a node — colored by kind, sized by how much it contains — and the edges are the two relationships a flat list can't show:
+A graph of the [module catalog](../): every **simulator** and **workspace** is a node — colored by kind, sized by how much it contains — and the edges are the two relationships a flat list can't show (general tools and infrastructure — emitters, utilities — live in the [catalog](../), not the graph):
 
 - **reuse** — a repo → the engine repos it depends on;
 - **study pins** — a workspace → the simulator its studies pin (with the version).
@@ -22,7 +22,6 @@ Click any node to see what it reuses, what reuses it, which simulator its studie
     <div class="ecomap-chips" id="ecomap-chips">
       <button class="ecomap-chip" data-kind="simulator" aria-pressed="true"><span class="ecomap-dot" data-k="simulator"></span>Simulators</button>
       <button class="ecomap-chip" data-kind="workspace" aria-pressed="true"><span class="ecomap-dot" data-k="workspace"></span>Workspaces</button>
-      <button class="ecomap-chip" data-kind="other" aria-pressed="true"><span class="ecomap-dot" data-k="other"></span>Other</button>
     </div>
     <button class="ecomap-btn" id="ecomap-reflow" type="button">Reflow</button>
   </div>
@@ -31,7 +30,6 @@ Click any node to see what it reuses, what reuses it, which simulator its studie
     <aside class="ecomap-legend" id="ecomap-legend" hidden>
       <div class="ecomap-row"><span class="ecomap-sw" data-k="simulator"></span>Simulator / engine</div>
       <div class="ecomap-row"><span class="ecomap-sw" data-k="workspace"></span>Workspace (studies)</div>
-      <div class="ecomap-row"><span class="ecomap-sw" data-k="other"></span>Other</div>
       <div class="ecomap-row"><span class="ecomap-sw ecomap-sw-engine"></span>Reused engine</div>
       <div class="ecomap-row"><span class="ecomap-ln ecomap-ln-reuse"></span>reuses &rarr;</div>
       <div class="ecomap-row"><span class="ecomap-ln ecomap-ln-study"></span>studies pin &rarr;</div>
