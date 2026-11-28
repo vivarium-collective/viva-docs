@@ -35,7 +35,13 @@
   }
 
   function adaptLedger(d) {
-    var repos = d.repos || d.modules || d || [];
+    // General tools / infrastructure (kind "other": emitters, utilities) are
+    // listed in the catalog, not graphed — the map stays a domain graph of
+    // simulators + workspaces and their reuse / study edges. Reuse edges that
+    // pointed at an excluded tool drop out automatically (target not a node).
+    var repos = (d.repos || d.modules || d || []).filter(function (r) {
+      return r.kind !== "other";
+    });
     var nodes = repos.map(function (r) {
       return {
         id: r.name, kind: r.kind || "other", pkg: r.package || "",

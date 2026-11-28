@@ -86,6 +86,11 @@
   }
 
   function kindOf(r) {
+    // Trust the ledger's derived kind (it excludes reactive infra edges —
+    // emitters/viz/viewers/analyses — from the simulator signal, so tool-only
+    // libraries land under "Other"). Fall back to a count heuristic only when a
+    // (fallback/legacy) entry carries no kind.
+    if (r.kind) return r.kind;
     var c = r.counts || {};
     if ((c.studies || 0) + (c.investigations || 0) > 0) return "workspace";
     if ((c.processes || 0) + (c.steps || 0) + (c.composites || 0) > 0) return "simulator";
